@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "119440866473",
+    "project_id": "sc2006-ecd77",
+    "storage_bucket": "sc2006-ecd77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119440866473:android:5a52724d502d768e6a3db8",
+        "android_client_info": {
+          "package_name": "com.nutriroute"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgXLptC21dwXOF1iIHYRb6NS7gema2EqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
