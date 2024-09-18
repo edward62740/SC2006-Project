@@ -1,9 +1,11 @@
 package com.nutriroute.models;
 
-public class Admin extends GenericUser<Double> {
+import com.nutriroute.enums.UserType;
 
-    public Admin(String name, String email, String password, Double id) {
-        super(name, email, password, id);
+public class Admin extends GenericUser<String> {
+
+    public Admin(String name, String email, String password, String id) {
+        super(name, email, password, id, UserType.ADMIN);
     }
 
 }

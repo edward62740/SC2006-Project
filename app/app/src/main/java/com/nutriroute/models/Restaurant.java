@@ -9,8 +9,9 @@ public class Restaurant {
     private String website;
     private String description;
     private String image; // path to img (do we want this?)
+    private String id;
 
-    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image) {
+    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id) {
         this.menu = menu;
         this.name = name;
         this.address = address;
@@ -19,6 +20,19 @@ public class Restaurant {
         this.website = website;
         this.description = description;
         this.image = image;
+        this.id = id;
+    }
+
+    public Restaurant() {
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Menu getMenu() {

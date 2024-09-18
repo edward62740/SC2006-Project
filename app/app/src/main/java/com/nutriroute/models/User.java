@@ -1,14 +1,16 @@
 package com.nutriroute.models;
 
-public class User extends GenericUser<Double> {
+import com.nutriroute.enums.UserType;
+
+public class User extends GenericUser<String> {
 
     private int height;
     private int weight;
     private int targetCalories;
     private int targetWeight;
 
-    public User(String name, String email, String password, Double id) {
-        super(name, email, password, id);
+    public User(String name, String email, String password, String id) {
+        super(name, email, password, id, UserType.USER);
     }
 
     public int getHeight() {

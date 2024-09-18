@@ -6,6 +6,7 @@ public class MenuItem {
     private double price;
     private String category;
     private String image; // path to img (do we want this?)
+    private String id;
 
     public MenuItem(String name, String description, double price, String category, String image) {
         this.name = name;

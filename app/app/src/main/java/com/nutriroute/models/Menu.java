@@ -4,10 +4,20 @@ import java.util.List;
 
 public class Menu {
     private List<MenuItem> items;
+    private String id;
 
     public Menu(List<MenuItem> items) {
         this.items = items;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public List<MenuItem> getItems() {
         return items;
