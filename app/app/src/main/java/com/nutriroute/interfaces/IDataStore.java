@@ -7,12 +7,14 @@ import com.nutriroute.models.Request;
 import com.nutriroute.models.Restaurant;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * This is the interface for data store. The type parameterization can be disregarded if not using
  * the parameterized base classes.
+ * T is the id type.
  */
-public interface IDataStore {
+public interface IDataStore<T extends Comparable<T>> {
 
     /**
      * These are the get methods for the different types of objects.
@@ -25,10 +27,10 @@ public interface IDataStore {
      * @param id
      * @return
      */
-    <T> GenericUser<?> getUser(T id);
+    GenericUser<T> getUser(T id);
     Restaurant getRestaurant(String id);
     Menu getMenu(String id);
-    <T> Request<?> getRequest(T id);
+    Request<T> getRequest(T id);
 
     /**
      * These are the create/modify methods for the different types of objects.
@@ -43,12 +45,13 @@ public interface IDataStore {
      * @typeparam T the type of the id, if applicable.
      * @param user the user object
      * @param id the id of the user
+     *
      * @return
      */
-    <T> boolean setUser(GenericUser<T> user, T id);
+    boolean setUser(GenericUser<T> user, T id);
     boolean setRestaurant(Restaurant restaurant);
     boolean setMenu(Menu menu);
-    <T> boolean setRequest(Request<T> request, T id);
+    boolean setRequest(Request<T> request, T id);
 
     // TODO: DELETE METHODS
 

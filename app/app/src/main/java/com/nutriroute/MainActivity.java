@@ -1,23 +1,19 @@
 package com.nutriroute;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nutriroute.enums.UserType;
+import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.models.GenericUser;
-import com.nutriroute.models.Menu;
 import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.User;
-import com.nutriroute.stores.FirebaseDataStore;
-
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import com.nutriroute.activities.LoginActivity;
+import com.nutriroute.stores.ServiceLocator;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseDataStore dataStore = new FirebaseDataStore();
+
+    IDataStore<String> dataStore = ServiceLocator.getDB();
 
     public void _n_async_test_cb() {
         System.out.println("Hello World3");
@@ -35,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(r2);
         r2.setPhone("123-456-7890###############");
         dataStore.setRestaurant(r2);
+        dataStore._deleteObjectFromDB(r2, "3s3");
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         dataStore.setUser(user3, user3.getId()); // attempt create by setting
 
 
-
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
 

@@ -24,31 +24,36 @@ import com.nutriroute.models.Restaurant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * This is the class which implements the IDataStore interface.
  * It performs R/W ops with Firebase RTDB, with read-through LRU cache.
  * The writes are done exclusively on the Firebase RTDB to ensure consistency.
+ *
+ * Provide the conv argument to the constructor, to specify how the key T is converted to a string.
  */
-public class FirebaseDataStore implements IDataStore {
+public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T> {
 
     private final DatabaseReference databaseReference;
     private final Gson gson;
-
+    private final Function<T, String> keyToString;
     private boolean isPendingUpdate = false;
 
     // These are the write through caches
-    LRUMap<String, GenericUser<?>> genericUserCache = new LRUMap<>(10, 100);
+    LRUMap<String, GenericUser<T>> genericUserCache = new LRUMap<>(10, 100);
     LRUMap<String, Restaurant> restaurantCache = new LRUMap<>(10, 100);
     LRUMap<String, Menu> menuCache = new LRUMap<>(10, 100);
-    LRUMap<String, Request<?>> requestCache = new LRUMap<>(10, 100);
+    LRUMap<String, Request<T>> requestCache = new LRUMap<>(10, 100);
 
 
-    public FirebaseDataStore() {
+    FirebaseDataStore(Function<T, String> conv) {
         this.databaseReference = FirebaseDatabase.getInstance("https://sc2006-ecd77-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
         this.gson = new Gson();
+        this.keyToString = conv;
         Log.d("FirebaseDataStore", "Now, loading all objects from the database...");
         this._loadObjFromDB(GenericUser.class, this::_internal_cb);
         this._loadObjFromDB(Restaurant.class, this::_internal_cb);
@@ -71,14 +76,14 @@ public class FirebaseDataStore implements IDataStore {
         return isPendingUpdate;
     }
 
-    public <T> GenericUser<?> getUser(T id) {
+    public GenericUser<T> getUser(T id) {
         System.out.print("cache size: " + genericUserCache.size());
-        return genericUserCache.get(id.toString());
+        return genericUserCache.get(keyToString != null ? keyToString.apply(id) : id.toString());
     }
 
 
-    public <T> boolean setUser(GenericUser<T> user, T id) {
-        this._updateObjectToDB(user, id.toString());
+    public boolean setUser(GenericUser<T> user, T id) {
+        this._updateObjectToDB(user, keyToString != null ? keyToString.apply(id) : id.toString());
         genericUserCache.put(id.toString(), user);
         return true;
     }
@@ -91,8 +96,8 @@ public class FirebaseDataStore implements IDataStore {
         return menuCache.get(id);
     }
 
-    public <T> Request<?> getRequest(T id) {
-        return requestCache.get(id.toString());
+    public Request<T> getRequest(T id) {
+        return requestCache.get(keyToString != null ? keyToString.apply(id) : id.toString());
     }
 
     public boolean setRestaurant(Restaurant restaurant) {
@@ -107,8 +112,8 @@ public class FirebaseDataStore implements IDataStore {
         return true;
     }
 
-    public <T> boolean setRequest(Request<T> request, T id) {
-        this._updateObjectToDB(request, request.getId().toString());
+    public boolean setRequest(Request<T> request, T id) {
+        this._updateObjectToDB(request, keyToString != null ? keyToString.apply(id) : id.toString());
         requestCache.put(request.getId().toString(), request);
         return true;
     }
@@ -161,7 +166,7 @@ public class FirebaseDataStore implements IDataStore {
                     if (GenericUser.class.isAssignableFrom(objClass)) {
                         GenericUser<?> user = GenericUserFactory.fromJson(jsonElement);
                         processedList.add(user);
-                        genericUserCache.put(user.getId().toString(), user);
+                        genericUserCache.put(user.getId().toString(), (GenericUser<T>) user);
                     }
                     else if (Restaurant.class.isAssignableFrom(objClass)) {
                         Restaurant restaurant = gson.fromJson(json, Restaurant.class);
@@ -176,7 +181,7 @@ public class FirebaseDataStore implements IDataStore {
                     else if (Request.class.isAssignableFrom(objClass)) {
                         Request<?> req = RequestFactory.fromJson(jsonElement);
                         processedList.add(req);
-                        requestCache.put(req.getId().toString(), req);
+                        requestCache.put(req.getId().toString(), (Request<T>) req);
                     }
                     else {
                         System.out.println("Unhandled object type: " + objClass.getSimpleName());
