@@ -1,12 +1,11 @@
-package com.nutriroute.stores;
+package com.nutriroute.utils;
 
 import com.google.gson.JsonElement;
-import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.Request;
 
 public class RequestFactory {
     public static Request<String> createRequest(String requestType) {
-
+    //todo
         return null;
     }
 

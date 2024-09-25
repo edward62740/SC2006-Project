@@ -10,6 +10,7 @@ public class Restaurant {
     private String description;
     private String image; // path to img (do we want this?)
     private String id;
+    private String location; // google maps location
 
     public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id) {
         this.menu = menu;

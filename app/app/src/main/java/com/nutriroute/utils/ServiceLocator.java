@@ -1,4 +1,6 @@
-package com.nutriroute.stores;
+package com.nutriroute.utils;
+
+import com.nutriroute.stores.FirebaseDataStore;
 
 public class ServiceLocator {
     static FirebaseDataStore<String> dataStore = new FirebaseDataStore<>(null); // this means the KEYS are all strings

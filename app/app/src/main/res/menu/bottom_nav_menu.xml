@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_user_dashboard"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Dashboard" /> <!-- Ensure this drawable exists -->
+
+    <item
+        android:id="@+id/nav_user_stores"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:title="Stores" /> <!-- Ensure this drawable exists -->
+   " />
+
+    <item
+        android:id="@+id/nav_user_diary"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="Diary" />
+        <!-- Add icon for notifications -->
+    />
+
+    <item
+        android:id="@+id/nav_user_more"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="More" />
+    <!-- Add icon for notifications -->
+    />
+</menu>

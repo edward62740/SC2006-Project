@@ -1,13 +1,9 @@
 package com.nutriroute.interfaces;
 
-import com.nutriroute.enums.UserType;
 import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.Restaurant;
-
-import java.util.Optional;
-import java.util.function.Function;
 
 /**
  * This is the interface for data store. The type parameterization can be disregarded if not using
@@ -83,4 +79,5 @@ public interface IDataStore<T extends Comparable<T>> {
     boolean _deleteObjectFromDB(Object obj, String id);
 
 
+    int isPendingUpdate();
 }

@@ -1,4 +1,4 @@
-package com.nutriroute.stores;
+package com.nutriroute.utils;
 
 
 import com.google.gson.Gson;
@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.nutriroute.enums.UserType;
 import com.nutriroute.models.Admin;
 import com.nutriroute.models.GenericUser;
-import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.User;
 import com.nutriroute.models.Vendor;
 

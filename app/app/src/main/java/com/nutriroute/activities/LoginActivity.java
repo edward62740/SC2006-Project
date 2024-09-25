@@ -1,5 +1,7 @@
 package com.nutriroute.activities;
 
+import static com.nutriroute.enums.UserType.USER;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,14 +10,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nutriroute.MainActivity;
 import com.nutriroute.R;
+import com.nutriroute.controllers.AuthController;
+import com.nutriroute.enums.UserType;
+import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.interfaces.IGenericUserManagementService;
+import com.nutriroute.models.User;
+import com.nutriroute.services.GenericUserManagementService;
+import com.nutriroute.stores.AuthStore;
+import com.nutriroute.utils.ServiceLocator;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
+
+    IDataStore<String> dataStore = ServiceLocator.getDB();
+
+    IGenericUserManagementService userManagementService = new GenericUserManagementService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +50,27 @@ public class LoginActivity extends AppCompatActivity {
     private void handleLogin() {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        System.out.println(dataStore.getUser("User1"));
+        System.out.println(dataStore.getUser("Use4r2"));
 
-        // You would typically call the controller here to handle the login logic
-        // For demonstration, we'll just show a toast
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         } else {
             // Call the controller to handle login
             // Assuming Controller is a singleton or a static instance
-            //boolean loginSuccess = Controller.login(username, password);
-            if (true) {
+            UserType userType = AuthController.login(username, password);
+            if (userType != null) {
+                AuthStore.setCurUser(dataStore.getUser(username));
                 // Navigate to the next activity
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(userType == USER) {
+                    User user = (User) dataStore.getUser(username);
+                    System.out.println(user);
+                    System.out.println(user.getCaloriesHistory());
+                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+                    startActivity(intent);
+                }
+
+
             } else {
                 Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
             }

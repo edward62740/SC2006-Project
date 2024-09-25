@@ -20,11 +20,12 @@ import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.Restaurant;
+import com.nutriroute.utils.GenericUserFactory;
+import com.nutriroute.utils.RequestFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
 import java.util.function.Function;
@@ -41,7 +42,7 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
     private final DatabaseReference databaseReference;
     private final Gson gson;
     private final Function<T, String> keyToString;
-    private boolean isPendingUpdate = false;
+    private int isPendingUpdateCount = 0;
 
     // These are the write through caches
     LRUMap<String, GenericUser<T>> genericUserCache = new LRUMap<>(10, 100);
@@ -50,18 +51,16 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
     LRUMap<String, Request<T>> requestCache = new LRUMap<>(10, 100);
 
 
-    FirebaseDataStore(Function<T, String> conv) {
+    public FirebaseDataStore(Function<T, String> conv) {
         this.databaseReference = FirebaseDatabase.getInstance("https://sc2006-ecd77-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
         this.gson = new Gson();
         this.keyToString = conv;
         Log.d("FirebaseDataStore", "Now, loading all objects from the database...");
+        isPendingUpdateCount = 4;
         this._loadObjFromDB(GenericUser.class, this::_internal_cb);
         this._loadObjFromDB(Restaurant.class, this::_internal_cb);
         this._loadObjFromDB(Menu.class, this::_internal_cb);
         this._loadObjFromDB(Request.class, this::_internal_cb);
-
-        isPendingUpdate = true;
-
     }
 
     private void _internal_cb() {
@@ -69,11 +68,12 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
         Log.d("FirebaseDataStore", "Loaded Restaurant with size: " + restaurantCache.size());
         Log.d("FirebaseDataStore", "Loaded Menu with size: " + menuCache.size());
         Log.d("FirebaseDataStore", "Loaded Request with size: " + requestCache.size());
-        isPendingUpdate = false;
+        isPendingUpdateCount--;
+        System.out.println("isPendingUpdateCount: " + isPendingUpdateCount);
     }
 
-    public boolean isPendingUpdate() {
-        return isPendingUpdate;
+    public int isPendingUpdate() {
+        return isPendingUpdateCount;
     }
 
     public GenericUser<T> getUser(T id) {
@@ -134,7 +134,6 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
                             objList.add(dataMap);
                         }
                         future.complete(objList);
-                        isPendingUpdate = true;
                     } else {
                         future.completeExceptionally(new Exception("No data found"));
                     }
@@ -190,10 +189,12 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
             }
             if (callback != null) {
                 callback.run();
-                isPendingUpdate = false;
             }
         }).exceptionally(e -> {
             e.printStackTrace();
+            if (callback != null) {
+                callback.run();
+            }
             return null;
         });
 
