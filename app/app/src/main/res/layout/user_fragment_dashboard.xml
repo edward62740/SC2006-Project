@@ -21,8 +21,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="Back to previous day"
             android:padding="16dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:tint="#AEEEEE" /> <!-- Light cyan tint for arrow -->
+            android:src="@android:drawable/ic_media_previous" /> <!-- Light cyan tint for arrow -->
 
         <!-- Today's Calories Text -->
         <TextView
@@ -41,8 +40,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="Forward to next day"
             android:padding="16dp"
-            android:src="@android:drawable/ic_media_next"
-            android:tint="#AEEEEE" /> <!-- Light cyan tint for arrow -->
+            android:src="@android:drawable/ic_media_next" /> <!-- Light cyan tint for arrow -->
 
     </LinearLayout>
 
