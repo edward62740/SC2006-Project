@@ -14,7 +14,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.nutriroute.adapters.LocalDateAdapter;
 import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.Menu;
@@ -23,6 +25,7 @@ import com.nutriroute.models.Restaurant;
 import com.nutriroute.utils.GenericUserFactory;
 import com.nutriroute.utils.RequestFactory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,7 +56,9 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
 
     public FirebaseDataStore(Function<T, String> conv) {
         this.databaseReference = FirebaseDatabase.getInstance("https://sc2006-ecd77-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
-        this.gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe());
+        this.gson = gsonBuilder.create();
         this.keyToString = conv;
         Log.d("FirebaseDataStore", "Now, loading all objects from the database...");
         isPendingUpdateCount = 4;
@@ -76,8 +81,11 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
         return isPendingUpdateCount;
     }
 
+    public Gson getGson() {
+        return gson;
+    }
+
     public GenericUser<T> getUser(T id) {
-        System.out.print("cache size: " + genericUserCache.size());
         return genericUserCache.get(keyToString != null ? keyToString.apply(id) : id.toString());
     }
 

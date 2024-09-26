@@ -3,6 +3,7 @@ package com.nutriroute.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,33 +35,29 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
     @Override
     public void onBindViewHolder(@NonNull CalorieDayViewHolder holder, int position) {
         CalorieDay calorieDay = calorieDays.get(position);
+        System.out.println(calorieDay.getDate());
 
-        // Set date
-        holder.dateTextView.setText("Date: " + dateFormat.format(calorieDay.getDate()));
+        // Set the date header
+        holder.dateTextView.setText("Date: " + calorieDay.getDate());
 
-        // Concatenate calories consumed for the day
-        List<Integer> calories = calorieDay.getCaloriesConsumed();
-        StringBuilder caloriesString = new StringBuilder("Calories: ");
-        for (int calorie : calories) {
-            caloriesString.append(calorie).append(" kcal, ");
+        // Clear previous entries
+        holder.calorieEntriesLayout.removeAllViews();
+
+        // Create views for each food entry
+        for (int i = 0; i < calorieDay.getFoodConsumed().size(); i++) {
+            View calorieEntryView = LayoutInflater.from(holder.itemView.getContext())
+                    .inflate(R.layout.calorie_entry, holder.calorieEntriesLayout, false);
+
+            TextView restaurantTextView = calorieEntryView.findViewById(R.id.text_restaurant);
+            TextView foodTextView = calorieEntryView.findViewById(R.id.text_menu_item);
+            TextView caloriesTextView = calorieEntryView.findViewById(R.id.text_calories);
+
+            restaurantTextView.setText(calorieDay.getFoodRestaurant().get(i));
+            foodTextView.setText(calorieDay.getFoodConsumed().get(i));
+            caloriesTextView.setText(calorieDay.getCaloriesConsumed().get(i) + " kcal");
+
+            holder.calorieEntriesLayout.addView(calorieEntryView);
         }
-        holder.caloriesTextView.setText(caloriesString.toString());
-
-        // Concatenate food items
-        List<String> foods = calorieDay.getFoodConsumed();
-        StringBuilder foodString = new StringBuilder("Foods: ");
-        for (String food : foods) {
-            foodString.append(food).append(", ");
-        }
-        holder.foodTextView.setText(foodString.toString());
-
-        // Concatenate restaurant IDs
-        List<String> restaurants = calorieDay.getFoodRestaurant();
-        StringBuilder restaurantString = new StringBuilder("Restaurants: ");
-        for (String restaurant : restaurants) {
-            restaurantString.append(restaurant).append(", ");
-        }
-        holder.restaurantTextView.setText(restaurantString.toString());
     }
 
     @Override
@@ -71,16 +68,12 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
     static class CalorieDayViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateTextView;
-        TextView caloriesTextView;
-        TextView foodTextView;
-        TextView restaurantTextView;
+        LinearLayout calorieEntriesLayout; // Added layout to hold entries
 
         public CalorieDayViewHolder(@NonNull View itemView) {
             super(itemView);
             dateTextView = itemView.findViewById(R.id.text_date);
-            caloriesTextView = itemView.findViewById(R.id.text_calories);
-            foodTextView = itemView.findViewById(R.id.text_food);
-            restaurantTextView = itemView.findViewById(R.id.text_restaurant);
+            calorieEntriesLayout = itemView.findViewById(R.id.calorie_entries); // Ensure this is defined in item_calorie_day.xml
         }
     }
 }

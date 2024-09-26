@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -20,25 +21,75 @@ import java.util.List;
 
 public class UserDashboardFragment extends Fragment {
     private RecyclerView calorieHistoryRecyclerView;
-    private CalorieHistoryAdapter calorieHistoryAdapter;
+    private TextView textCaloriesDay, textCaloriesCount;
+    private ImageView buttonBack, buttonForward;
+
+    private List<CalorieDay> calorieDays;
+    private int currentDayIndex = 0; // Track the current day being displayed
+
+    User currentUser = ((User) AuthStore.getCurUser());
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.user_fragment_dashboard, container, false);
-        // set textview
-        TextView text_today_calories = view.findViewById(R.id.text_today_calories);
-        System.out.println(((User) AuthStore.getCurUser()).getTodayCalories());
-        text_today_calories.setText("Today's Calories: " +  ((User) AuthStore.getCurUser()).getTodayCalories());
+
+        // Initialize views
+        textCaloriesDay = view.findViewById(R.id.text_calories_day);
+        textCaloriesCount = view.findViewById(R.id.text_calories_count);
+        buttonBack = view.findViewById(R.id.button_back);
+        buttonForward = view.findViewById(R.id.button_forward);
+        calorieHistoryRecyclerView = view.findViewById(R.id.user_calorie_history);
+
+
+        calorieDays = currentUser.getCaloriesHistory();
+        currentDayIndex = calorieDays.size() ; // Start with the most recent day
+
+        // Set RecyclerView layout manager (no changes to adapter logic)
+        calorieHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Display today's calories initially
+        updateCalorieText(currentDayIndex);
+
+        // Set up back button listener
+        buttonBack.setOnClickListener(v -> {
+            if (currentDayIndex > 0) {
+                currentDayIndex--; // Move to the previous day
+                updateCalorieText(currentDayIndex);
+            }
+        });
+
+        // Set up forward button listener
+        buttonForward.setOnClickListener(v -> {
+            if (currentDayIndex <= calorieDays.size() - 1) {
+                currentDayIndex++; // Move to the next day
+                updateCalorieText(currentDayIndex);
+            }
+        });
+        // Setup RecyclerView for calorie history
         calorieHistoryRecyclerView = view.findViewById(R.id.user_calorie_history);
         calorieHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Assuming AuthStore.getCurUser().getCalorieDays() returns the list of CalorieDay
-        List<CalorieDay> calorieDays = ((User) AuthStore.getCurUser()).getCaloriesHistory();
-        System.out.println(calorieDays);
-
-        calorieHistoryAdapter = new CalorieHistoryAdapter(calorieDays);
+        // Get the list of CalorieDay and initialize the adapter
+        List<CalorieDay> calorieDays = currentUser.getCaloriesHistory();
+        CalorieHistoryAdapter calorieHistoryAdapter = new CalorieHistoryAdapter(calorieDays);
         calorieHistoryRecyclerView.setAdapter(calorieHistoryAdapter);
-
         return view;
+    }
+
+    // Method to update only the calorie TextView based on the day index
+    private void updateCalorieText(int dayIndex) {
+
+        // Get the calorie data for the selected day
+        if (dayIndex >= calorieDays.size() ) {
+            textCaloriesCount.setText("Calories: " +  currentUser.getCaloriesToday().getTotalCalories());
+            textCaloriesDay.setText(currentUser.getCaloriesToday().getDate().toString());
+            return;
+        }
+        CalorieDay selectedDay = calorieDays.get(calorieDays.size() - 1 - dayIndex);
+
+
+        // Update the TextView with the selected day's calorie count
+        textCaloriesCount.setText("Calories: " + selectedDay.getTotalCalories());
+        textCaloriesDay.setText(selectedDay.getDate().toString());
     }
 }

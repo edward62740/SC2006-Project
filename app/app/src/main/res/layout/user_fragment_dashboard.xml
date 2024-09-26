@@ -2,27 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#2B2B2B"> <!-- Dark grey background color -->
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Today's Calories Header with Arrows for Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="placeholder homepage for user"
-        android:textSize="24sp" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="16dp">
 
+        <!-- Back Arrow for Previous Day -->
+        <ImageView
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Back to previous day"
+            android:padding="16dp"
+            android:src="@android:drawable/ic_media_previous"
+            android:tint="#AEEEEE" /> <!-- Light cyan tint for arrow -->
+
+        <!-- Today's Calories Text -->
+        <TextView
+            android:id="@+id/text_calories_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Forward Arrow for Next Day -->
+        <ImageView
+            android:id="@+id/button_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Forward to next day"
+            android:padding="16dp"
+            android:src="@android:drawable/ic_media_next"
+            android:tint="#AEEEEE" /> <!-- Light cyan tint for arrow -->
+
+    </LinearLayout>
+
+    <!-- Calorie Count Below Header -->
     <TextView
-        android:id="@+id/text_today_calories"
+        android:id="@+id/text_calories_count"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="0 Calories"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
 
-    <TextView
-        android:text="placeholder recycler view for history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+    <!-- Placeholder Recycler View for User's Calorie History -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_calorie_history"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" /> <!-- Recycler view to list history -->
 
 </LinearLayout>

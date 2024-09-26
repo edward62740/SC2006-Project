@@ -1,7 +1,10 @@
 package com.nutriroute.controllers;
 
+import com.nutriroute.interfaces.IUserCalorieManagementService;
+
 public class UserController {
 
+    private static IUserCalorieManagementService userCalorieManagementService;
     private UserController() {
     }
 
@@ -32,6 +35,8 @@ public class UserController {
         1-8,9 is a list of calories. possible to use the user storage to get the calorie history
         no need to bother with the DB for this
          */
+        userCalorieManagementService.updateState();
+
 
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#007BFF</item> <!-- Primary color -->
+        <item name="colorPrimaryDark">#0056b3</item> <!-- Darker variant -->
+        <item name="colorAccent">#FF4081</item> <!-- Accent color -->
+        <item name="android:textColor">@android:color/white</item> <!-- White text color -->
+    </style>
+
+    <!-- Style for the NavigationView -->
+    <style name="CustomNavigationView" parent="Widget.Design.NavigationView">
+        <item name="android:background">#4B4B4B</item> <!-- Dark gray background -->
+        <item name="android:textColor">@android:color/white</item> <!-- White text color -->
+    </style>
+
+</resources>

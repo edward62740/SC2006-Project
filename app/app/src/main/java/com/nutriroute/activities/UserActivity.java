@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.nutriroute.fragments.UserDashboardFragment;
 import com.nutriroute.R;
+import com.nutriroute.fragments.UserSettingsFragment;
 import com.nutriroute.fragments.UserStoresFragment;
 
 public class UserActivity extends AppCompatActivity {
@@ -35,8 +36,8 @@ public class UserActivity extends AppCompatActivity {
 
             }
 
-            else if (item.getItemId() == R.id.nav_user_more) {
-                Snackbar.make(findViewById(R.id.bottom_navigation), "not impl", Snackbar.LENGTH_LONG).show();
+            else if (item.getItemId() == R.id.nav_user_settings) {
+                selectedFragment = new UserSettingsFragment();
             }
 
 

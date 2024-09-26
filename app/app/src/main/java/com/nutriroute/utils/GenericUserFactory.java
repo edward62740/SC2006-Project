@@ -11,7 +11,7 @@ import com.nutriroute.models.Vendor;
 
 public class GenericUserFactory {
 
-    private static final Gson gson = new Gson();
+    private static final Gson gson = ServiceLocator.getDB().getGson();
 
     public static GenericUser<String> createUser(UserType userType) {
         switch (userType) {

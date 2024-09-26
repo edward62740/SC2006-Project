@@ -12,6 +12,7 @@ import com.nutriroute.models.User;
 import com.nutriroute.models.Vendor;
 import com.nutriroute.utils.ServiceLocator;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-       // __TEST__generateRandomDB();
+      //  __TEST__generateRandomDB();
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
@@ -71,19 +72,16 @@ public class MainActivity extends AppCompatActivity {
 
             // Create a new user
             User user = new User(userName, email, pw, id);
-            user.setTodayCalories(1200);
+
             List<CalorieDay> calorieDays = user.getCaloriesHistory();
-            for (int j = 0; j < (int) (Math.random() * 31); j++) {
-                // generate Date j days ago
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_YEAR, -j);
-                Date nDaysBefore = calendar.getTime();
-                CalorieDay calorieDay = new CalorieDay(nDaysBefore);
+            user.setCaloriesToday(new CalorieDay(LocalDate.now()));
+            for (int j = 0; j < Math.max(1, (int) (Math.random() * 31)); j++) {
+                CalorieDay calorieDay = new CalorieDay(LocalDate.now().minusDays(j+1));
 
 
-                for (int k = 0; k < (int) (Math.random() * 5); k++) {
+                for (int k = 0; k < Math.max(1, (int) (Math.random() * 5)); k++) {
                     calorieDay.addCaloriesConsumed( (int) (Math.random() * 834));
-                    calorieDay.addFoodConsumed("Menu" + (int) (Math.random() * 23));
+                    calorieDay.addFoodConsumed("SomeMenuItem" + (int) (Math.random() * 23));
                     calorieDay.addFoodRestaurant("Restaurant" + (int) (Math.random() * 23));
                 }
 

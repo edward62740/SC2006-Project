@@ -4,7 +4,9 @@ import android.util.Pair;
 
 import com.nutriroute.enums.UserType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class User extends GenericUser<String> {
@@ -13,18 +15,15 @@ public class User extends GenericUser<String> {
     private int weight;
     private int targetCalories;
     private int targetWeight;
-    private int todayCalories;
     private boolean isPrescribed;
     // array of calories consumed each day
     private List<CalorieDay> caloriesHistory;
-
-    // just assume that the food history will be NULL for the days that are skipped
-
-
+    private CalorieDay caloriesToday;
 
     public User(String name, String email, String password, String id) {
         super(name, email, password, id, UserType.USER);
         caloriesHistory = new ArrayList<>();
+        caloriesToday = new CalorieDay(LocalDate.now());
     }
 
     public int getHeight() {
@@ -59,20 +58,28 @@ public class User extends GenericUser<String> {
         this.targetWeight = targetWeight;
     }
 
-    public int getTodayCalories() {
-        return todayCalories;
-    }
-
-    public void setTodayCalories(int todayCalories) {
-        this.todayCalories = todayCalories;
-    }
-
     public List<CalorieDay> getCaloriesHistory() {
         return caloriesHistory;
     }
 
     public void addCaloriesHistory(CalorieDay calorieDay) {
         caloriesHistory.add(calorieDay);
+    }
+
+    public CalorieDay getCaloriesToday() {
+        return caloriesToday;
+    }
+
+    public void setCaloriesToday(CalorieDay caloriesToday) {
+        this.caloriesToday = caloriesToday;
+    }
+
+    public void setPrescribed(boolean prescribed) {
+        isPrescribed = prescribed;
+    }
+
+    public boolean isPrescribed() {
+        return isPrescribed;
     }
 
 

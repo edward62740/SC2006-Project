@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
             } else {
+                System.out.println(dataStore.getUser("User1"));
                 Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
             }
         }
