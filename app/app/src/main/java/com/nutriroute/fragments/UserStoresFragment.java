@@ -13,10 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.nutriroute.R;
+import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.utils.PostalCodeHelper;
+import com.nutriroute.utils.ServiceLocator;
 
 public class UserStoresFragment extends Fragment {
 
     private WebView webView;
+    IDataStore<String> dataStore = ServiceLocator.getDB();
 
     @Nullable
     @Override
@@ -28,10 +32,24 @@ public class UserStoresFragment extends Fragment {
         webView = view.findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient()); // Ensure links open within the WebView
         webView.getSettings().setJavaScriptEnabled(true);
+        PostalCodeHelper postalCodeHelper = new PostalCodeHelper();
+
 
         // Load the Google Maps URL for a specific location (San Francisco example)
-        String url = "https://www.google.com/maps/embed/v1/place?q=37.7749,-122.4194&zoom=12";
-        webView.loadUrl(url);
+        final String[] url = {"https://www.onemap.gov.sg/amm/amm.html?mapStyle=Default&zoomLevel=15"};
+        dataStore.getRestaurants().forEach(restaurant -> {
+            url[0] += "&marker=postalcode:" + restaurant.getAddress() + "!colour:red";
+            postalCodeHelper.fromPostalCodeGetAddress(Integer.parseInt(restaurant.getAddress()), address -> {
+                if (address != null) {
+                    // Handle the received address (e.g., display it in a TextView)
+                    System.out.println("Address: " + address);
+                } else {
+                    // Handle the error (e.g., show a message to the user)
+                    System.out.println("Address not found.");
+                }
+            });
+        });
+        webView.loadUrl(url[0]);
 
         return view;
     }

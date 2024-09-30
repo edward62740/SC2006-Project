@@ -5,6 +5,8 @@ import com.nutriroute.models.Menu;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.Restaurant;
 
+import java.util.Collection;
+
 /**
  * This is the interface for data store. The type parameterization can be disregarded if not using
  * the parameterized base classes.
@@ -80,4 +82,6 @@ public interface IDataStore<T extends Comparable<T>> {
 
 
     int isPendingUpdate();
+
+    Collection<Restaurant> getRestaurants();
 }

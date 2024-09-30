@@ -45,5 +45,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("org.apache.commons:commons-collections4:4.4")
+
 
 }

@@ -35,6 +35,9 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
     @Override
     public void onBindViewHolder(@NonNull CalorieDayViewHolder holder, int position) {
         CalorieDay calorieDay = calorieDays.get(position);
+        if (calorieDay == null) {
+            return;
+        }
         System.out.println(calorieDay.getDate());
 
         // Set the date header
@@ -42,7 +45,9 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
 
         // Clear previous entries
         holder.calorieEntriesLayout.removeAllViews();
-
+        if(calorieDay.getFoodConsumed() == null) {
+            return;
+        }
         // Create views for each food entry
         for (int i = 0; i < calorieDay.getFoodConsumed().size(); i++) {
             View calorieEntryView = LayoutInflater.from(holder.itemView.getContext())

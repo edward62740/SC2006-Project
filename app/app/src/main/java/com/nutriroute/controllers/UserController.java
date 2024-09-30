@@ -1,10 +1,11 @@
 package com.nutriroute.controllers;
 
 import com.nutriroute.interfaces.IUserCalorieManagementService;
+import com.nutriroute.services.UserCalorieManagementService;
 
 public class UserController {
 
-    private static IUserCalorieManagementService userCalorieManagementService;
+    private static final IUserCalorieManagementService userCalorieManagementService = new UserCalorieManagementService();
     private UserController() {
     }
 

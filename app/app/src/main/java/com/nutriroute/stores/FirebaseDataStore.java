@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.LRUMap;
+import org.apache.commons.collections4.map.LRUMap;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +27,7 @@ import com.nutriroute.utils.RequestFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -48,10 +49,10 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
     private int isPendingUpdateCount = 0;
 
     // These are the write through caches
-    LRUMap<String, GenericUser<T>> genericUserCache = new LRUMap<>(10, 100);
-    LRUMap<String, Restaurant> restaurantCache = new LRUMap<>(10, 100);
-    LRUMap<String, Menu> menuCache = new LRUMap<>(10, 100);
-    LRUMap<String, Request<T>> requestCache = new LRUMap<>(10, 100);
+    LRUMap<String, GenericUser<T>> genericUserCache = new LRUMap<>(100, 10);
+    LRUMap<String, Restaurant> restaurantCache = new LRUMap<>(100, 10);
+    LRUMap<String, Menu> menuCache = new LRUMap<>(100, 10);
+    LRUMap<String, Request<T>> requestCache = new LRUMap<>(100, 10);
 
 
     public FirebaseDataStore(Function<T, String> conv) {
@@ -98,6 +99,11 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
 
     public Restaurant getRestaurant(String id) {
         return restaurantCache.get(id);
+    }
+
+    public Collection<Restaurant> getRestaurants() {
+        // return iterable of restaurants
+        return restaurantCache.values();
     }
 
     public Menu getMenu(String id) {
