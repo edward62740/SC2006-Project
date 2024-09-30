@@ -1,105 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5"> <!-- Light gray background -->
+    android:background="#001f0e"
+    app:layout_anchorGravity="center_vertical">
 
-    <EditText
-        android:id="@+id/editTextText2"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"> <!-- Add space for the navbar -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/editTextText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#003300"
+                android:ems="10"
+                android:inputType="text"
+                android:padding="12dp"
+                android:text="User Information"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/heightValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Height"
+                android:textColor="#FFFFFF" />
+
+            <SeekBar
+                android:id="@+id/heightSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#003300"
+                android:max="250"
+                android:padding="12dp"
+                android:progressTint="#00C853" />
+
+            <TextView
+                android:id="@+id/weightValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Weight"
+                android:textColor="#FFFFFF" />
+
+            <SeekBar
+                android:id="@+id/weightSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#003300"
+                android:max="200"
+                android:padding="12dp"
+                android:progressTint="#00C853" />
+
+            <TextView
+                android:id="@+id/targetCaloriesValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Target Calories"
+                android:textColor="#FFFFFF" />
+
+            <SeekBar
+                android:id="@+id/targetCaloriesSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#003300"
+                android:max="5000"
+                android:padding="12dp"
+                android:progressTint="#00C853" />
+
+            <TextView
+                android:id="@+id/targetWeightValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Target Weight"
+                android:textColor="#FFFFFF" />
+
+            <SeekBar
+                android:id="@+id/targetWeightSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#003300"
+                android:max="200"
+                android:padding="12dp"
+                android:progressTint="#00C853" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:id="@+id/editTextText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#003300"
+                android:ems="10"
+                android:inputType="text"
+                android:padding="12dp"
+                android:text="Should we suggest your meals?"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/prescribedToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Prescribed"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:backgroundTint="#00C853"
+                android:text="Save Changes"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Sliders to adjust info"
-        android:padding="12dp"
-        android:textColor="#000000"
-    android:background="@android:color/white" />
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu" /> <!-- Ensure this menu resource exists -->
 
-    <TextView
-        android:id="@+id/heightValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Height"
-        android:textColor="#000000" />
-
-    <SeekBar
-        android:id="@+id/heightSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="250"
-        android:progressTint="#007BFF"
-        android:background="#D3D3D3" />
-
-    <TextView
-        android:id="@+id/weightValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weight"
-        android:textColor="#000000" />
-
-    <SeekBar
-        android:id="@+id/weightSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="200"
-        android:progressTint="#007BFF"
-    android:background="#D3D3D3" />
-
-    <TextView
-        android:id="@+id/targetCaloriesValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Target Calories"
-        android:textColor="#000000" />
-
-    <SeekBar
-        android:id="@+id/targetCaloriesSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="5000"
-        android:progressTint="#007BFF"
-    android:background="#D3D3D3" />
-
-    <TextView
-        android:id="@+id/targetWeightValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Target Weight"
-        android:textColor="#000000" />
-
-    <SeekBar
-        android:id="@+id/targetWeightSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="200"
-        android:progressTint="#007BFF"
-    android:background="#D3D3D3" />
-
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Is Prescribed button"
-        android:padding="12dp"
-        android:textColor="#000000"
-    android:background="@android:color/white" />
-
-    <ToggleButton
-        android:id="@+id/prescribedToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prescribed" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save Changes"
-        android:backgroundTint="#007BFF"
-    android:textColor="#FFFFFF" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

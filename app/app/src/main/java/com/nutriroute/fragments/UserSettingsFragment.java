@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
+import com.google.android.material.snackbar.Snackbar;
 import com.nutriroute.R;
 import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.models.User;
@@ -65,16 +67,16 @@ public class UserSettingsFragment extends Fragment {
         prescribedToggleButton.setChecked(currentUser.isPrescribed());
 
         // Display initial values in TextViews
-        heightValue.setText(String.valueOf(currentUser.getHeight()));
-        weightValue.setText(String.valueOf(currentUser.getWeight()));
-        targetCaloriesValue.setText(String.valueOf(currentUser.getTargetCalories()));
-        targetWeightValue.setText(String.valueOf(currentUser.getTargetWeight()));
+        heightValue.setText("Height: " + String.valueOf(currentUser.getHeight()));
+        weightValue.setText("Weight: " + String.valueOf(currentUser.getWeight()));
+        targetCaloriesValue.setText("Target calories: " + String.valueOf(currentUser.getTargetCalories()));
+        targetWeightValue.setText("Target weight: " + String.valueOf(currentUser.getTargetWeight()));
 
         // Update displayed values when sliders are changed
         heightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                heightValue.setText(String.valueOf(progress));
+                heightValue.setText("Height: " + String.valueOf(progress));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -85,7 +87,7 @@ public class UserSettingsFragment extends Fragment {
         weightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                weightValue.setText(String.valueOf(progress));
+                weightValue.setText("Weight: " + String.valueOf(progress));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -96,7 +98,7 @@ public class UserSettingsFragment extends Fragment {
         targetCaloriesSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetCaloriesValue.setText(String.valueOf(progress));
+                targetCaloriesValue.setText("Target calories: " + String.valueOf(progress));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -107,7 +109,7 @@ public class UserSettingsFragment extends Fragment {
         targetWeightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetWeightValue.setText(String.valueOf(progress));
+                targetWeightValue.setText("Target weight: " + String.valueOf(progress));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -124,6 +126,7 @@ public class UserSettingsFragment extends Fragment {
 
             currentUser.setPrescribed(prescribedToggleButton.isChecked());
             dataStore.setUser(currentUser, currentUser.getId());
+            Snackbar.make(view, "Settings saved", Snackbar.LENGTH_SHORT).show();
             // Save user changes in AuthStore if necessary
         });
 

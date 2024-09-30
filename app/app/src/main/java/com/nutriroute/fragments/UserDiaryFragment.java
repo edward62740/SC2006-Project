@@ -86,6 +86,14 @@ public class UserDiaryFragment extends Fragment {
         caloriesProgressBar.setMax(currentUser.getTargetCalories());
         caloriesProgressBar.setProgress(progress);
         tvCaloriesRemaining.setText(max-progress + " Remaining");
+        if(progress > max) {
+            // set color from hex #
+            tvCaloriesRemaining.setTextColor(getResources().getColor(R.color.red));
+            caloriesProgressBar.setProgressTintList(getResources().getColorStateList(R.color.red));
+        } else {
+            tvCaloriesRemaining.setTextColor(getResources().getColor(R.color.green));
+            caloriesProgressBar.setProgressTintList(getResources().getColorStateList(R.color.green));
+        }
     }
 
     private void showMealDetails() {

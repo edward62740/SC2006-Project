@@ -45,8 +45,7 @@ public class UserDashboardFragment extends Fragment {
         calorieDays = currentUser.getCaloriesHistory();
         currentDayIndex = calorieDays.size() ; // Start with the most recent day
 
-        // Set RecyclerView layout manager (no changes to adapter logic)
-        calorieHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         // Display today's calories initially
         updateCalorieText(currentDayIndex);

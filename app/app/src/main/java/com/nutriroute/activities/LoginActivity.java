@@ -2,14 +2,18 @@ package com.nutriroute.activities;
 
 import static com.nutriroute.enums.UserType.USER;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.nutriroute.R;
 import com.nutriroute.controllers.AuthController;
 import com.nutriroute.enums.UserType;
@@ -25,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private View skeletonLoader;
+    private TextView nutrirouteTextView;
 
     IDataStore<String> dataStore = ServiceLocator.getDB();
 
@@ -34,10 +40,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        skeletonLoader = findViewById(R.id.skeleton_loader);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
+        nutrirouteTextView = findViewById(R.id.nutriroute_title);
+        startColorAnimation();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +55,26 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void startColorAnimation() {
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),
+                getResources().getColor(R.color.light_green), // Start color (black)
+                getResources().getColor(R.color.dark_green)); // End color (red)
+
+        colorAnimation.setDuration(1500); // Duration of the animation
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                nutrirouteTextView.setTextColor((int) animator.getAnimatedValue());
+            }
+        });
+        colorAnimation.start();
+    }
+
     private void handleLogin() {
+        skeletonLoader.setVisibility(View.GONE);
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        System.out.println(dataStore.getUser("User1"));
-        System.out.println(dataStore.getUser("Use4r2"));
+        Toast.makeText(this, "Backend is loading ...", Toast.LENGTH_SHORT).show();
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -63,11 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                 AuthStore.setCurUser(dataStore.getUser(username));
                 // Navigate to the next activity
                 if(userType == USER) {
+                    skeletonLoader.setVisibility(View.VISIBLE);
                     User user = (User) dataStore.getUser(username);
-                    System.out.println(user);
-                    System.out.println(user.getCaloriesHistory());
                     Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 else if (userType == UserType.ADMIN) {
                    // Intent intent = new Intent(LoginActivity.this, AdminActivity.class);

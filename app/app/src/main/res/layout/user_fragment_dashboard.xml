@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#1D1D1D">
@@ -19,7 +20,7 @@
             android:contentDescription="Back to previous day"
             android:padding="16dp"
             android:src="@android:drawable/ic_media_previous"
-            android:tint="#AEEEEE" />
+            app:tint="#AEEEEE" />
 
         <TextView
             android:id="@+id/text_calories_day"
@@ -37,7 +38,7 @@
             android:contentDescription="Forward to next day"
             android:padding="16dp"
             android:src="@android:drawable/ic_media_next"
-            android:tint="#AEEEEE" />
+            app:tint="#AEEEEE" />
 
     </LinearLayout>
 

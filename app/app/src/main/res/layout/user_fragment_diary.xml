@@ -100,7 +100,7 @@
             android:id="@+id/btnAddBreakfast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Food"
+            android:text="Add Calories"
             android:backgroundTint="#00C853"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -148,7 +148,7 @@
             android:id="@+id/btnAddLunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Food"
+            android:text="Add Calories"
             android:backgroundTint="#00C853"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -185,18 +185,17 @@
             <TextView
                 android:id="@+id/tvDinnerCalories"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="500"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnAddDinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Food"
+            android:text="Add Calories"
             android:backgroundTint="#00C853"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
