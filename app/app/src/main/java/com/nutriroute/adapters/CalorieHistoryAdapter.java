@@ -34,7 +34,7 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull CalorieDayViewHolder holder, int position) {
-        CalorieDay calorieDay = calorieDays.get(position);
+        CalorieDay calorieDay = calorieDays.get(calorieDays.size() - 1 - position); // reverse order
         if (calorieDay == null) {
             return;
         }

@@ -1,196 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#001f0e"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NutriRoute"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <!-- Today's Diary (Calories Progress Section) -->
-    <TextView
-        android:id="@+id/tvCaloriesTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Today's Diary"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tvCalories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Calories"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/caloriesProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:max="100"
-            android:progress="75" />
-
+        <!-- Title -->
         <TextView
-            android:id="@+id/tvCaloriesRemaining"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1,200 Remaining"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="Track Your Calories"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-    <!-- Breakfast Section -->
-
-    <TextView
-        android:id="@+id/tvBreakfast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Breakfast"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        <!-- Today's Diary (Calories Progress Section) -->
         <TextView
-            android:id="@+id/tvBreakfastDetails"
+            android:id="@+id/tvCaloriesTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:text="Today's Diary"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <ProgressBar
+                android:id="@+id/caloriesProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="75"
+                android:progressTint="#00C853" />
+
+            <TextView
+                android:id="@+id/tvCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,200 Remaining"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+        <!-- Meal Section Template -->
+        <TextView
+            android:id="@+id/tvBreakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Breakfast"
+            android:textColor="#00E676"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvBreakfastDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Ice Lemon Tea\nMcSpicy Extra Value Meal"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tvBreakfastCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="800"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAddBreakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Food"
+            android:backgroundTint="#00C853"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="Ice Lemon Tea\nMcSpicy Extra Value Meal"
+            android:layout_gravity="end" />
+
+        <!-- Lunch Section -->
+        <TextView
+            android:id="@+id/tvLunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lunch"
+            android:textColor="#00E676"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLunchDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Spaghetti Bolognese"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tvLunchCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="600"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAddLunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Food"
+            android:backgroundTint="#00C853"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tvBreakfastCalories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnAddBreakfast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Food"
-        android:backgroundTint="#00C853"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp" />
-
-    <!-- Lunch Section -->
-    <TextView
-        android:id="@+id/tvLunch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Lunch"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvLunchDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:text="Ice Lemon Tea\nMcSpicy Extra Value Meal"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:layout_gravity="end" />
 
+        <!-- Dinner Section -->
         <TextView
-            android:id="@+id/tvLunchCalories"
+            android:id="@+id/tvDinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="800"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:text="Dinner"
+            android:textColor="#00E676"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="4dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnAddLunch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Food"
-        android:backgroundTint="#00C853"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/tvDinnerDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Grilled Chicken Salad"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp" />
 
-    <!-- Dinner Section -->
-    <TextView
-        android:id="@+id/tvDinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Dinner"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tvDinnerCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvDinnerDetails"
+        <Button
+            android:id="@+id/btnAddDinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:text="Add Food"
+            android:backgroundTint="#00C853"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tvDinnerCalories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="800"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:layout_gravity="end" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnAddDinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Food"
-        android:backgroundTint="#00C853"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp" />
-
-</LinearLayout>
+</ScrollView>

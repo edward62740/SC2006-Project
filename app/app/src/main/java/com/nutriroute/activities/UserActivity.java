@@ -23,7 +23,9 @@ public class UserActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        UserController.run();
+        UserController.run(); // update, state transition of user
+
+        // view frag state transition
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = new UserDashboardFragment();
 
@@ -35,17 +37,15 @@ public class UserActivity extends AppCompatActivity {
             }
 
             else if (item.getItemId() == R.id.nav_user_diary) {
-
                 selectedFragment = new UserDiaryFragment();
             }
 
             else if (item.getItemId() == R.id.nav_user_settings) {
                 selectedFragment = new UserSettingsFragment();
             }
-
-
-            // Replace the current fragment
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+
             return true;
         });
 

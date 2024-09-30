@@ -6,8 +6,14 @@ import com.nutriroute.models.User;
 
 public interface IGenericUserManagementService {
 
+    /*
+     * Register a new user
+     */
     void registerGenericUser(String name, String password, String email, UserType userType);
 
+    /*
+     * Modify a user
+     */
     void modifyGenericUser(GenericUser<String> user);
 
 }

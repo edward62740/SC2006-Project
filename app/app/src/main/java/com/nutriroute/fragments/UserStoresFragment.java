@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.nutriroute.R;
 import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.utils.GNSSLocHelper;
 import com.nutriroute.utils.PostalCodeHelper;
 import com.nutriroute.utils.ServiceLocator;
 
@@ -33,6 +34,7 @@ public class UserStoresFragment extends Fragment {
         webView.setWebViewClient(new WebViewClient()); // Ensure links open within the WebView
         webView.getSettings().setJavaScriptEnabled(true);
         PostalCodeHelper postalCodeHelper = new PostalCodeHelper();
+        GNSSLocHelper gnssLocHelper = new GNSSLocHelper();
 
 
         // Load the Google Maps URL for a specific location (San Francisco example)
@@ -43,11 +45,24 @@ public class UserStoresFragment extends Fragment {
                 if (address != null) {
                     // Handle the received address (e.g., display it in a TextView)
                     System.out.println("Address: " + address);
+                    // Using a lambda expression for the AddressCallback
+                    gnssLocHelper.fromAddressGetCoordinates(address, (latitude, longitude) -> {
+                        if (latitude != null && longitude != null) {
+                            System.out.println("Coordinates: Latitude = " + latitude + ", Longitude = " + longitude);
+                            // Use the coordinates here (e.g., update UI, save to database, etc.)
+                        } else {
+                            System.out.println("Failed to retrieve coordinates.");
+                        }
+                    });
+
+
                 } else {
                     // Handle the error (e.g., show a message to the user)
                     System.out.println("Address not found.");
                 }
             });
+
+
         });
         webView.loadUrl(url[0]);
 

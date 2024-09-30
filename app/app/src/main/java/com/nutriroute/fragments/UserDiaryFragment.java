@@ -1,12 +1,17 @@
 package com.nutriroute.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +51,7 @@ public class UserDiaryFragment extends Fragment {
         tvTitle = view.findViewById(R.id.tvTitle);
         tvCaloriesTitle = view.findViewById(R.id.tvCaloriesTitle);
         tvCalories = view.findViewById(R.id.tvCalories);
-        tvCaloriesRemaining = view.findViewById(R.id.tvCaloriesRemaining);
+        tvCaloriesRemaining = view.findViewById(R.id.tvCalories);
         tvBreakfast = view.findViewById(R.id.tvBreakfast);
         tvBreakfastDetails = view.findViewById(R.id.tvBreakfastDetails);
         tvBreakfastCalories = view.findViewById(R.id.tvBreakfastCalories);
@@ -61,11 +66,12 @@ public class UserDiaryFragment extends Fragment {
 
         caloriesProgressBar = view.findViewById(R.id.caloriesProgressBar);
 
+
         btnAddBreakfast = view.findViewById(R.id.btnAddBreakfast);
         btnAddLunch = view.findViewById(R.id.btnAddLunch);
         btnAddDinner = view.findViewById(R.id.btnAddDinner);
 
-        // Set up UI elements
+
         setupCaloriesProgress(currentUser.getCaloriesToday().getTotalCalories(),
                 currentUser.getTargetCalories());
 
@@ -76,16 +82,15 @@ public class UserDiaryFragment extends Fragment {
         btnAddDinner.setOnClickListener(v -> addDinner());
     }
 
-    private void setupCaloriesProgress(int progress, int caloriesRemaining) {
+    private void setupCaloriesProgress(int progress, int max) {
+        caloriesProgressBar.setMax(currentUser.getTargetCalories());
         caloriesProgressBar.setProgress(progress);
-        tvCaloriesRemaining.setText(caloriesRemaining + " Remaining");
+        tvCaloriesRemaining.setText(max-progress + " Remaining");
     }
 
     private void showMealDetails() {
         List<Integer> calories = currentUser.getCaloriesToday().getCaloriesConsumed();
-        System.out.println(currentUser.getCaloriesToday());
-        System.out.println(calories);
-        calorieManagementService.addCalorieItem("1", "1", 100, MealType.LUNCH);
+
 
         if(!calories.isEmpty() && calories.get(0) != null) {
             tvBreakfastDetails.setText("Details: " + currentUser.getCaloriesToday().getFoodConsumed().get(0));
@@ -104,14 +109,65 @@ public class UserDiaryFragment extends Fragment {
     }
 
     private void addBreakfast() {
-        // Handle breakfast addition (e.g., open dialog or new fragment)
+        showAddCalorieDialog(MealType.BREAKFAST);
     }
 
     private void addLunch() {
-        // Handle lunch addition (e.g., open dialog or new fragment)
+        showAddCalorieDialog(MealType.LUNCH);
     }
 
     private void addDinner() {
-        // Handle dinner addition (e.g., open dialog or new fragment)
+        showAddCalorieDialog(MealType.DINNER);
     }
+
+    private void showAddCalorieDialog(MealType mealType) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+
+        // Inflate custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_calorie_item, null);
+        builder.setView(dialogView);
+
+        // Initialize dialog views
+        EditText etRestaurantId = dialogView.findViewById(R.id.etRestaurantId);
+        EditText etFoodId = dialogView.findViewById(R.id.etFoodId);
+        EditText etCalories = dialogView.findViewById(R.id.etCalories);
+        Spinner spinnerMealType = dialogView.findViewById(R.id.spinnerMealType);
+        Button btnSubmit = dialogView.findViewById(R.id.btnSubmit);
+
+        // Set up the MealType spinner
+        ArrayAdapter<MealType> mealTypeAdapter = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_item, MealType.values());
+        mealTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMealType.setAdapter(mealTypeAdapter);
+
+        // Set the initial value of the spinner to the passed mealType
+        spinnerMealType.setSelection(mealTypeAdapter.getPosition(mealType));
+
+        // Show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+        btnSubmit.setOnClickListener(v -> {
+            if (etRestaurantId.getText().toString().isEmpty() || etFoodId.getText().toString().isEmpty()
+                    || etCalories.getText().toString().isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String restaurantId = etRestaurantId.getText().toString();
+            String foodId = etFoodId.getText().toString();
+            int calories = Integer.parseInt(etCalories.getText().toString());
+
+            MealType selectedMealType = (MealType) spinnerMealType.getSelectedItem();
+
+            calorieManagementService.addCalorieItem(restaurantId, foodId, calories, selectedMealType);
+
+            showMealDetails();
+            setupCaloriesProgress(currentUser.getCaloriesToday().getTotalCalories(),
+                    currentUser.getTargetCalories());
+            dialog.dismiss();
+        });
+    }
+
 }

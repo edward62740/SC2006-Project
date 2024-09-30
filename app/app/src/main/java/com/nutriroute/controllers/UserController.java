@@ -12,7 +12,9 @@ public class UserController {
     // entry point for user controller
     public static void run() {
 
-        // get some signal from the GUI
+        userCalorieManagementService.updateState(); // updates the state of the user's calorie history and current day
+
+
         /*
 
         decompose task
@@ -36,7 +38,7 @@ public class UserController {
         1-8,9 is a list of calories. possible to use the user storage to get the calorie history
         no need to bother with the DB for this
          */
-        userCalorieManagementService.updateState();
+
 
 
     }

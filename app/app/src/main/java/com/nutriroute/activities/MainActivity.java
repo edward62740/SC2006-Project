@@ -26,15 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
     IDataStore<String> dataStore = ServiceLocator.getDB();
 
-    public void _n_async_test_cb() {
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-      //  __TEST__generateRandomDB();
+    //    __TEST__generateRandomDB();
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
@@ -47,21 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public CompletableFuture<Void> waitForPendingUpdate() {
-        return CompletableFuture.runAsync(() -> {
-            while (dataStore.isPendingUpdate() > 0) {
-                try {
-                    // Delay for 500 milliseconds (or your desired time)
-                    TimeUnit.MILLISECONDS.sleep(500);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt(); // Restore interrupted status
-                    break; // Exit if interrupted
-                }
-            }
-            // After the wait, you can check the final state
-            System.out.println("Final pending update count: " + dataStore.isPendingUpdate());
-        });
-    }
 
     protected void __TEST__generateRandomDB()
     {
@@ -77,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
             List<CalorieDay> calorieDays = user.getCaloriesHistory();
             user.setCaloriesToday(new CalorieDay(LocalDate.now()));
-            for (int j = 0; j < Math.max(1, (int) (Math.random() * 31)); j++) {
-                CalorieDay calorieDay = new CalorieDay(LocalDate.now().minusDays(j+1));
+            int n = Math.max(1, (int) (Math.random() * 31));
+            for (int j = 0; j < n; j++) {
+                CalorieDay calorieDay = new CalorieDay(LocalDate.now().minusDays(n-j));
 
 
                 for (int k = 0; k < Math.max(1, (int) (Math.random() * 5)); k++) {

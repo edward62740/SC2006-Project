@@ -17,13 +17,14 @@ import com.nutriroute.models.CalorieDay;
 import com.nutriroute.models.User;
 import com.nutriroute.stores.AuthStore;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class UserDashboardFragment extends Fragment {
     private RecyclerView calorieHistoryRecyclerView;
     private TextView textCaloriesDay, textCaloriesCount;
     private ImageView buttonBack, buttonForward;
-
+    CalorieHistoryAdapter calorieHistoryAdapter;
     private List<CalorieDay> calorieDays;
     private int currentDayIndex = 0; // Track the current day being displayed
 
@@ -71,7 +72,7 @@ public class UserDashboardFragment extends Fragment {
 
         // Get the list of CalorieDay and initialize the adapter
         List<CalorieDay> calorieDays = currentUser.getCaloriesHistory();
-        CalorieHistoryAdapter calorieHistoryAdapter = new CalorieHistoryAdapter(calorieDays);
+        calorieHistoryAdapter = new CalorieHistoryAdapter(calorieDays);
         calorieHistoryRecyclerView.setAdapter(calorieHistoryAdapter);
         return view;
     }
@@ -82,10 +83,11 @@ public class UserDashboardFragment extends Fragment {
         // Get the calorie data for the selected day
         if (dayIndex >= calorieDays.size() ) {
             textCaloriesCount.setText("Calories: " +  currentUser.getCaloriesToday().getTotalCalories());
-            textCaloriesDay.setText(currentUser.getCaloriesToday().getDate().toString());
+            textCaloriesDay.setText("Today"); // expected because state is updated
             return;
         }
-        CalorieDay selectedDay = calorieDays.get(calorieDays.size() - 1 - dayIndex);
+        CalorieDay selectedDay = calorieDays.get(dayIndex);
+        calorieHistoryRecyclerView.smoothScrollToPosition(calorieDays.size()  - dayIndex);
 
 
         // Update the TextView with the selected day's calorie count

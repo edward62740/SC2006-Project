@@ -64,16 +64,33 @@ public class CalorieDay {
         }
     }
 
+
     public void addCaloriesConsumed(int calories, int index) {
-        caloriesConsumed.add(index, calories);
+        if (index < caloriesConsumed.size()) { //caloriesConsumed.size() == 3 at init
+            caloriesConsumed.set(index, calories);
+        }
+        else {
+            caloriesConsumed.add(calories);
+        }
     }
 
     public void addFoodConsumed(String foodId, int index) {
-        foodConsumed.add(index, foodId);
+        if (index < foodConsumed.size()) { //foodConsumed.size() == 3 at init
+            foodConsumed.set(index, foodId);
+        }
+        else {
+            foodConsumed.add(foodId);
+        }
     }
 
     public void addFoodRestaurant(String restaurantId, int index) {
-        foodRestaurant.add(index, restaurantId);
+        if (index < foodRestaurant.size()) { //foodRestaurant.size() == 3 at init
+            foodRestaurant.set(index, restaurantId);
+        }
+        else {
+            foodRestaurant.add(restaurantId);
+        }
+
     }
 
     public int getTotalCalories() {

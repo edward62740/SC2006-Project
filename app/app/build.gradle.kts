@@ -46,6 +46,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("org.apache.commons:commons-collections4:4.4")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 
 
 }

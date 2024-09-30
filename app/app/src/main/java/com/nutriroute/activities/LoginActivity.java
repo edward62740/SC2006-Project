@@ -69,6 +69,14 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                     startActivity(intent);
                 }
+                else if (userType == UserType.ADMIN) {
+                   // Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                   // startActivity(intent);
+                }
+                else if (userType == UserType.VENDOR) {
+                   // Intent intent = new Intent(LoginActivity.this, VendorActivity.class);
+                   // startActivity(intent);
+                }
 
 
             } else {
