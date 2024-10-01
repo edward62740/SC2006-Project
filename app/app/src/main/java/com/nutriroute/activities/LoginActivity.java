@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         nutrirouteTextView = findViewById(R.id.nutriroute_title);
+        skeletonLoader.setVisibility(View.GONE);
         startColorAnimation();
 
         loginButton.setOnClickListener(new View.OnClickListener() {

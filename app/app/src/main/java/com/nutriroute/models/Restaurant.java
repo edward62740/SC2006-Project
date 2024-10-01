@@ -10,7 +10,8 @@ public class Restaurant {
     private String description;
     private String image; // path to img (do we want this?)
     private String id;
-    private String location; // google maps location
+    private String location; // postal code (vendor enters this)
+    private String latlong; // latlong (generated from postal code)
 
     public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id) {
         this.menu = menu;
@@ -98,5 +99,13 @@ public class Restaurant {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
