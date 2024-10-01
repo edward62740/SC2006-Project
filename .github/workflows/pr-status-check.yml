@@ -13,28 +13,39 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { data: pr } = await github.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-            });
+            const { context, github } = require('@actions/github');
 
-            const checks = await github.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: pr.head.sha,
-            });
-
-            const failedChecks = checks.data.check_runs.filter(check => check.conclusion === 'failure');
-
-            if (failedChecks.length > 0) {
-              await github.pulls.update({
+            try {
+              // Get the current pull request
+              const { data: pr } = await github.pulls.get({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.payload.pull_request.number,
-                state: 'closed',
               });
-              console.log('PR closed due to failed checks.');
-            } else {
-              console.log('All checks passed, no action taken.');
+
+              // List checks for the current pull request's commit
+              const checks = await github.checks.listForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: pr.head.sha,
+              });
+
+              // Check for failed checks
+              const failedChecks = checks.data.check_runs.filter(check => check.conclusion === 'failure');
+
+              if (failedChecks.length > 0) {
+                // Close the PR if there are failed checks
+                await github.pulls.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  state: 'closed',
+                });
+                console.log('PR closed due to failed checks.');
+              } else {
+                console.log('All checks passed, no action taken.');
+              }
+            } catch (error) {
+              console.error('Error processing the PR:', error);
+              throw new Error('Failed to check PR status or close PR');
             }
