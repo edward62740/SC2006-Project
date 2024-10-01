@@ -2,33 +2,43 @@ package com.nutriroute.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nutriroute.R;
+import com.nutriroute.fragments.UserStoresFragment;
 import com.nutriroute.models.Restaurant;
 import com.nutriroute.utils.PostalCodeHelper;
-//import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAdapter.RestaurantViewHolder> {
 
     private List<Restaurant> restaurantList;
-    private Context context; // Store context for dialog creation
+    private List<Float> distanceList;
+    private Context context;
     PostalCodeHelper postalCodeHelper = new PostalCodeHelper();
+    RecyclerView menuRecyclerView;
 
-    public UserRestaurantAdapter(Context context, List<Restaurant> restaurantList) {
-        this.context = context; // Initialize context
-        this.restaurantList = restaurantList;
+    public UserRestaurantAdapter(Context context, Pair<List<Restaurant>, List<Float>> restaurantList) {
+        this.context = context;
+        this.restaurantList = restaurantList.first;
+        this.distanceList = restaurantList.second;
+    }
+
+    public void updateData(Pair<List<Restaurant>, List<Float>> restaurantList) {
+        this.restaurantList = restaurantList.first;
+        this.distanceList = restaurantList.second;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -54,6 +64,7 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         holder.textName.setText(restaurant.getName());
         holder.textPhone.setText("Phone: " + restaurant.getPhone());
         holder.textDescription.setText(restaurant.getDescription());
+        holder.textDistance.setText("Distance: " + distanceList.get(position) + " km");
 
         // Set the click listener for the item view
         holder.itemView.setOnClickListener(v -> showRestaurantDialog(restaurant));
@@ -72,28 +83,46 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         TextView dialogAddress = dialogView.findViewById(R.id.dialog_address);
         TextView dialogPhone = dialogView.findViewById(R.id.dialog_phone);
         TextView dialogDescription = dialogView.findViewById(R.id.dialog_description);
+        WebView mapWebView = dialogView.findViewById(R.id.map_webview);
+        mapWebView.getSettings().setJavaScriptEnabled(true);
         Button dialogOkButton = dialogView.findViewById(R.id.dialog_ok_button);
 
+        menuRecyclerView = dialogView.findViewById(R.id.restaurant_menu);
+        menuRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        // Load the restaurant menu items
+        MenuAdapter menuAdapter = new MenuAdapter(restaurant.getMenu().getItems(), context);
+        menuRecyclerView.setAdapter(menuAdapter);
+
+        postalCodeHelper.fromPostalCodeGetAddress(Integer.parseInt(restaurant.getAddress()), address -> {
+            if (address != null) {
+                dialogAddress.setText("Address: " + address);
+            } else {
+                dialogAddress.setText("Invalid address");
+            }
+        });
 
         dialogTitle.setText(restaurant.getName());
-        dialogAddress.setText("Address: " + restaurant.getAddress());
         dialogPhone.setText("Phone: " + restaurant.getPhone());
-        dialogDescription.setText("Description: " + restaurant.getDescription());
+        dialogDescription.setText("Overview: " + restaurant.getDescription());
+
+        final String[] url = {"https://www.onemap.gov.sg/amm/amm.html?mapStyle=Default&zoomLevel=13"};
+        url[0] += "&marker=postalcode:" + restaurant.getAddress() + "!colour:red!rType:TRANSIT!rDest:" + restaurant.getLocation()
+                + "&marker=postalcode:" + restaurant.getAddress() + "!colour:red!rType:TRANSIT!rDest:" + UserStoresFragment.getUserLatLong();
+
+        mapWebView.loadUrl(url[0]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
 
-
         dialogOkButton.setOnClickListener(v -> dialog.dismiss());
 
-        // Show the dialog
         dialog.show();
     }
 
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
-        public TextView textName, textAddress, textPhone, textDescription;
-        public ImageView imageRestaurant;
+        public TextView textName, textAddress, textPhone, textDescription, textDistance;
 
         public RestaurantViewHolder(View itemView) {
             super(itemView);
@@ -101,7 +130,7 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
             textAddress = itemView.findViewById(R.id.text_address);
             textPhone = itemView.findViewById(R.id.text_phone);
             textDescription = itemView.findViewById(R.id.text_description);
-            imageRestaurant = itemView.findViewById(R.id.image_restaurant);
+            textDistance = itemView.findViewById(R.id.text_dist);
         }
     }
 }

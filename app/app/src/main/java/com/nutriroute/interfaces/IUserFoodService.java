@@ -1,5 +1,7 @@
 package com.nutriroute.interfaces;
 
+import android.util.Pair;
+
 import com.nutriroute.models.Restaurant;
 
 import java.util.Comparator;
@@ -9,7 +11,10 @@ public interface IUserFoodService {
     /*
      * Query the restaurants based on the sorting function
      */
-    List<Restaurant> queryRestaurants(Comparator<Restaurant> sortingFunction);
+    Pair<List<Restaurant>, List<Float>> queryRestaurants(Comparator<Restaurant> sortingFunction);
 
     Comparator<Restaurant> sortByDistance();
+
+    void setUserLatLong(String userLatLong);
+    String getUserLatLong();
 }

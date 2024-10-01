@@ -116,6 +116,7 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
 
     public boolean setRestaurant(Restaurant restaurant) {
         this._updateObjectToDB(restaurant, restaurant.getId());
+        System.out.println(restaurant.getLocation());
         restaurantCache.put(restaurant.getId(), restaurant);
         return true;
     }

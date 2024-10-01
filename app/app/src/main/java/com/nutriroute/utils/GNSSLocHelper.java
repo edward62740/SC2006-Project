@@ -72,27 +72,34 @@ public class GNSSLocHelper {
                     Document doc = builder.parse(new InputSource(new StringReader(response)));
 
                     // Extract latitude and longitude from the XML
-                    NodeList latNodes = doc.getElementsByTagName("lat");
-                    NodeList lngNodes = doc.getElementsByTagName("lng");
+                    NodeList latNodes = doc.getElementsByTagName("latt");
+                    NodeList lngNodes = doc.getElementsByTagName("longt");
+                    NodeList confidenceNodes = doc.getElementsByTagName("confidence");
 
-                    if (latNodes.getLength() > 0 && lngNodes.getLength() > 0) {
+                    if (latNodes.getLength() > 0 && lngNodes.getLength() > 0 && confidenceNodes.getLength() > 0) {
                         String latitude = latNodes.item(0).getTextContent();
                         String longitude = lngNodes.item(0).getTextContent();
-                        callback.onCoordinatesReceived(latitude, longitude);
+                        float confidence = Float.parseFloat(confidenceNodes.item(0).getTextContent());
+
+                        // Create a single string for GPS coordinates
+                        String gpsCoordinates = latitude + "," + longitude;
+
+                        // Pass the coordinates and confidence back through the callback
+                        callback.onCoordinatesReceived(gpsCoordinates, confidence);
                     } else {
-                        callback.onCoordinatesReceived(null, null);
+                        callback.onCoordinatesReceived(null, 0.0f); // Return 0.0f for confidence if not found
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    callback.onCoordinatesReceived(null, null);
+                    callback.onCoordinatesReceived(null, 0.0f);
                 }
             } else {
-                callback.onCoordinatesReceived(null, null);
+                callback.onCoordinatesReceived(null, 0.0f);
             }
         }
     }
 
     public interface AddressCallback {
-        void onCoordinatesReceived(String latitude, String longitude);
+        void onCoordinatesReceived(String gpsCoordinates, float confidence);
     }
 }
