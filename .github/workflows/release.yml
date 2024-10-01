@@ -3,7 +3,7 @@ name: Minimal Android CI Workflow
 on:
   push:
     branches:
-      - master
+      - edward62740-patch-1
     tags:
       - 'v*'
 
