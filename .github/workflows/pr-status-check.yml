@@ -13,8 +13,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { context, github } = require('@actions/github');
-
             try {
               // Get the current pull request
               const { data: pr } = await github.pulls.get({
