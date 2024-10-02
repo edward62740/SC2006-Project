@@ -13,14 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.nutriroute.R;
 import com.nutriroute.controllers.AuthController;
 import com.nutriroute.enums.UserType;
 import com.nutriroute.interfaces.IDataStore;
-import com.nutriroute.interfaces.IGenericUserManagementService;
 import com.nutriroute.models.User;
-import com.nutriroute.services.GenericUserManagementService;
 import com.nutriroute.stores.AuthStore;
 import com.nutriroute.utils.ServiceLocator;
 
@@ -33,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView nutrirouteTextView;
 
     IDataStore<String> dataStore = ServiceLocator.getDB();
-
-    IGenericUserManagementService userManagementService = new GenericUserManagementService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

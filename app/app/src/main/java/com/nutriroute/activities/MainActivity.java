@@ -28,6 +28,18 @@ public class MainActivity extends AppCompatActivity {
 
     IDataStore<String> dataStore = ServiceLocator.getDB();
 
+
+    /**
+     * This is the application entry point. Here, we start the login activity.
+     * <p>
+     * In general, the convention is that the ACTIVITY is the controller + view,
+     * and the CONTROLLER is exclusively the high level logic.
+     * The lower level logic is contained in the SERVICE classes.
+     *
+     * Note that the activity/fragments should NEVER instantiate the service classes.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

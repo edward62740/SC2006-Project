@@ -17,7 +17,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class UserFoodService implements IUserFoodService {
-    User user = (User) AuthStore.getCurUser(); // unsafe cast to User since it must be User by now
     static IDataStore<String> dataStore = ServiceLocator.getDB();
     GNSSLocHelper gnssLocHelper = new GNSSLocHelper();
 

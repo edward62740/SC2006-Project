@@ -1,17 +1,25 @@
 package com.nutriroute.models;
 
+
+/**
+ * This class represents a restaurant.
+ *
+ * Note: It is highly recommended at runtime, before creating a particular Restaurant instance,
+ * to lookup the postal code and populate the location field with the GPS coordinates.
+ * <p>
+ * Evidently, if the Vendor creates a new restaurant, there should be a valid location.
+ */
 public class Restaurant {
     private Menu menu;
     private String name;
-    private String address;
+    private String address; // this should be the postal code
     private String phone;
     private String email;
     private String website;
     private String description;
     private String image; // path to img (do we want this?)
     private String id;
-    private String location; // postal code (vendor enters this)
-    private String latlong; // latlong (generated from postal code)
+    private String location; // this should be the GPS coordinates
 
     public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id) {
         this.menu = menu;

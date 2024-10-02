@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nutriroute.R;
 import com.nutriroute.adapters.UserRestaurantAdapter;
+import com.nutriroute.controllers.UserController;
 import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.interfaces.IUserFoodService;
 import com.nutriroute.models.Restaurant;
@@ -41,10 +42,6 @@ import java.util.concurrent.Executors;
 
 public class UserStoresFragment extends Fragment {
 
-    private WebView webView;
-    IDataStore<String> dataStore = ServiceLocator.getDB();
-    IUserFoodService userFoodService = new UserFoodService();
-    User currentUser = (User) AuthStore.getCurUser();
     private RecyclerView recyclerView;
     private UserRestaurantAdapter restaurantAdapter;
     private List<Restaurant> restaurantList;
@@ -52,6 +49,7 @@ public class UserStoresFragment extends Fragment {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private LocationHelper locationHelper;
     public static String userLatLong;
+
     public static String getUserLatLong() {
         return userLatLong;
     }
@@ -88,12 +86,13 @@ public class UserStoresFragment extends Fragment {
             @Override
             public void onLocationReceived(Location location) {
                 System.out.println("Location: " + location.getLatitude() + ", " + location.getLongitude());
-                userFoodService.setUserLatLong(location.getLatitude() + "," + location.getLongitude());
+                UserController.setUserCurrentLocation(location.getLatitude() + "," + location.getLongitude());
+
 
                Toast.makeText(getContext(), "Setting static location for testing", Toast.LENGTH_SHORT).show();
 
-                userFoodService.setUserLatLong("1.3544,103.9866");
-                userLatLong = userFoodService.getUserLatLong();
+                UserController.setUserCurrentLocation("1.3544,103.9866");
+                userLatLong = UserController.getUserCurrentLocation();
                 queryAndSetupAdapter();
             }
 
@@ -112,7 +111,7 @@ public class UserStoresFragment extends Fragment {
         executor.execute(() -> {
             // Query restaurants and sort by distance
             Pair<List<Restaurant>, List<Float>> restaurants
-                    = userFoodService.queryRestaurants(userFoodService.sortByDistance());
+                    = UserController.queryRestaurantsByDistance();
 
             // Update the UI on the main thread
             getActivity().runOnUiThread(() -> {
