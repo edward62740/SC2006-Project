@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.nutriroute.R;
+import com.nutriroute.controllers.UserController;
 import com.nutriroute.enums.MealType;
 import com.nutriroute.interfaces.IUserCalorieManagementService;
 import com.nutriroute.models.User;
@@ -35,7 +36,6 @@ public class UserDiaryFragment extends Fragment {
     private Button btnAddBreakfast, btnAddLunch, btnAddDinner;
 
     User currentUser = ((User) AuthStore.getCurUser());
-    IUserCalorieManagementService calorieManagementService = new UserCalorieManagementService();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -169,7 +169,7 @@ public class UserDiaryFragment extends Fragment {
 
             MealType selectedMealType = (MealType) spinnerMealType.getSelectedItem();
 
-            calorieManagementService.addCalorieItem(restaurantId, foodId, calories, selectedMealType);
+            UserController.updateCalories(restaurantId, foodId, calories, selectedMealType);
 
             showMealDetails();
             setupCaloriesProgress(currentUser.getCaloriesToday().getTotalCalories(),

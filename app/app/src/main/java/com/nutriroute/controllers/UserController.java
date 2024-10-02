@@ -1,46 +1,76 @@
 package com.nutriroute.controllers;
 
-import com.nutriroute.interfaces.IUserCalorieManagementService;
-import com.nutriroute.services.UserCalorieManagementService;
+import android.util.Pair;
 
+import com.nutriroute.enums.MealType;
+import com.nutriroute.enums.UserType;
+import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.interfaces.IGenericUserManagementService;
+import com.nutriroute.interfaces.IUserCalorieManagementService;
+import com.nutriroute.interfaces.IUserFoodService;
+import com.nutriroute.models.Restaurant;
+import com.nutriroute.services.GenericUserManagementService;
+import com.nutriroute.services.UserCalorieManagementService;
+import com.nutriroute.services.UserFoodService;
+import com.nutriroute.utils.ServiceLocator;
+
+import java.util.List;
+
+/**
+ * This is the user controller which is responsible for handling the the logic for the user.
+ * The distinction between the controller and the activities/fragments is that the controller
+ * is the one that deals with the service layer.
+ */
 public class UserController {
 
+    // Service layer objects
     private static final IUserCalorieManagementService userCalorieManagementService = new UserCalorieManagementService();
+    private static final IUserFoodService userFoodService = new UserFoodService();
+    private static final IGenericUserManagementService userManagementService = new GenericUserManagementService();
+    // Data store reference
+    private static final IDataStore<String> dataStore = ServiceLocator.getDB();
+
     private UserController() {
     }
 
-    // entry point for user controller
-    public static void run() {
-
+    /**
+     * High level abstraction for updating the user state, which keeps the underlying data
+     * structures valid and up-to-date.
+     */
+    public static void updateUserState() {
         userCalorieManagementService.updateState(); // updates the state of the user's calorie history and current day
+    }
+
+    /**
+     * These methods are part of use cases #1-1, which are used to instantiate a new user
+     */
+    public static void registerUser(String name, String password, String email) {
+        userManagementService.registerGenericUser(name, password, email, UserType.USER);
+    }
 
 
-        /*
+    /**
+     * These methods are part of use cases #1-2, 1-4, #1-5, which are used to give the user
+     * a list of relevant restaurants
+     */
+    public static Pair<List<Restaurant>, List<Float>> queryRestaurantsByDistance() {
+        return userFoodService.queryRestaurants(userFoodService.sortByDistance());
+    }
 
-        decompose task
-        1. there are stuff to trigger the gui to show details (1-8, 1-9)
-        2. there is the restaurant/user interaction (1-3, 1-4, 1-5, 1-6)
-        3. mutate the user (1-1)
+    public static void setUserCurrentLocation(String userLatLong) {
+        userFoodService.setUserLatLong(userLatLong);
+    }
 
-        define: IUserMapService, call maps and draw etc. (API: google maps)
-        IUserFoodService, do the logic for calorie provisioning etc.
-        IUserManagementService, create or modify obj and dump into DB (API: DB)
+    public static String getUserCurrentLocation() {
+        return userFoodService.getUserLatLong();
+    }
 
-        1-2,3,4,5 requires: find N minimum dist restaurants,
-        calculate calories and subtract from user's daily intake,
-        the google maps stuff + overlay coordinates on map
-        probably on view side: open the restaurant details when clicked
-
-        1-6 is just a user modification, so it's a simple call to the DB
-
-        1-7 is a notification thing
-
-        1-8,9 is a list of calories. possible to use the user storage to get the calorie history
-        no need to bother with the DB for this
-         */
-
-
-
+    /**
+     * These methods are part of use cases #1-6, which are used to update the calories of the
+     * current user
+     */
+    public static void updateCalories(String restaurantId, String foodId, int calories, MealType mealType) {
+        userCalorieManagementService.addCalorieItem(restaurantId, foodId, calories, mealType);
     }
 
 
