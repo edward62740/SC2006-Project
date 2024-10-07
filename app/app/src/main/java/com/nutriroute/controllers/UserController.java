@@ -8,12 +8,14 @@ import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.interfaces.IGenericUserManagementService;
 import com.nutriroute.interfaces.IUserCalorieManagementService;
 import com.nutriroute.interfaces.IUserFoodService;
+import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.Restaurant;
 import com.nutriroute.services.GenericUserManagementService;
 import com.nutriroute.services.UserCalorieManagementService;
 import com.nutriroute.services.UserFoodService;
 import com.nutriroute.utils.ServiceLocator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +48,7 @@ public class UserController {
      */
     public static void registerUser(String name, String password, String email) {
         userManagementService.registerGenericUser(name, password, email, UserType.USER);
+        //dataStore._loadObjFromDB(GenericUser, null);
     }
 
 
@@ -56,6 +59,27 @@ public class UserController {
     public static Pair<List<Restaurant>, List<Float>> queryRestaurantsByDistance() {
         return userFoodService.queryRestaurants(userFoodService.sortByDistance());
     }
+
+    public static Pair<List<Restaurant>, List<Float>> queryRestaurantsByPrescription() {
+        Pair<List<Restaurant>, List<Float>> restaurants =
+                userFoodService.queryRestaurants(userFoodService.sortByDistance());
+
+        if (restaurants != null && restaurants.first != null && !restaurants.first.isEmpty()) {
+
+            int i = (int) (Math.random() * restaurants.first.size());
+
+            List<Restaurant> selectedRestaurant = new ArrayList<>();
+            selectedRestaurant.add(restaurants.first.get(i));
+
+            List<Float> selectedDistance = new ArrayList<>();
+            selectedDistance.add(restaurants.second.get(i));
+
+            return new Pair<>(selectedRestaurant, selectedDistance);
+        }
+
+        return new Pair<>(new ArrayList<>(), new ArrayList<>());
+    }
+
 
     public static void setUserCurrentLocation(String userLatLong) {
         userFoodService.setUserLatLong(userLatLong);
@@ -71,6 +95,14 @@ public class UserController {
      */
     public static void updateCalories(String restaurantId, String foodId, int calories, MealType mealType) {
         userCalorieManagementService.addCalorieItem(restaurantId, foodId, calories, mealType);
+    }
+
+    /**
+     * Log out method
+     */
+    public static void logoutAndExit() {
+        updateUserState();
+        AuthController.logout();
     }
 
 

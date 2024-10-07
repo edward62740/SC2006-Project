@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private Button loginButton, createAccountButton;
     private View skeletonLoader;
     private TextView nutrirouteTextView;
 
@@ -39,16 +39,22 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
+        createAccountButton = findViewById(R.id.createAccountButton);
         nutrirouteTextView = findViewById(R.id.nutriroute_title);
         skeletonLoader.setVisibility(View.GONE);
         startColorAnimation();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleLogin();
-            }
+        loginButton.setOnClickListener(v -> handleLogin());
+
+        createAccountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, CreateGenericUserActivity.class);
+            startActivity(intent);
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        skeletonLoader.setVisibility(View.GONE);
     }
 
     private void startColorAnimation() {
@@ -83,9 +89,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Navigate to the next activity
                 if(userType == USER) {
                     skeletonLoader.setVisibility(View.VISIBLE);
-                    User user = (User) dataStore.getUser(username);
                     Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                     startActivity(intent);
+
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 else if (userType == UserType.ADMIN) {

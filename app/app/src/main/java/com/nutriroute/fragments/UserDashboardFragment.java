@@ -72,6 +72,10 @@ public class UserDashboardFragment extends Fragment {
 
         // Get the list of CalorieDay and initialize the adapter
         List<CalorieDay> calorieDays = currentUser.getCaloriesHistory();
+        //check if today already appended
+        if (!calorieDays.contains(currentUser.getCaloriesToday())) {
+            calorieDays.add(currentUser.getCaloriesToday());
+        }
         calorieHistoryAdapter = new CalorieHistoryAdapter(calorieDays);
         calorieHistoryRecyclerView.setAdapter(calorieHistoryAdapter);
         return view;

@@ -1,5 +1,6 @@
 package com.nutriroute.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.nutriroute.R;
+import com.nutriroute.controllers.UserController;
+import com.nutriroute.enums.MealType;
 import com.nutriroute.models.MenuItem;
+import com.nutriroute.models.Restaurant;
 
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
     private List<MenuItem> menuItems;
+    private Restaurant restaurant;
     private Context context;
     static ImageView imageView;
 
-    public MenuAdapter(List<MenuItem> menuItems, Context context) {
-        this.menuItems = menuItems;
+    public MenuAdapter(Restaurant restaurant, Context context) {
+        this.restaurant = restaurant;
+        this.menuItems = restaurant.getMenu().getItems();
         this.context = context;
     }
 
@@ -49,8 +55,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show toast with the menu item name
-                Toast.makeText(context, "Clicked, TODO impl 1-6: " + menuItem.getName(), Toast.LENGTH_SHORT).show();
+                selectMealAndAlloc(menuItem);
             }
         });
         Glide.with(context).load("https://lh3.googleusercontent.com/p/AF1QipNMwMB3ZR2p2Nz61uCrCgzv2-dw3in2kIM5SfAd=s680-w680-h510").into(imageView);
@@ -60,6 +65,38 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public int getItemCount() {
         return menuItems.size();
     }
+
+    // Show a dialog to prompt the user for the meal type
+    private void selectMealAndAlloc(MenuItem menuItem) {
+        String[] mealOptions = {"Breakfast", "Lunch", "Dinner", "Misc"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Which meal are you having this for?");
+
+        builder.setItems(mealOptions, (dialog, which) -> {
+            MealType selectedMealType;
+            switch (which) {
+                case 0:
+                    selectedMealType = MealType.BREAKFAST;
+                    break;
+                case 1:
+                    selectedMealType = MealType.LUNCH;
+                    break;
+                case 2:
+                    selectedMealType = MealType.DINNER;
+                    break;
+                case 3:
+                default:
+                    selectedMealType = MealType.MISC;
+                    break;
+            }
+            Toast.makeText(context, "Recorded: " + menuItem.getName() + " for " + selectedMealType, Toast.LENGTH_SHORT).show();
+            UserController.updateCalories(restaurant.getName(), menuItem.getName(), menuItem.getCalories(), selectedMealType);
+        });
+
+        // Show the dialog
+        builder.show();
+    }
+
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
         public TextView textName, textDescription, textPrice, textCalories;

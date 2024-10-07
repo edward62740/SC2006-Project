@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     //dummy data for testing and demonstration
     protected void __TEST__generateRandomDB()
     {String[] validPostalCode = {"637553", "637034", "639798", "637335", "636922", "639798", "639798", "638075", "636922", "321789"};
-        /*
+
+        String[] validImageUrl = {};
+
 
         for (int i = 1; i <= 25; i++) {
             String userName = "User" + i;
@@ -126,34 +128,35 @@ public class MainActivity extends AppCompatActivity {
             // Output to show user creation
             System.out.println("Created admin: " + userName + " with ID: " + id);
         }
-        */
+        /*
 
 
-        for (int x = 1; x <= 16; x++) {
+        for (int x = 1; x <= 16; x++) { //restaurant
             String name = "Restaurant" + x;
             Menu menu = new Menu(new ArrayList<>());
-            for (int i = 1; i <= 16; i++) {
-                List<MenuItem> items = new ArrayList<>();
-                for(int j = 1; j <= 16; j++) {
-                    String itemname = "MenuItem" + i + "ForRestaurant" + j;
-                    double price = Math.random() * 10; //round to 2dp
-                    price = Math.round(price * 100.0) / 100.0;
-                    MenuItem menuItem = new MenuItem(itemname, "description of item" + j,
-                            price, "category" + (int) (Math.random() * 36), "", (int) (Math.random() * 2200));
-                    items.add(menuItem);
-                }
-                String menuname = "MenuForRestaurant" + i;
-                String id = "Restaurant" + i; // let id be the same as the restaurant id for simplicity
-                menu.setItems(items);
-                menu.setId(id);
-                System.out.println("Created menu: " + menuname + " with ID: " + id);
+
+            List<MenuItem> items = new ArrayList<>();
+            for(int j = 1; j <= 16; j++) {
+                String itemname = "MenuItem" + j + "ForRestaurant" + x;
+                double price = Math.random() * 10; //round to 2dp
+                price = Math.round(price * 100.0) / 100.0;
+                MenuItem menuItem = new MenuItem(itemname, "description of item" + j,
+                        price, "category" + (int) (Math.random() * 36), "", (int) (Math.random() * 2200));
+                items.add(menuItem);
             }
+            String menuname = "MenuForRestaurant" + x;
+            String id = "Restaurant" + x; // let id be the same as the restaurant id for simplicity
+            menu.setItems(items);
+            menu.setId(id);
+            System.out.println("Created menu: " + menuname + " with ID: " + id);
+
             String address = validPostalCode[(int) (Math.random() * validPostalCode.length)];
-            String phone = "123-456-78" + String.format("%02d", x); // Incrementing phone numbers
+            String phone = "62382043" + String.format("%02d", x); // Incrementing phone numbers
             String someId = "Restaurant" + x;
+            String description = "Description of restaurant" + x;
 
             // Create a new restaurant
-            Restaurant restaurant = new Restaurant(null, name, address, phone, " ", " ", " ", " ", someId);
+            Restaurant restaurant = new Restaurant(null, name, address, phone, " ", " ", description, " ", someId);
             restaurant.setMenu(menu);
 
             // Set the restaurant in the data store
@@ -161,8 +164,10 @@ public class MainActivity extends AppCompatActivity {
 
             // Output to show restaurant creation
             System.out.println("Created restaurant: " + name + " with ID: " + someId);
-        }
 
+
+        }
+*/
 
 
 

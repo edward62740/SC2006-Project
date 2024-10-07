@@ -2,6 +2,7 @@ package com.nutriroute.controllers;
 
 import com.nutriroute.enums.UserType;
 import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.stores.AuthStore;
 import com.nutriroute.utils.ServiceLocator;
 
 /**
@@ -22,6 +23,10 @@ public class AuthController {
             }
         }
         return null;
+    }
+
+    public static void logout() {
+        AuthStore.setCurUser(null);
     }
 
 }

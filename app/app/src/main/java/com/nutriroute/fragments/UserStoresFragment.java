@@ -1,6 +1,7 @@
 package com.nutriroute.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,17 +51,21 @@ public class UserStoresFragment extends Fragment {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private LocationHelper locationHelper;
     public static String userLatLong;
+    private static User currentUser = (User) AuthStore.getCurUser();
+    private TextView searchTitle;
 
     public static String getUserLatLong() {
         return userLatLong;
     }
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.user_fragment_stores, container, false);
         locationHelper = new LocationHelper(this.getContext());
+        searchTitle = view.findViewById(R.id.stores_search_title);
 
         // Check for location permissions
         if (ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -68,6 +74,14 @@ public class UserStoresFragment extends Fragment {
         } else {
             // Get the last known location
             getLocation();
+        }
+        if(currentUser.isPrescribed())
+        {
+            searchTitle.setText("Recommended Restaurants");
+        }
+        else
+        {
+            searchTitle.setText("Nearby Restaurants");
         }
 
         recyclerView = view.findViewById(R.id.recycler_view_restaurants);
@@ -85,7 +99,6 @@ public class UserStoresFragment extends Fragment {
 
             @Override
             public void onLocationReceived(Location location) {
-                System.out.println("Location: " + location.getLatitude() + ", " + location.getLongitude());
                 UserController.setUserCurrentLocation(location.getLatitude() + "," + location.getLongitude());
 
 
@@ -93,6 +106,7 @@ public class UserStoresFragment extends Fragment {
 
                 UserController.setUserCurrentLocation("1.3544,103.9866");
                 userLatLong = UserController.getUserCurrentLocation();
+
                 queryAndSetupAdapter();
             }
 
@@ -103,17 +117,24 @@ public class UserStoresFragment extends Fragment {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void queryAndSetupAdapter() {
         // Create a single-threaded executor
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        // Run the data loading in a background thread
         executor.execute(() -> {
-            // Query restaurants and sort by distance
-            Pair<List<Restaurant>, List<Float>> restaurants
-                    = UserController.queryRestaurantsByDistance();
 
-            // Update the UI on the main thread
+            // Query restaurants and sort by distance
+            Pair<List<Restaurant>, List<Float>> restaurants;
+
+            if (currentUser.isPrescribed())
+            {
+                restaurants = UserController.queryRestaurantsByPrescription();
+            }
+            else {
+
+                restaurants = UserController.queryRestaurantsByDistance();
+            }
             getActivity().runOnUiThread(() -> {
                 // Setup the adapter with the queried restaurants
                 restaurantAdapter = new UserRestaurantAdapter(getContext(), restaurants);

@@ -10,6 +10,8 @@ import com.nutriroute.R;
 import com.nutriroute.fragments.UserSettingsFragment;
 import com.nutriroute.fragments.UserStoresFragment;
 import com.nutriroute.fragments.UserDiaryFragment;
+import com.nutriroute.models.User;
+import com.nutriroute.stores.AuthStore;
 
 /**
  * This is the entry point for Users.
@@ -18,7 +20,7 @@ import com.nutriroute.fragments.UserDiaryFragment;
  */
 public class UserActivity extends AppCompatActivity {
 
-
+    User currentUser = (User) AuthStore.getCurUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,9 @@ public class UserActivity extends AppCompatActivity {
         });
 
         // Set default fragment
-        if (savedInstanceState == null) {
+        if(currentUser.isNewAccount()) {
+            bottomNavigationView.setSelectedItemId(R.id.nav_user_settings);
+        } else if (savedInstanceState == null) {
             bottomNavigationView.setSelectedItemId(R.id.nav_user_dashboard);
         }
     }
