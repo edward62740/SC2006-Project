@@ -1,5 +1,6 @@
 package com.nutriroute.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Pair;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +29,6 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
     private List<Float> distanceList;
     private Context context;
     PostalCodeHelper postalCodeHelper = new PostalCodeHelper();
-    RecyclerView menuRecyclerView;
 
     public UserRestaurantAdapter(Context context, Pair<List<Restaurant>, List<Float>> restaurantList) {
         this.context = context;
@@ -35,6 +36,7 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         this.distanceList = restaurantList.second;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void updateData(Pair<List<Restaurant>, List<Float>> restaurantList) {
         this.restaurantList = restaurantList.first;
         this.distanceList = restaurantList.second;
@@ -49,6 +51,7 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         return new RestaurantViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
         Restaurant restaurant = restaurantList.get(position);
@@ -75,51 +78,12 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         return restaurantList.size();
     }
 
+    @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
     private void showRestaurantDialog(Restaurant restaurant) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_restaurant_info, null);
-
-        TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
-        TextView dialogAddress = dialogView.findViewById(R.id.dialog_address);
-        TextView dialogPhone = dialogView.findViewById(R.id.dialog_phone);
-        TextView dialogDescription = dialogView.findViewById(R.id.dialog_description);
-        WebView mapWebView = dialogView.findViewById(R.id.map_webview);
-        mapWebView.getSettings().setJavaScriptEnabled(true);
-        Button dialogOkButton = dialogView.findViewById(R.id.dialog_ok_button);
-
-        menuRecyclerView = dialogView.findViewById(R.id.restaurant_menu);
-        menuRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-        // Load the restaurant menu items
-        MenuAdapter menuAdapter = new MenuAdapter(restaurant.getMenu().getItems(), context);
-        menuRecyclerView.setAdapter(menuAdapter);
-
-        postalCodeHelper.fromPostalCodeGetAddress(Integer.parseInt(restaurant.getAddress()), address -> {
-            if (address != null) {
-                dialogAddress.setText("Address: " + address);
-            } else {
-                dialogAddress.setText("Invalid address");
-            }
-        });
-
-        dialogTitle.setText(restaurant.getName());
-        dialogPhone.setText("Phone: " + restaurant.getPhone());
-        dialogDescription.setText("Overview: " + restaurant.getDescription());
-
-        final String[] url = {"https://www.onemap.gov.sg/amm/amm.html?mapStyle=Default&zoomLevel=13"};
-        url[0] += "&marker=postalcode:" + restaurant.getAddress() + "!colour:red!rType:TRANSIT!rDest:" + restaurant.getLocation()
-                + "&marker=postalcode:" + restaurant.getAddress() + "!colour:red!rType:TRANSIT!rDest:" + UserStoresFragment.getUserLatLong();
-
-        mapWebView.loadUrl(url[0]);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-
-        dialogOkButton.setOnClickListener(v -> dialog.dismiss());
-
-        dialog.show();
+        com.nutriroute.adapters.RestaurantDialogFragment dialogFragment = new com.nutriroute.adapters.RestaurantDialogFragment(restaurant);
+        dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "RestaurantDialog");
     }
+
 
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
         public TextView textName, textAddress, textPhone, textDescription, textDistance;

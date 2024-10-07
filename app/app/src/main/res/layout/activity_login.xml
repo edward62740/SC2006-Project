@@ -2,6 +2,7 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -64,6 +65,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Google Login (PLACEHOLDER)"
+            android:textColorLink="#5B00FF"
+            app:icon="@drawable/common_google_signin_btn_icon_disabled"
+            app:iconPadding="2dp"
+            app:iconTint="@color/black" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <Button
+            android:id="@+id/createAccountButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
             android:textColorLink="#5B00FF" />
     </LinearLayout>
 
