@@ -62,4 +62,5 @@ public class Menu {
     public boolean isEmpty() {
         return items.isEmpty();
     }
+
 }

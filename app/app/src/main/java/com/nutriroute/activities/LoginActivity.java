@@ -99,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                    // startActivity(intent);
                 }
                 else if (userType == UserType.VENDOR) {
-                   // Intent intent = new Intent(LoginActivity.this, VendorActivity.class);
-                   // startActivity(intent);
+                   Intent intent = new Intent(LoginActivity.this, VendorActivity.class);
+                   startActivity(intent);
                 }
 
 

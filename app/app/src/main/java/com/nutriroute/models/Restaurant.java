@@ -1,6 +1,8 @@
 package com.nutriroute.models;
 
 
+import java.time.LocalTime;
+
 /**
  * This class represents a restaurant.
  *
@@ -20,8 +22,10 @@ public class Restaurant {
     private String image; // path to img (do we want this?)
     private String id;
     private String location; // this should be the GPS coordinates
+    private LocalTime openHour;
+    private LocalTime closeHour;
 
-    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id) {
+    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id, LocalTime openHour, LocalTime closeHour) {
         this.menu = menu;
         this.name = name;
         this.address = address;
@@ -31,6 +35,8 @@ public class Restaurant {
         this.description = description;
         this.image = image;
         this.id = id;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
     }
 
     public Restaurant() {
@@ -115,5 +121,21 @@ public class Restaurant {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public LocalTime getOpenHour() {
+        return openHour;
+    }
+
+    public void setOpenHour(String openHour){
+        this.openHour = LocalTime.parse(openHour);
+    }
+
+    public LocalTime getCloseHour() {
+        return closeHour;
+    }
+
+    public void setCloseHour(String closeHour){
+        this.closeHour = LocalTime.parse(closeHour);
     }
 }
