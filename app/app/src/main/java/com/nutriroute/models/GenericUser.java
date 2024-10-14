@@ -8,6 +8,7 @@ public abstract class GenericUser <T> {
     private String password;
     private T id;
     private UserType userType;
+    private boolean isNewAccount;
 
     public GenericUser(String name, String email, String password, T id, UserType userType) {
         this.name = name;
@@ -15,6 +16,7 @@ public abstract class GenericUser <T> {
         this.password = password;
         this.id = id;
         this.userType = userType;
+        this.isNewAccount = true;
     }
 
     public String getName() {
@@ -55,6 +57,14 @@ public abstract class GenericUser <T> {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public boolean isNewAccount() {
+        return isNewAccount;
+    }
+
+    public void setNewAccount(boolean isNewAccount) {
+        this.isNewAccount = isNewAccount;
     }
 
 

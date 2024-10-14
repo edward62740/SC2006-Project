@@ -26,6 +26,7 @@ public class MenuRequest {
         this.id = id;
     }
 
+
     public String getMenuItemId() {
         return menuItemId;
     }
@@ -33,6 +34,7 @@ public class MenuRequest {
     public void setMenuItemId(String menuItemId) {
         this.menuItemId = menuItemId;
     }
+
 
     public String getVendorId() {
         return vendorId;
@@ -55,6 +57,7 @@ public class MenuRequest {
     }
 
     public void setNewValue(String newValue) {
+
         this.newValue = newValue;
     }
 

@@ -2,6 +2,11 @@ package com.nutriroute.interfaces;
 
 import com.nutriroute.enums.MealType;
 
+/**
+ * This is the interface user calorie management.
+ * In general, it provides methods to update the state of the user's calorie count,
+ * as well as add and remove calorie items.
+ */
 public interface IUserCalorieManagementService {
 
     /*

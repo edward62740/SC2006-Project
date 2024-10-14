@@ -3,35 +3,60 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#001f0e">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="#001f0e"
+        android:ems="10"
+        android:hint="You can add other food items here, which are not found in this app"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/etRestaurantId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Restaurant ID" />
+        android:hint="Restaurant Name"
+        android:background="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
 
     <EditText
         android:id="@+id/etFoodId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Food ID" />
+        android:hint="Food Name"
+        android:background="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
 
     <EditText
         android:id="@+id/etCalories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Calories" />
+        android:hint="Calories"
+        android:background="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
 
     <Spinner
         android:id="@+id/spinnerMealType"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/white"/>
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit" />
+        android:text="Submit"
+        android:backgroundTint="#00C853"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

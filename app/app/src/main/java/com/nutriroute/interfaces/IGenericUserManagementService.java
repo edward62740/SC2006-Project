@@ -4,6 +4,10 @@ import com.nutriroute.enums.UserType;
 import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.User;
 
+/**
+ * This is the interface to create a new generic user, or modify them.
+ * It is used to abstract the user management over IDataStore.
+ */
 public interface IGenericUserManagementService {
 
     /*

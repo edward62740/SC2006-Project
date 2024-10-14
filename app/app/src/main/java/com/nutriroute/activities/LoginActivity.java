@@ -13,14 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.nutriroute.R;
 import com.nutriroute.controllers.AuthController;
 import com.nutriroute.enums.UserType;
 import com.nutriroute.interfaces.IDataStore;
-import com.nutriroute.interfaces.IGenericUserManagementService;
 import com.nutriroute.models.User;
-import com.nutriroute.services.GenericUserManagementService;
 import com.nutriroute.stores.AuthStore;
 import com.nutriroute.utils.ServiceLocator;
 
@@ -28,13 +25,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private Button loginButton, createAccountButton;
     private View skeletonLoader;
     private TextView nutrirouteTextView;
 
     IDataStore<String> dataStore = ServiceLocator.getDB();
-
-    IGenericUserManagementService userManagementService = new GenericUserManagementService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +39,22 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
+        createAccountButton = findViewById(R.id.createAccountButton);
         nutrirouteTextView = findViewById(R.id.nutriroute_title);
+        skeletonLoader.setVisibility(View.GONE);
         startColorAnimation();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleLogin();
-            }
+        loginButton.setOnClickListener(v -> handleLogin());
+
+        createAccountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, CreateGenericUserActivity.class);
+            startActivity(intent);
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        skeletonLoader.setVisibility(View.GONE);
     }
 
     private void startColorAnimation() {
@@ -87,9 +89,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Navigate to the next activity
                 if(userType == USER) {
                     skeletonLoader.setVisibility(View.VISIBLE);
-                    User user = (User) dataStore.getUser(username);
                     Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                     startActivity(intent);
+
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 else if (userType == UserType.ADMIN) {
@@ -97,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                    // startActivity(intent);
                 }
                 else if (userType == UserType.VENDOR) {
-                   // Intent intent = new Intent(LoginActivity.this, VendorActivity.class);
-                   // startActivity(intent);
+                   Intent intent = new Intent(LoginActivity.this, VendorActivity.class);
+                   startActivity(intent);
                 }
 
 

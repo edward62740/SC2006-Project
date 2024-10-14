@@ -2,6 +2,9 @@ package com.nutriroute.stores;
 
 import com.nutriroute.models.GenericUser;
 
+/**
+ * Store for the current authenticated user
+ */
 public class AuthStore {
 
     private static GenericUser<String> curUser;

@@ -1,5 +1,6 @@
 package com.nutriroute.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nutriroute.R;
+import com.nutriroute.enums.MealType;
 import com.nutriroute.models.CalorieDay;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,6 +37,7 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
         return new CalorieDayViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CalorieDayViewHolder holder, int position) {
         CalorieDay calorieDay = calorieDays.get(calorieDays.size() - 1 - position); // reverse order
@@ -41,13 +47,20 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
         System.out.println(calorieDay.getDate());
 
         // Set the date header
-        holder.dateTextView.setText("Date: " + calorieDay.getDate());
+        if (calorieDay.getDate() == LocalDate.now()) {
+            holder.dateTextView.setText("Today");
+        } else if (calorieDay.getDate().equals(LocalDate.now().minusDays(1))) {
+            holder.dateTextView.setText("Yesterday");
+        } else {
+            holder.dateTextView.setText("Date: " + calorieDay.getDate());
+        }
 
-        // Clear previous entries
+
         holder.calorieEntriesLayout.removeAllViews();
         if(calorieDay.getFoodConsumed() == null) {
             return;
         }
+
         // Create views for each food entry
         for (int i = 0; i < calorieDay.getFoodConsumed().size(); i++) {
             View calorieEntryView = LayoutInflater.from(holder.itemView.getContext())
@@ -56,10 +69,14 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
             TextView restaurantTextView = calorieEntryView.findViewById(R.id.text_restaurant);
             TextView foodTextView = calorieEntryView.findViewById(R.id.text_menu_item);
             TextView caloriesTextView = calorieEntryView.findViewById(R.id.text_calories);
+            TextView mealTypeTextView = calorieEntryView.findViewById(R.id.text_mealtype);
 
             restaurantTextView.setText(calorieDay.getFoodRestaurant().get(i));
             foodTextView.setText(calorieDay.getFoodConsumed().get(i));
             caloriesTextView.setText(calorieDay.getCaloriesConsumed().get(i) + " kcal");
+
+            mealTypeTextView.setText(MealType.values()[Math.min(i, 3)].toString());
+
 
             holder.calorieEntriesLayout.addView(calorieEntryView);
         }
