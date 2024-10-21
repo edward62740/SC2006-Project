@@ -16,11 +16,11 @@ public class GenericUserFactory {
     public static GenericUser<String> createUser(UserType userType) {
         switch (userType) {
             case ADMIN:
-                return new Admin("", "", "", ""); // Replace with your actual AdminUser class
+                return new Admin("", "", "", "");
             case USER:
-                return new User("", "", "", ""); // Replace with your actual CustomerUser class
+                return new User("", "", "", "");
             case VENDOR:
-                return new Vendor("", "", "", ""); // Replace with your actual VendorUser class
+                return new Vendor("", "", "", "");
             default:
                 throw new IllegalArgumentException("Unsupported user type: " + userType);
         }

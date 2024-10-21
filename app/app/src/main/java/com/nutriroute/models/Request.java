@@ -1,16 +1,19 @@
 package com.nutriroute.models;
 
+import com.nutriroute.enums.RequestStatus;
+import com.nutriroute.enums.RequestType;
+
 public abstract class Request <T> {
     private T id;
-    private String title;
     private String description;
-    private Integer status;
+    private RequestStatus status;
+    private RequestType type;
 
-    public Request(String title, String description, T id) {
+    public Request(T id, String description, RequestType type) {
         this.id = id;
-        this.title = title;
+        this.type = type;
         this.description = description;
-        this.status = 0;
+        this.status = RequestStatus.PENDING;
     }
 
     public T getId() {
@@ -21,12 +24,12 @@ public abstract class Request <T> {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public RequestType getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(RequestType type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -37,19 +40,19 @@ public abstract class Request <T> {
         this.description = description;
     }
 
-    public Integer getStatus() {
+    public RequestStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(RequestStatus status) {
         this.status = status;
     }
 
     public void approve() {
-        this.status = 1;
+        this.status = RequestStatus.APPROVED;
     }
 
     public void deny() {
-        this.status = 2;
+        this.status = RequestStatus.DENIED;
     }
 }

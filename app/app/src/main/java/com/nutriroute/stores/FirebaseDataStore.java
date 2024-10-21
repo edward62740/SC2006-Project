@@ -51,7 +51,6 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
     // These are the write through caches
     LRUMap<String, GenericUser<T>> genericUserCache = new LRUMap<>(100, 10);
     LRUMap<String, Restaurant> restaurantCache = new LRUMap<>(100, 10);
-    LRUMap<String, Menu> menuCache = new LRUMap<>(100, 10);
     LRUMap<String, Request<T>> requestCache = new LRUMap<>(100, 10);
 
 
@@ -65,14 +64,12 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
         isPendingUpdateCount = 4;
         this._loadObjFromDB(GenericUser.class, this::_internal_cb);
         this._loadObjFromDB(Restaurant.class, this::_internal_cb);
-        this._loadObjFromDB(Menu.class, this::_internal_cb);
         this._loadObjFromDB(Request.class, this::_internal_cb);
     }
 
     private void _internal_cb() {
         Log.d("FirebaseDataStore", "Loaded GenericUser with size: " + genericUserCache.size());
         Log.d("FirebaseDataStore", "Loaded Restaurant with size: " + restaurantCache.size());
-        Log.d("FirebaseDataStore", "Loaded Menu with size: " + menuCache.size());
         Log.d("FirebaseDataStore", "Loaded Request with size: " + requestCache.size());
         isPendingUpdateCount--;
         System.out.println("isPendingUpdateCount: " + isPendingUpdateCount);
@@ -106,9 +103,11 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
         return restaurantCache.values();
     }
 
-    public Menu getMenu(String id) {
-        return menuCache.get(id);
+    public Collection<Request<T>> getRequests() {
+        // return iterable of requests
+        return requestCache.values();
     }
+
 
     public Request<T> getRequest(T id) {
         return requestCache.get(keyToString != null ? keyToString.apply(id) : id.toString());
@@ -116,20 +115,15 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
 
     public boolean setRestaurant(Restaurant restaurant) {
         this._updateObjectToDB(restaurant, restaurant.getId());
-        System.out.println(restaurant.getLocation());
         restaurantCache.put(restaurant.getId(), restaurant);
         return true;
     }
 
-    public boolean setMenu(Menu menu) {
-        this._updateObjectToDB(menu, menu.getId());
-        menuCache.put(menu.getId(), menu);
-        return true;
-    }
 
     public boolean setRequest(Request<T> request, T id) {
         this._updateObjectToDB(request, keyToString != null ? keyToString.apply(id) : id.toString());
         requestCache.put(request.getId().toString(), request);
+        System.out.println("UPDATED REQUEST");
         return true;
     }
 
@@ -187,11 +181,6 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
                         processedList.add(restaurant);
                         restaurantCache.put(restaurant.getId(), restaurant);
                     }
-                    else if (Menu.class.isAssignableFrom(objClass)) {
-                        Menu menu = gson.fromJson(json, Menu.class);
-                        processedList.add(menu);
-                        menuCache.put(menu.getId(), menu);
-                    }
                     else if (Request.class.isAssignableFrom(objClass)) {
                         Request<?> req = RequestFactory.fromJson(jsonElement);
                         processedList.add(req);
@@ -231,6 +220,7 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
                 type = obj.getClass().getSimpleName().toLowerCase();
             }
 
+
             String oid = id;
             String json = gson.toJson(obj);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -259,17 +249,14 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
             else {
                 type = obj.getClass().getSimpleName().toLowerCase();
             }
-
             // Convert the user object to JSON and then to a Map
             String json = gson.toJson(obj);
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> jsonMap = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {});
-
             // Update the existing user data in the Firebase database
             databaseReference.child(type).child(oid).updateChildren(jsonMap)
                     .addOnSuccessListener(aVoid -> Log.d("FirebaseDataStore", "Object update successfully!"))
                     .addOnFailureListener(e -> Log.d("FirebaseDataStore", "Object update fail"));
-
             return true;
         } catch (Exception e) {
             e.printStackTrace();

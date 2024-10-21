@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nutriroute.R;
 import com.nutriroute.adapters.VendorMenuAdapter;
+import com.nutriroute.controllers.VendorController;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.Restaurant;
 
@@ -83,6 +84,10 @@ public class VendorAddItemDialogFragment extends DialogFragment {
 
         submitButton.setOnClickListener(v -> {
             //TODO: Implement logic to submit addItemRequest
+            Menu menu = restaurant.getMenu();
+
+            VendorController.generateNewMenuRequest(menu, 0, menu.getItems().get(0));
+            System.out.println("Add Item Request generated");
             dismiss();
         });
 

@@ -1,34 +1,19 @@
 package com.nutriroute.models;
 
-public class RestaurantRequest {
-    private String id;
+import com.nutriroute.enums.RequestStatus;
+import com.nutriroute.enums.RequestType;
+
+public class RestaurantRequest extends Request<String> {
+
     private String restaurantId;
     private String vendorId;
     private String changeType;
-    private Restaurant newValue;
-    private String status;
+    private Restaurant restaurant;
     private String reason;
 
-    public RestaurantRequest() {
-        this.status = "";
-        this.reason = "";
-    }
-
-    public RestaurantRequest(String id, String vendorId, String restaurantId, String changeType, Restaurant newValue, String status){
-        this.id = id;
-        this.vendorId = vendorId;
-        this.restaurantId = restaurantId;
-        this.changeType = changeType;
-        this.newValue = newValue;
-        this.status = status;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public RestaurantRequest(String id, String description) {
+        super(id, description, RequestType.CLAIM_REQUEST);
+        this.setStatus(RequestStatus.PENDING);
     }
 
     public String getRestaurantId() {
@@ -55,20 +40,12 @@ public class RestaurantRequest {
         this.changeType = changeType;
     }
 
-    public Restaurant getNewValue() {
-        return newValue;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setNewValue(Restaurant newValue) {
-        this.newValue = newValue;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRestaurant(Restaurant newValue) {
+        this.restaurant = newValue;
     }
 
     public String getReason() {
