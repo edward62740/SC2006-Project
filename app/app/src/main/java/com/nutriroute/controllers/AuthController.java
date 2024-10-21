@@ -25,6 +25,13 @@ public class AuthController {
         return null;
     }
 
+    public static UserType googleLogin(String email) {
+        if(dataStore.getUser(email) != null) {
+                return dataStore.getUser(email).getUserType();
+        }
+        return null;
+    }
+
     public static void logout() {
         AuthStore.setCurUser(null);
     }
