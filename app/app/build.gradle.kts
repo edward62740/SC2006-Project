@@ -49,7 +49,24 @@ dependencies {
     implementation("org.apache.commons:commons-collections4:4.4")
     implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
+//    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    // Coil
+    implementation(libs.coil.compose)
+    // Extended Icons
+    implementation(libs.androidx.material.icons.extended)
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    // Credential Manager
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+
 
 
 }

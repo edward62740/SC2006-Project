@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
-            android:text="Vendor1" />
+            android:text="Admin1" />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -60,15 +60,11 @@
             android:layout_height="wrap_content"
             android:text="Login" />
 
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/googleLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Google Login (PLACEHOLDER)"
-            android:textColorLink="#5B00FF"
-            app:icon="@drawable/common_google_signin_btn_icon_disabled"
-            app:iconPadding="2dp"
-            app:iconTint="@color/black" />
+            android:gravity="center_horizontal" />
 
         <Space
             android:layout_width="match_parent"

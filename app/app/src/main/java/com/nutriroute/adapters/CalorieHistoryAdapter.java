@@ -72,6 +72,12 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
             TextView mealTypeTextView = calorieEntryView.findViewById(R.id.text_mealtype);
 
             restaurantTextView.setText(calorieDay.getFoodRestaurant().get(i));
+            if (calorieDay.getFoodRestaurant().get(i).equals("")) {
+                restaurantTextView.setText("No entry for this meal");
+                restaurantTextView.setTextColor(holder.itemView.getContext().getResources().getColor(R.color.red));
+                foodTextView.setVisibility(View.GONE);
+                caloriesTextView.setVisibility(View.GONE);
+            }
             foodTextView.setText(calorieDay.getFoodConsumed().get(i));
             caloriesTextView.setText(calorieDay.getCaloriesConsumed().get(i) + " kcal");
 

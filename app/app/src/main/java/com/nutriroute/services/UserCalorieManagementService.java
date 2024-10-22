@@ -57,10 +57,12 @@ public class UserCalorieManagementService implements IUserCalorieManagementServi
 
     public void addCalorieItem(String restaurantId, String foodId, int calories, MealType mealType) {
         updateState();
-        user.getCaloriesToday().addCaloriesConsumed(calories, mealType.ordinal());
-        user.getCaloriesToday().addFoodConsumed(foodId, mealType.ordinal());
-        user.getCaloriesToday().addFoodRestaurant(restaurantId, mealType.ordinal());
-        if (mealType == MealType.MISC) {
+        if (mealType != MealType.MISC) {
+            user.getCaloriesToday().addCaloriesConsumed(calories, mealType.ordinal());
+            user.getCaloriesToday().addFoodConsumed(foodId, mealType.ordinal());
+            user.getCaloriesToday().addFoodRestaurant(restaurantId, mealType.ordinal());
+        }
+        else {
             // append to the end of the list with size()
             user.getCaloriesToday().addCaloriesConsumed(calories, user.getCaloriesToday().getCaloriesConsumed().size());
             user.getCaloriesToday().addFoodConsumed(foodId, user.getCaloriesToday().getFoodConsumed().size());

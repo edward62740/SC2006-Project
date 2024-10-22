@@ -17,11 +17,13 @@ public class VendorRestaurantManagementService implements IVendorRestaurantManag
     public List<Restaurant> getRestaurantList(){
         Vendor vendor = (Vendor) AuthStore.getCurUser();
         List<String> restaurantIds = vendor.getRestaurants();
+
         if (restaurantIds==null)
             return null;
         List<Restaurant> restaurants = new ArrayList<>();
         for (String Id : restaurantIds) {
             restaurants.add(dataStore.getRestaurant(Id));
+
         }
         return restaurants;
     }
