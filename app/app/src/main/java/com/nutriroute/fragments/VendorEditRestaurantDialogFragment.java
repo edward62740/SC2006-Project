@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,10 +30,17 @@ import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.RestaurantRequest;
 
+import java.time.LocalTime;
+
 public class VendorEditRestaurantDialogFragment extends DialogFragment {
 
     private Restaurant restaurant;
     private RestaurantRequest restaurantRequest;
+    ImageView restaurantImage;
+    EditText restaurantName, openHour, closeHour, restaurantDescription,
+    restaurantAddress, restaurantPhone, restaurantEmail, restaurantWebsite;
+    Button saveChanges;
+    ImageButton backButton;
 
     public VendorEditRestaurantDialogFragment(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -44,18 +52,27 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_edit_restaurant_info, container, false);
 
-        ImageView restaurantImage = view.findViewById(R.id.image_restaurant);
-        EditText restaurantName = view.findViewById(R.id.text_name);
-        EditText openHour = view.findViewById(R.id.text_open_hour);
-        EditText closeHour = view.findViewById(R.id.text_close_hour);
-        EditText restaurantDescription = view.findViewById(R.id.text_description);
-        Button saveChanges = view.findViewById(R.id.button_save_changes);
-        ImageButton backButton = view.findViewById(R.id.button_back);
+        restaurantImage = view.findViewById(R.id.image_restaurant);
+        restaurantName = view.findViewById(R.id.text_name);
+        openHour = view.findViewById(R.id.text_open_hour);
+        closeHour = view.findViewById(R.id.text_close_hour);
+        restaurantDescription = view.findViewById(R.id.restaurant_description);
+        saveChanges = view.findViewById(R.id.button_save_changes);
+        backButton = view.findViewById(R.id.button_back);
+        restaurantAddress = view.findViewById(R.id.restaurant_address);
+        restaurantPhone = view.findViewById(R.id.restaurant_phone);
+        restaurantEmail = view.findViewById(R.id.restaurant_email);
+        restaurantWebsite = view.findViewById(R.id.restaurant_website);
 
         restaurantName.setText(restaurant.getName());
         restaurantDescription.setText(restaurant.getDescription());
         openHour.setText(restaurant.getOpenHour()==null ? "--:--":restaurant.getOpenHour().toString());
         closeHour.setText(restaurant.getCloseHour()==null ? "--:--":restaurant.getCloseHour().toString());
+        restaurantAddress.setText(restaurant.getAddress());
+        restaurantPhone.setText(restaurant.getPhone());
+        restaurantEmail.setText(restaurant.getEmail());
+        restaurantWebsite.setText(restaurant.getWebsite());
+
         // Make sure time is valid and formatted
         openHour.addTextChangedListener(new TextWatcher() {
             private String current = "";
@@ -106,16 +123,34 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
 
         restaurantImage.setOnClickListener(v -> {
             //TODO: Implement logic to upload image
+
         });
 
         saveChanges.setOnClickListener(v -> {
             //TODO: implement logic to submit editRestaurantRequest
-            dismiss();
+            if (checkFields()) {
+                String name = restaurantName.getText().toString();
+                LocalTime open = LocalTime.parse(openHour.getText().toString());
+                LocalTime close = LocalTime.parse(closeHour.getText().toString());
+                String address = restaurantAddress.getText().toString();
+                String phone = restaurantPhone.getText().toString();
+                String email = restaurantEmail.getText().toString();
+                String website = restaurantWebsite.getText().toString();
+                String description = restaurantDescription.getText().toString();
+                Restaurant editRestaurant = new Restaurant(name, open, close, address, phone, email, website, description);
+                VendorController.generateNewRestaurantRequest(restaurant, editRestaurant);
+                Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }
+            else{
+                if (!checkTime(openHour.getText().toString()) || !checkTime(closeHour.getText().toString()))
+                    Toast.makeText(getContext(), "Invalid time!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getContext(), "Missing fields!", Toast.LENGTH_SHORT).show();
+            }
         });
 
-        backButton.setOnClickListener(v -> {
-            dismiss();
-        });
+        backButton.setOnClickListener(v -> dismiss());
 
         return view;
     }
@@ -138,9 +173,34 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
         int minute = number%100;
         if (hour > 23)
             hour=23;
-        if (minute > 59)
+        if (hour>1 && minute > 59)
             minute=59;
         return (hour<10 ? "0" + hour : hour) + ":" + (minute<10 ? "0" + minute : minute);
     }
 
+    private Boolean checkTime(String s){
+        String cleanString = s.replaceAll("[:,-]", "");
+        if (cleanString.isEmpty()) return false;
+        Integer number = Integer.parseInt(cleanString);
+        if (number.toString().length()>4)
+            number /= 10;
+        int hour = number/100;
+        int minute = number%100;
+        if (hour > 23)
+            hour=23;
+        if (hour>1 && minute > 59)
+            minute=59;
+        return minute <= 59;
+    }
+
+    private Boolean checkFields() {
+        return !restaurantName.getText().toString().isEmpty() &&
+                !openHour.getText().toString().isEmpty() &&
+                checkTime(openHour.getText().toString()) &&
+                !closeHour.getText().toString().isEmpty() &&
+                !openHour.getText().toString().equals(closeHour.getText().toString()) &&
+                checkTime(closeHour.getText().toString()) &&
+                !restaurantAddress.getText().toString().isEmpty() &&
+                !restaurantPhone.getText().toString().isEmpty();
+    }
 }

@@ -6,13 +6,13 @@ import com.nutriroute.enums.RequestType;
 public class RestaurantRequest extends Request<String> {
 
     private String restaurantId;
-    private String vendorId;
+//    private String vendorId;
     private String changeType;
-    private Restaurant restaurant;
+    private Restaurant newValue;
     private String reason;
 
     public RestaurantRequest(String id, String description) {
-        super(id, description, RequestType.CLAIM_REQUEST);
+        super(id, description, RequestType.RESTAURANT_CHANGE_REQUEST);
         this.setStatus(RequestStatus.PENDING);
     }
 
@@ -25,11 +25,13 @@ public class RestaurantRequest extends Request<String> {
     }
 
     public String getVendorId() {
-        return vendorId;
+        //return vendorId;
+        return super.getVendorId();
     }
 
     public void setVendorId(String vendorId) {
-        this.vendorId = vendorId;
+        //this.vendorId = vendorId;
+        super.setVendorId(vendorId);
     }
 
     public String getChangeType() {
@@ -40,12 +42,12 @@ public class RestaurantRequest extends Request<String> {
         this.changeType = changeType;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public Restaurant getNewValue() {
+        return newValue;
     }
 
-    public void setRestaurant(Restaurant newValue) {
-        this.restaurant = newValue;
+    public void setNewValue(Restaurant newValue) {
+        this.newValue = newValue;
     }
 
     public String getReason() {

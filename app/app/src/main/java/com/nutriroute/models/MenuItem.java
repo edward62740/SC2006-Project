@@ -82,4 +82,15 @@ public class MenuItem {
                 calories==c.calories
                 );
     }
+
+    public boolean changeIsValid() {
+        return (name!=null&&!name.isEmpty()) ||
+                (description!=null&&!description.isEmpty()) ||
+                price!=-1 ||
+                calories!=-1;
+    }
+
+    public boolean noChange() {
+        return (name==null && description==null && price==-1 && calories==-1);
+    }
 }

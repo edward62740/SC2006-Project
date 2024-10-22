@@ -39,6 +39,17 @@ public class Restaurant {
         this.closeHour = closeHour;
     }
 
+    public Restaurant(String name, LocalTime openHour, LocalTime closeHour, String address, String phone, String email, String website, String description){
+        this.name = name;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.website = website;
+        this.description = description;
+    }
+
     public String getId() {
         return id;
     }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nutriroute.R;
 import com.nutriroute.adapters.VendorClaimsAdapter;
+import com.nutriroute.controllers.VendorController;
 import com.nutriroute.models.Request;
 
 import java.util.Collections;
@@ -31,12 +32,12 @@ public class VendorStatusFragment extends Fragment {
         textNoClaims = view.findViewById(R.id.text_noclaim);
         recyclerView = view.findViewById(R.id.recycler_view_claims);
 
-        if (true) { // TODO: change logic to if no claims
+        if (VendorController.getNumberOfRequests()==0) { // TODO: change logic to if no claims
             textNoClaims.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         }
         else { //TODO: Implement logic to populate recyclerView
-            List<Request> requestList = Collections.emptyList();
+            List<Request<String>> requestList = VendorController.getRequests();
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             claimsAdapter = new VendorClaimsAdapter(getContext(), requestList);
             recyclerView.setAdapter(claimsAdapter);

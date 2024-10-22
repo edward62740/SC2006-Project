@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,17 +19,20 @@ import com.nutriroute.models.MenuItem;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.MenuViewHolder> {
 
     private Menu menu;
     private List<MenuItem> menuItems;
     private Context context;
+    List<MenuItem> editItemList;
 
-    public VendorMenuAdapter(Context context, Menu menu){
+    public VendorMenuAdapter(Context context, Menu menu, List<MenuItem> editItemList){
         this.context = context;
         this.menu = menu;
         this.menuItems = menu.getItems();
+        this.editItemList = editItemList;
     }
 
     @NonNull
@@ -44,6 +46,7 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         MenuItem item = this.menu.get(position);
+        MenuItem editItem = editItemList.get(position);
         if (item == null) {return;}
 
         holder.itemName.setText(item.getName());
@@ -51,6 +54,16 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
         holder.itemPrice.setText("$" + item.getPrice());
         holder.itemCalories.setText(Integer.toString(item.getCalories()));
         // set EditText to update menuItem when text change has been detected
+        holder.itemName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                editItem.setName(holder.itemName.getText().toString());
+            }
+        });
         holder.itemCalories.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -59,9 +72,9 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (holder.itemCalories.getText().toString().isEmpty())
-                    item.setCalories(0);
+                    editItem.setCalories(0);
                 else
-                    item.setCalories(Integer.parseInt(holder.itemCalories.getText().toString()));
+                    editItem.setCalories(Integer.parseInt(holder.itemCalories.getText().toString()));
             }
         });
         holder.itemDescription.addTextChangedListener(new TextWatcher() {
@@ -71,7 +84,7 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
             public void afterTextChanged(Editable editable) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                item.setDescription(holder.itemDescription.getText().toString());
+                editItem.setDescription(holder.itemDescription.getText().toString());
             }
         });
         holder.itemPrice.addTextChangedListener(new TextWatcher() {
@@ -89,14 +102,16 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
                     String cleanString = s.toString().replaceAll("[$,.]", "");
 
                     double parsed = Double.parseDouble(cleanString);
-                    String formatted = NumberFormat.getCurrencyInstance().format((parsed / 100));
+                    NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+                    format.setMaximumFractionDigits(2);
+                    String formatted = format.format((parsed / 100));
 
                     current = formatted;
                     holder.itemPrice.setText(formatted);
                     holder.itemPrice.setSelection(formatted.length());
 
                     holder.itemPrice.addTextChangedListener(this);
-                    item.setPrice(parsed/100);
+                    editItem.setPrice(parsed/100);
                 }
             }
         });
@@ -110,7 +125,6 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
         });
 
     }
-
 
     @Override
     public int getItemCount() {

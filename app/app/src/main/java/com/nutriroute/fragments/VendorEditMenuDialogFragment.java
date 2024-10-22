@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,8 +21,13 @@ import com.nutriroute.R;
 import com.nutriroute.adapters.VendorMenuAdapter;
 import com.nutriroute.controllers.VendorController;
 import com.nutriroute.models.Menu;
+import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Restaurant;
+import com.nutriroute.models.Vendor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VendorEditMenuDialogFragment extends DialogFragment {
 
@@ -51,14 +57,36 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
         menuRecyclerView.setNestedScrollingEnabled(false);
 
         //TODO: will probably change logic here to parse a new request
-        VendorMenuAdapter menuAdapter = new VendorMenuAdapter(getContext(), menu);
+        List<MenuItem> editItemList = new ArrayList<>();
+        for (int i=0; i<menu.size(); i++) {
+            editItemList.add(new MenuItem());
+            editItemList.get(i).setPrice(-1);
+            editItemList.get(i).setCalories(-1);
+        }
+        VendorMenuAdapter menuAdapter = new VendorMenuAdapter(getContext(), menu, editItemList);
         menuRecyclerView.setAdapter(menuAdapter);
 
         restaurantName.setText(restaurant.getName());
 
         saveChanges.setOnClickListener(v -> {
+            boolean change=false;
+            boolean valid=true;
+            for (int i=0; i<menu.size(); i++){
+                if (!editItemList.get(i).noChange() && !editItemList.get(i).changeIsValid())
+                    valid=false;
+                if (editItemList.get(i).changeIsValid() && !menu.get(i).equals(editItemList.get(i))){
+                    VendorController.generateNewMenuRequest(menu, i, editItemList.get(i));
+                    change=true;
+                }
+            }
+            if (change) {
+                Toast.makeText(getContext(), "Request Submitted", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }else if (!valid)
+                Toast.makeText(getContext(), "Invalid Entry Detected", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getContext(), "No Change Detected", Toast.LENGTH_SHORT).show();
             //TODO: implement logic to submit editMenuRequest
-            dismiss();
         });
 
         backButton.setOnClickListener(v -> {

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.nutriroute.enums.RequestType;
 import com.nutriroute.enums.UserType;
+import com.nutriroute.models.ClaimRequest;
 import com.nutriroute.models.GenericUser;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Request;
@@ -15,8 +16,10 @@ public class RequestFactory {
 
     public static Request<String> createRequest(RequestType requestType) {
         switch (requestType) {
-            case CLAIM_REQUEST:
+            case RESTAURANT_CHANGE_REQUEST:
                 return new RestaurantRequest("", "");
+            case CLAIM_REQUEST:
+                return new ClaimRequest("", "");
             case MENU_CHANGE_REQUEST:
                 return new MenuRequest("", "");
             default:

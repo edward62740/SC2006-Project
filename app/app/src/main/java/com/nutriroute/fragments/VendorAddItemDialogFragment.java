@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.nutriroute.R;
 import com.nutriroute.adapters.VendorMenuAdapter;
 import com.nutriroute.controllers.VendorController;
 import com.nutriroute.models.Menu;
+import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.Restaurant;
 
 import java.text.NumberFormat;
@@ -34,6 +36,9 @@ public class VendorAddItemDialogFragment extends DialogFragment {
     private Restaurant restaurant;
     private Menu menu;
     private RecyclerView menuRecyclerView;
+    ImageButton restaurantImage, backButton;
+    EditText itemName, itemPrice, itemCalories, itemDescription;
+    Button submitButton;
 
     public VendorAddItemDialogFragment(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -46,13 +51,13 @@ public class VendorAddItemDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_add_item, container, false);
 
-        ImageButton restaurantImage = view.findViewById(R.id.button_image);
-        EditText itemName = view.findViewById(R.id.text_name);
-        EditText itemPrice = view.findViewById(R.id.text_price);
-        EditText itemCalories = view.findViewById(R.id.text_calories);
-        EditText itemDescription = view.findViewById(R.id.text_description);
-        Button submitButton = view.findViewById(R.id.button_submit);
-        ImageButton backButton = view.findViewById(R.id.button_back);
+        restaurantImage = view.findViewById(R.id.button_image);
+        itemName = view.findViewById(R.id.text_name);
+        itemPrice = view.findViewById(R.id.text_price);
+        itemCalories = view.findViewById(R.id.text_calories);
+        itemDescription = view.findViewById(R.id.text_description);
+        submitButton = view.findViewById(R.id.button_submit);
+        backButton = view.findViewById(R.id.button_back);
 
         itemPrice.addTextChangedListener(new TextWatcher() {
             private String current = "";
@@ -88,11 +93,22 @@ public class VendorAddItemDialogFragment extends DialogFragment {
 
         submitButton.setOnClickListener(v -> {
             //TODO: Implement logic to submit addItemRequest
-            Menu menu = restaurant.getMenu();
-
-            VendorController.generateNewMenuRequest(menu, 0, menu.getItems().get(0));
-            System.out.println("Add Item Request generated");
-            dismiss();
+            if (checkFields()) {
+                Menu menu = restaurant.getMenu();
+                MenuItem menuItem = new MenuItem();
+                menuItem.setName(itemName.getText().toString());
+                double price = Double.valueOf(itemPrice.getText().toString().replace("$", ""));
+                menuItem.setPrice(price);
+                menuItem.setCalories(Integer.parseInt(itemCalories.getText().toString()));
+                menuItem.setDescription(itemDescription.getText().toString());
+                VendorController.generateNewMenuRequest(menu, menuItem);
+                System.out.println("Add Item Request generated");
+                Toast.makeText(getContext(), "Request Submitted", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }
+            else{
+                Toast.makeText(getContext(), "Missing fields!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         backButton.setOnClickListener(v -> {
@@ -108,5 +124,13 @@ public class VendorAddItemDialogFragment extends DialogFragment {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }
+    }
+
+    private Boolean checkFields() {
+        return !itemName.getText().toString().isEmpty() &&
+                !itemPrice.getText().toString().isEmpty() &&
+                !itemCalories.getText().toString().isEmpty() &&
+                !itemDescription.getText().toString().isEmpty();
+        //todo add validation for proof image
     }
 }
