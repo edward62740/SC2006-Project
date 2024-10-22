@@ -48,6 +48,7 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
 
         menuRecyclerView = view.findViewById(R.id.menuRecyclerView);
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        menuRecyclerView.setNestedScrollingEnabled(false);
 
         //TODO: will probably change logic here to parse a new request
         VendorMenuAdapter menuAdapter = new VendorMenuAdapter(getContext(), menu);
