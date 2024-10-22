@@ -44,6 +44,9 @@ public class VendorClaimStoreFragment extends Fragment {
 
         if (currentUser.getRestaurants()!=null)
             textTitle.setText("Claim a new store!");
+        else
+            textTitle.setText("Let's start by claiming your first store!");
+
 
         openHour.addTextChangedListener(new TextWatcher() {
             private String current = "";
@@ -111,7 +114,9 @@ public class VendorClaimStoreFragment extends Fragment {
     }
 
     private String processTime(CharSequence s){
-        Integer number = Integer.parseInt(s.toString().replaceAll(":", ""));
+        String cleanString = s.toString().replaceAll("[:,-]", "");
+        if (cleanString.isEmpty()) return "00:00";
+        Integer number = Integer.parseInt(cleanString);
         if (number.toString().length()>4)
             number /= 10;
         int hour = number/100;

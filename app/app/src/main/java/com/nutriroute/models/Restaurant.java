@@ -39,10 +39,6 @@ public class Restaurant {
         this.closeHour = closeHour;
     }
 
-    public Restaurant() {
-
-    }
-
     public String getId() {
         return id;
     }

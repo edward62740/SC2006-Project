@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowId;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -54,7 +56,6 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
         restaurantDescription.setText(restaurant.getDescription());
         openHour.setText(restaurant.getOpenHour()==null ? "--:--":restaurant.getOpenHour().toString());
         closeHour.setText(restaurant.getCloseHour()==null ? "--:--":restaurant.getCloseHour().toString());
-
         // Make sure time is valid and formatted
         openHour.addTextChangedListener(new TextWatcher() {
             private String current = "";
@@ -128,7 +129,9 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
     }
 
     private String processTime(CharSequence s){
-        Integer number = Integer.parseInt(s.toString().replaceAll("[:,-]", ""));
+        String cleanString = s.toString().replaceAll("[:,-]", "");
+        if (cleanString.isEmpty()) return "00:00";
+        Integer number = Integer.parseInt(cleanString);
         if (number.toString().length()>4)
             number /= 10;
         int hour = number/100;

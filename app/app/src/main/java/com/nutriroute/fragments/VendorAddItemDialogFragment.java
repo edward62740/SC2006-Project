@@ -25,6 +25,8 @@ import com.nutriroute.models.Menu;
 import com.nutriroute.models.Restaurant;
 
 import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
 
 public class VendorAddItemDialogFragment extends DialogFragment {
 
@@ -66,7 +68,9 @@ public class VendorAddItemDialogFragment extends DialogFragment {
                     String cleanString = s.toString().replaceAll("[$,.]", "");
 
                     double parsed = Double.parseDouble(cleanString);
-                    String formatted = NumberFormat.getCurrencyInstance().format((parsed / 100));
+                    NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+                    format.setMaximumFractionDigits(2);
+                    String formatted = format.format((parsed / 100));
 
                     current = formatted;
                     itemPrice.setText(formatted);

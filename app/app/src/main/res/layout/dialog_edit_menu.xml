@@ -8,65 +8,70 @@
     android:padding="16dp"
     android:background="#042D14">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/saveChangesButton"
         android:layout_weight="1">
 
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:padding="8dp"
-            android:background="@drawable/baseline_close_24"
-            android:backgroundTint="#FFFFFF"/>
-
-
-        <!-- Profile Image at the top -->
-        <ImageView
-            android:id="@+id/restaurantImage"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="Restaurant Image"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" /> <!-- Replace with actual image -->
-
-        <!-- Restaurant Title -->
-        <TextView
-            android:id="@+id/restaurantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="Restaurant Name"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <!-- ScrollView wrapping the RecyclerView to allow scrolling -->
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="16dp"
-            android:fillViewport="true">
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/menuRecyclerView"
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:padding="8dp"
+                android:background="@drawable/baseline_close_24"
+                android:backgroundTint="#FFFFFF"/>
+
+
+            <!-- Profile Image at the top -->
+            <ImageView
+                android:id="@+id/restaurantImage"
+                android:layout_width="256dp"
+                android:layout_height="256dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="Restaurant Image"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_foreground" /> <!-- Replace with actual image -->
+
+            <!-- Restaurant Title -->
+            <TextView
+                android:id="@+id/restaurantName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scrollbars="vertical" />
-            <!-- Layout for individual menu items -->
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Restaurant Name"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-        </ScrollView>
+            <!-- ScrollView wrapping the RecyclerView to allow scrolling -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_margin="16dp"
+                android:fillViewport="true">
 
-    </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/menuRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical" />
+                <!-- Layout for individual menu items -->
+
+            </ScrollView>
+
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Save Changes Button pinned at the bottom -->
     <Button

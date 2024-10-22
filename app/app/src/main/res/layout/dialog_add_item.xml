@@ -8,91 +8,97 @@
     android:padding="16dp"
     android:background="#002B0A">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/button_submit">
-
-        <!-- Back button -->
-        <ImageButton
-            android:id="@+id/button_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:padding="8dp"
-            android:backgroundTint="#FFFFFF"
-            android:background="@drawable/baseline_close_24" />
-
-        <ImageButton
-            android:id="@+id/button_image"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:src="@drawable/upload"
-            android:scaleType="centerCrop"/>
-
-        <EditText
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:hint="MenuItem Name"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+            <!-- Back button -->
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:padding="8dp"
+                android:backgroundTint="#FFFFFF"
+                android:background="@drawable/baseline_close_24" />
+
+            <ImageButton
+                android:id="@+id/button_image"
+                android:layout_width="256dp"
+                android:layout_height="256dp"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/upload"
+                android:scaleType="centerCrop"/>
 
             <EditText
-                android:id="@+id/text_price"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:textAlignment="center"
-                android:layout_marginStart="16dp"
-                android:background="#042511"
-                android:inputType="numberDecimal"
-                android:hint="Price"
-                android:textColorHint="#FFFFFF"
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:hint="MenuItem Name"
                 android:textColor="#FFFFFF"
-                android:textSize="32sp"/>
+                android:textColorHint="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:id="@+id/text_price"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="8dp"
+                    android:background="#042511"
+                    android:inputType="numberDecimal"
+                    android:hint="Price"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
+                    android:textSize="32sp"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/text_calories"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:textAlignment="center"
+                    android:layout_marginRight="8dp"
+                    android:background="#042511"
+                    android:inputType="number"
+                    android:hint="Calories"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
+                    android:textSize="32sp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
             <EditText
-                android:id="@+id/text_calories"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:textAlignment="center"
-                android:layout_marginStart="16dp"
-                android:background="#042511"
-                android:inputType="number"
-                android:hint="Calories"
+                android:id="@+id/text_description"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="start"
+                android:layout_marginTop="8dp"
+                android:hint="Item Description"
                 android:textColorHint="#FFFFFF"
                 android:textColor="#FFFFFF"
-                android:textSize="32sp"/>
+                android:textSize="18dp"/>
+
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/text_description"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:gravity="start"
-            android:layout_marginTop="8dp"
-            android:hint="Item Description"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"/>
-
-
-
-    </LinearLayout>
+    </ScrollView>
 
         <!-- Submit Button -->
         <Button
