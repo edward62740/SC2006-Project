@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.nutriroute.R;
+import com.nutriroute.controllers.VendorController;
+import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.Vendor;
 import com.nutriroute.stores.AuthStore;
 
@@ -99,6 +101,8 @@ public class VendorClaimStoreFragment extends Fragment {
         submitButton.setOnClickListener(v -> {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new VendorStoresFragment()).commit();
             Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
+            Restaurant restaurant = new Restaurant();
+            VendorController.generateNewMenuRequest(restaurant); // just to test
             //TODO: Implement logic to submit claim request
         });
 

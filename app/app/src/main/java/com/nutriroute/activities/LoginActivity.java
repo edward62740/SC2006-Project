@@ -146,8 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
             else if (userType == UserType.ADMIN) {
-                // Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                startActivity(intent);
             }
             else if (userType == UserType.VENDOR) {
                 Intent intent = new Intent(LoginActivity.this, VendorActivity.class);
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         } else {
-            System.out.println(dataStore.getUser("User1"));
+
             Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }
