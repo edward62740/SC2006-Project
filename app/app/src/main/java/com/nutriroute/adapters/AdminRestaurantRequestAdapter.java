@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.nutriroute.R;
 import com.nutriroute.controllers.AdminController;
+import com.nutriroute.models.ClaimRequest;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.RestaurantRequest;
@@ -37,8 +38,8 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RestaurantRequest request = (RestaurantRequest) restaurantRequestList.get(position);
-        holder.textRestaurantId.setText("Restaurant ID: " + request.getRestaurantId());
+        ClaimRequest request = (ClaimRequest) restaurantRequestList.get(position);
+        holder.textRestaurantId.setText("Restaurant ID: " + request.getId());
         holder.textVendorId.setText("Vendor ID: " + request.getVendorId());
         holder.textReason.setText("Claim reason: "+ request.getReason());
 
@@ -66,12 +67,12 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
     }
 
 
-    private void showDetailDialog(RestaurantRequest request) {
+    private void showDetailDialog(ClaimRequest request) {
 
         String message =
-                "Restaurant ID: " + request.getRestaurantId() +
+                "Restaurant ID: " + request.getId() +
                 "\nVendor ID: " + request.getVendorId() +
-                "\nChange Type: " + request.getChangeType() +
+                "\nChange Type: " + request.getProof() +
                 "\nReason: " + request.getReason();
 
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
