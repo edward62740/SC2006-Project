@@ -22,7 +22,6 @@ import com.nutriroute.models.RestaurantRequest;
 
 import java.util.List;
 
-//TODO: Implement claims recyclerView
 public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapter.ClaimsViewHolder>{
 
     private Context context;
@@ -85,7 +84,6 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
             super(itemView);
             textName = itemView.findViewById(R.id.text_name);
             textDescription = itemView.findViewById(R.id.text_description);
-            //buttonView = itemView.findViewById(R.id.button_view);
 
         }
     }

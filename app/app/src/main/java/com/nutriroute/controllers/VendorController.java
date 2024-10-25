@@ -64,9 +64,6 @@ public class VendorController {
         requestMailboxService.send(req);
     }
 
-
-    // public static Pair<Time, Time>
-
     public static void logoutAndExit() {
         AuthController.logout();
     }

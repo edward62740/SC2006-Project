@@ -17,9 +17,11 @@ import androidx.fragment.app.Fragment;
 
 import com.nutriroute.R;
 import com.nutriroute.controllers.VendorController;
+import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.Vendor;
 import com.nutriroute.stores.AuthStore;
+import com.nutriroute.utils.ServiceLocator;
 
 import java.time.LocalTime;
 
@@ -31,12 +33,15 @@ public class VendorClaimStoreFragment extends Fragment {
     private ImageView proofImage;
     private Button browseButton, submitButton;
 
-    Vendor currentUser = ((Vendor) AuthStore.getCurUser());
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.vendor_claim_store, container, false);
+
+        Vendor currentUser = ((Vendor) AuthStore.getCurUser());
+        IDataStore<String> dataStore = ServiceLocator.getDB();
 
         //Initialise views
         backButton = view.findViewById(R.id.back_button);
@@ -52,7 +57,7 @@ public class VendorClaimStoreFragment extends Fragment {
         restaurantWebsite = view.findViewById(R.id.restaurant_website);
         restaurantDescription = view.findViewById(R.id.restaurant_description);
 
-        if (currentUser.getRestaurants()!=null)
+        if (!currentUser.isNewAccount())
             textTitle.setText("Claim a new store!");
         else
             textTitle.setText("Let's start by claiming your first store!");
@@ -76,7 +81,6 @@ public class VendorClaimStoreFragment extends Fragment {
                     openHour.setSelection(formatted.length());
 
                     openHour.addTextChangedListener(this);
-                    //TODO set request open hout
                 }
             }
         });
@@ -99,7 +103,6 @@ public class VendorClaimStoreFragment extends Fragment {
                     closeHour.setSelection(formatted.length());
 
                     closeHour.addTextChangedListener(this);
-                    //TODO set request close hour
                 }
             }
         });
@@ -122,6 +125,8 @@ public class VendorClaimStoreFragment extends Fragment {
                 VendorController.generateNewRestaurantClaimRequest(restaurant, "proof1"); //todo add proof
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new VendorStoresFragment()).commit();
                 Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
+                currentUser.setNewAccount(false);
+                dataStore.setUser(currentUser, currentUser.getId());
             }
             else {
                 if (!checkTime(openHour.getText().toString()) || !checkTime(closeHour.getText().toString()))
@@ -131,11 +136,6 @@ public class VendorClaimStoreFragment extends Fragment {
                 else
                     Toast.makeText(getContext(), "Missing fields!", Toast.LENGTH_SHORT).show();
             }
-
-
-            //Restaurant restaurant = new Restaurant();
-            //VendorController.generateNewMenuRequest(restaurant); // just to test
-            //TODO: Implement logic to submit claim request
         });
 
         backButton.setOnClickListener(v -> {

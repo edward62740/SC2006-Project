@@ -92,7 +92,6 @@ public class VendorAddItemDialogFragment extends DialogFragment {
         });
 
         submitButton.setOnClickListener(v -> {
-            //TODO: Implement logic to submit addItemRequest
             if (checkFields()) {
                 Menu menu = restaurant.getMenu();
                 MenuItem menuItem = new MenuItem();

@@ -116,10 +116,6 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
             }
         });
 
-        // TODO: probably changing this part to modify a request directly
-        // Parse a new request from dialog onto here and modify
-        // then check for changes in dialog when submit is pressed
-
         holder.itemImage.setOnClickListener(v -> {
             //TODO: Implement logic to upload image
         });

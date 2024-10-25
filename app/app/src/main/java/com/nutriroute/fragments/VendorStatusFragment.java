@@ -32,11 +32,11 @@ public class VendorStatusFragment extends Fragment {
         textNoClaims = view.findViewById(R.id.text_noclaim);
         recyclerView = view.findViewById(R.id.recycler_view_claims);
 
-        if (VendorController.getNumberOfRequests()==0) { // TODO: change logic to if no claims
+        if (VendorController.getNumberOfRequests()==0) {
             textNoClaims.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         }
-        else { //TODO: Implement logic to populate recyclerView
+        else {
             List<Request<String>> requestList = VendorController.getRequests();
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             claimsAdapter = new VendorClaimsAdapter(getContext(), requestList);

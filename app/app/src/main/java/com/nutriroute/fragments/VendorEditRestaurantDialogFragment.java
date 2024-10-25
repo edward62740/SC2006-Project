@@ -93,7 +93,6 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
                     openHour.setSelection(formatted.length());
 
                     openHour.addTextChangedListener(this);
-                    //TODO set request open hour
                 }
             }
         });
@@ -116,7 +115,6 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
                     closeHour.setSelection(formatted.length());
 
                     closeHour.addTextChangedListener(this);
-                    //TODO set request close hour
                 }
             }
         });
@@ -127,7 +125,6 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
         });
 
         saveChanges.setOnClickListener(v -> {
-            //TODO: implement logic to submit editRestaurantRequest
             if (checkFields()) {
                 String name = restaurantName.getText().toString();
                 String open = openHour.getText().toString();

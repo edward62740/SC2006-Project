@@ -56,7 +56,6 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         menuRecyclerView.setNestedScrollingEnabled(false);
 
-        //TODO: will probably change logic here to parse a new request
         List<MenuItem> editItemList = new ArrayList<>();
         for (int i=0; i<menu.size(); i++) {
             editItemList.add(new MenuItem());
@@ -86,7 +85,6 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
                 Toast.makeText(getContext(), "Invalid Entry Detected", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(getContext(), "No Change Detected", Toast.LENGTH_SHORT).show();
-            //TODO: implement logic to submit editMenuRequest
         });
 
         backButton.setOnClickListener(v -> {
