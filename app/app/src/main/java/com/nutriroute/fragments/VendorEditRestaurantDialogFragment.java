@@ -130,17 +130,22 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
             //TODO: implement logic to submit editRestaurantRequest
             if (checkFields()) {
                 String name = restaurantName.getText().toString();
-                LocalTime open = LocalTime.parse(openHour.getText().toString());
-                LocalTime close = LocalTime.parse(closeHour.getText().toString());
+                String open = openHour.getText().toString();
+                String close = closeHour.getText().toString();
                 String address = restaurantAddress.getText().toString();
                 String phone = restaurantPhone.getText().toString();
                 String email = restaurantEmail.getText().toString();
                 String website = restaurantWebsite.getText().toString();
                 String description = restaurantDescription.getText().toString();
                 Restaurant editRestaurant = new Restaurant(name, open, close, address, phone, email, website, description);
-                VendorController.generateNewRestaurantRequest(restaurant, editRestaurant);
-                Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
-                dismiss();
+                editRestaurant.setId(restaurant.getId());
+                if (editRestaurant.equals(restaurant))
+                    Toast.makeText(getContext(), "No Changes Detected!", Toast.LENGTH_SHORT).show();
+                else {
+                    VendorController.generateNewRestaurantRequest(restaurant, editRestaurant);
+                    Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
             else{
                 if (!checkTime(openHour.getText().toString()) || !checkTime(closeHour.getText().toString()))

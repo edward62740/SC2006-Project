@@ -3,7 +3,6 @@ package com.nutriroute.services;
 import com.nutriroute.enums.RequestType;
 import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.interfaces.IVendorRequestManagementService;
-import com.nutriroute.models.ClaimRequest;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.MenuRequest;
@@ -35,7 +34,7 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
             }
         }
         MenuRequest menuRequest = new MenuRequest(menu.getId() + "_MenuItemRequest_" + count, "Add Menu Item Request");
-        menuRequest.setMenuItemId(String.valueOf(menu.getItems().size()));
+        menuRequest.setMenuItemId("0");
         menuRequest.setRestaurantId(menu.getId());
         menuRequest.setVendorId(vendor.getId());
         menuRequest.setChangeType("add");
@@ -61,32 +60,28 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
         menuRequest.setRestaurantId(menu.getId());
         menuRequest.setVendorId(vendor.getId());
         menuRequest.setChangeType("update");
+        fillMenuItemOldValues(menu.get(position), menuItem);
         menuRequest.setNewValue(menuItem);
         System.out.println("Menu Request generated: " + menuRequest);
         return menuRequest;
     }
 
-    public ClaimRequest generateRestaurantClaimRequest(Restaurant restaurant, String proof) {
+    public RestaurantRequest generateRestaurantClaimRequest(Restaurant restaurant, String proof) {
         Vendor vendor = (Vendor) AuthStore.getCurUser();
         int count=1;
         for (Request<String> request : dataStore.getRequests()){
             if (request.getType()==RequestType.CLAIM_REQUEST){
-                ClaimRequest claimRequest = (ClaimRequest) request;
+                RestaurantRequest claimRequest = (RestaurantRequest) request;
                 if (claimRequest.getVendorId().equals(vendor.getId())){
                     count++;
                 }
             }
         }
 
-        ClaimRequest claimRequest = new ClaimRequest(vendor.getId() + "_ClaimRequest_" + count, "Claim restaurant Request");
+        RestaurantRequest claimRequest = new RestaurantRequest(vendor.getId() + "_ClaimRequest_" + count, "Claim restaurant Request", RequestType.CLAIM_REQUEST);
         claimRequest.setVendorId(vendor.getId());
-        claimRequest.setOpenHour(restaurant.getOpenHour());
-        claimRequest.setCloseHour(restaurant.getCloseHour());
-        claimRequest.setRestaurantAddress(restaurant.getAddress());
-        claimRequest.setRestaurantPhone(restaurant.getPhone());
-        claimRequest.setRestaurantEmail(restaurant.getEmail());
-        claimRequest.setRestaurantWebsite(restaurant.getWebsite());
-        claimRequest.setDescription(restaurant.getDescription());
+        claimRequest.setRestaurantId(restaurant.getName());
+        claimRequest.setNewValue(restaurant);
         claimRequest.setProof(proof);
         System.out.println("Restaurant Request generated: " + claimRequest);
         return claimRequest;
@@ -104,10 +99,9 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
-        RestaurantRequest restaurantRequest = new RestaurantRequest(restaurant.getId() + "_RestaurantRequest_" + count, "Edit Restaurant Request");
+        RestaurantRequest restaurantRequest = new RestaurantRequest(restaurant.getId() + "_RestaurantRequest_" + count, "Edit Restaurant Request", RequestType.RESTAURANT_CHANGE_REQUEST);
         restaurantRequest.setRestaurantId(restaurant.getId());
         restaurantRequest.setVendorId(vendor.getId());
-        restaurantRequest.setChangeType("update");
         restaurantRequest.setNewValue(newValue);
         System.out.println("Menu Request generated: " + restaurantRequest);
         return restaurantRequest;
@@ -129,4 +123,25 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
     public int getNumberOfRequests() {
         return dataStore.getRequests().size();
     } //removed use because this param cannot be synchronized
+
+    @Override
+    public void fillMenuItemOldValues(MenuItem oldItem, MenuItem newItem) {
+        if (newItem.getName()==null) {
+            newItem.setName(oldItem.getName());
+        }
+        if (newItem.getDescription()==null) {
+            newItem.setDescription(oldItem.getDescription());
+        }
+        if (newItem.getPrice()==-1) {
+            newItem.setPrice(oldItem.getPrice());
+        }
+        if (newItem.getCalories()==-1) {
+            newItem.setCalories(oldItem.getCalories());
+        }
+    }
+
+    @Override
+    public void fillRestaurantOldValues(Restaurant oldRestaurant, Restaurant newRestaurant) {
+
+    }
 }

@@ -1,6 +1,5 @@
 package com.nutriroute.interfaces;
 
-import com.nutriroute.models.ClaimRequest;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.MenuRequest;
@@ -14,7 +13,9 @@ public interface IVendorRequestManagementService {
     public MenuRequest generateAddMenuItemRequest(Menu menu, MenuItem menuItem);
     public MenuRequest generateEditMenuItemRequest(Menu menu, int position, MenuItem menuItem);
     public RestaurantRequest generateEditRestaurantRequest(Restaurant restaurant, Restaurant newValue);
-    public ClaimRequest generateRestaurantClaimRequest(Restaurant restaurant, String proof);
+    public RestaurantRequest generateRestaurantClaimRequest(Restaurant restaurant, String proof);
     public int getNumberOfRequests();
     public List<Request<String>> getRequests();
+    public void fillMenuItemOldValues(MenuItem oldItem, MenuItem newItem);
+    public void fillRestaurantOldValues(Restaurant oldRestaurant, Restaurant newRestaurant);
 }

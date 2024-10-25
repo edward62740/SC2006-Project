@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Postal Code of Restaurant"
                 android:backgroundTint="#008F00"
-                android:inputType="text"
+                android:inputType="number"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 android:layout_marginTop="16dp"

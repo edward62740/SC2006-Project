@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nutriroute.R;
 import com.nutriroute.controllers.AdminController;
 import com.nutriroute.enums.RequestType;
-import com.nutriroute.models.ClaimRequest;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.Restaurant;
@@ -66,11 +65,11 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
 
         holder.itemView.setOnClickListener(v -> {
             if (type == RequestType.CLAIM_REQUEST) {
-                ClaimRequest claimRequest = (ClaimRequest) requestList.get(position);
-                showDetailDialog(claimRequest);
+                RestaurantRequest claimRequest = (RestaurantRequest) requestList.get(position);
+                showDetailDialog(claimRequest, RequestType.CLAIM_REQUEST);
             } else if (type == RequestType.RESTAURANT_CHANGE_REQUEST){
                 RestaurantRequest restaurantRequest = (RestaurantRequest) requestList.get(position);
-                showDetailDialog(restaurantRequest);
+                showDetailDialog(restaurantRequest, RequestType.RESTAURANT_CHANGE_REQUEST);
             } else {
                 MenuRequest menuRequest = (MenuRequest) requestList.get(position);
                 showDetailDialog(menuRequest);
@@ -91,13 +90,17 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
         }
     }
 
+    //Todo: Improve Dialog UI
+
     private void showDetailDialog(MenuRequest request) {
 
-        String message = "Menu Item ID: " + request.getMenuItemID() +
-                "\nRestaurant ID: " + request.getRestaurantId() +
-                "\nVendor ID: " + request.getVendorId() +
-                "\nChange Type: " + request.getChangeType() +
-                "\nReason: " + request.getReason();
+        String message =
+                "Vendor ID: " + request.getVendorId() +
+                        "\nRestaurant ID: " + request.getRestaurantId() +
+                        "\nMenu Item ID: " + request.getMenuItemID() +
+                        "\nChange Type: " + request.getChangeType() +
+                        "\nStatus: " + request.getStatus() +
+                        "\nReason: " + request.getReason();
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -111,34 +114,27 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
         dialog.show();
     }
 
-    private void showDetailDialog(RestaurantRequest request) {
-
-        String message = "Restaurant ID: " + request.getRestaurantId() +
-                "\nVendor ID: " + request.getVendorId() +
-                "\nChange Type: " + request.getChangeType() +
-                "\nReason: " + request.getReason();
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Restaurant Request Details")
-                .setMessage(message)
-                .setNeutralButton("Exit", (dialog, which) -> {
-                    dialog.dismiss();
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private void showDetailDialog(ClaimRequest request) {
-
-        String message = "Restaurant Name: " + request.getRestaurantName() +
-                "\nVendor ID: " + request.getVendorId() +
-                "\nReason: " + request.getReason();
-
+    private void showDetailDialog(RestaurantRequest request, RequestType requestType) {
+        String message, title;
+        if (requestType==RequestType.RESTAURANT_CHANGE_REQUEST) {
+            message =
+                    "Vendor ID: " + request.getVendorId() +
+                            "\nRestaurant ID: " + request.getRestaurantId() +
+                            "\nStatus: " + request.getStatus() +
+                            "\nReason: " + request.getReason();
+            title = "Change Restaurant Details";
+        }
+        else{
+            message =
+                    "\nVendor ID: " + request.getVendorId() +
+                            "\nRestaurant ID: " + request.getRestaurantId() +
+                            "\nStatus: " + request.getStatus() +
+                            "\nReason: " + request.getReason();
+            title = "Restaurant Claim Details";
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Menu Request Details")
+        builder.setTitle(title)
                 .setMessage(message)
                 .setNeutralButton("Exit", (dialog, which) -> {
                     dialog.dismiss();

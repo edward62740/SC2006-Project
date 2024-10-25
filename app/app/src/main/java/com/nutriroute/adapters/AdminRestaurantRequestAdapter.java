@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.nutriroute.R;
 import com.nutriroute.controllers.AdminController;
-import com.nutriroute.models.ClaimRequest;
+import com.nutriroute.enums.RequestType;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.RestaurantRequest;
@@ -38,10 +38,13 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ClaimRequest request = (ClaimRequest) restaurantRequestList.get(position);
-        holder.textRestaurantId.setText("Restaurant ID: " + request.getId());
+        RestaurantRequest request = (RestaurantRequest) restaurantRequestList.get(position);
+        holder.textRestaurantId.setText("Restaurant ID: " + request.getRestaurantId());
         holder.textVendorId.setText("Vendor ID: " + request.getVendorId());
-        holder.textReason.setText("Claim reason: "+ request.getReason());
+        if (request.getType()==RequestType.CLAIM_REQUEST)
+            holder.textReason.setText("Request Type: Restaurant Claim");
+        else
+            holder.textReason.setText("Request Type: Update Restaurant Details");
 
         holder.itemView.setOnClickListener(v -> {
             showDetailDialog(request);
@@ -67,19 +70,19 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
     }
 
 
-    private void showDetailDialog(ClaimRequest request) {
+    private void showDetailDialog(RestaurantRequest request) {
 
+        String requestType = (request.getType()==RequestType.CLAIM_REQUEST ? "Restaurant Claim" : "Update Restaurant Details");
         String message =
-                "Restaurant ID: " + request.getId() +
-                "\nVendor ID: " + request.getVendorId() +
-                "\nChange Type: " + request.getProof() +
-                "\nReason: " + request.getReason();
+                "Restaurant ID: " + request.getRestaurantId() +
+                        "\nVendor ID: " + request.getVendorId() +
+                        "\nRequest Type: " + requestType;
 
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Restaurant Claim Details")
+
+        builder.setTitle(requestType)
                 .setMessage(message)
                 .setPositiveButton("Accept", (dialog, which) -> {
                     AdminController.acceptRequest(request);

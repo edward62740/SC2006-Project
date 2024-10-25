@@ -111,8 +111,8 @@ public class VendorClaimStoreFragment extends Fragment {
         submitButton.setOnClickListener(v -> {
             if (checkFields()){
                 String name = restaurantName.getText().toString();
-                LocalTime open = LocalTime.parse(openHour.getText().toString());
-                LocalTime close = LocalTime.parse(closeHour.getText().toString());
+                String open = openHour.getText().toString();
+                String close = closeHour.getText().toString();
                 String address = restaurantAddress.getText().toString();
                 String phone = restaurantPhone.getText().toString();
                 String email = restaurantEmail.getText().toString();
@@ -126,6 +126,8 @@ public class VendorClaimStoreFragment extends Fragment {
             else {
                 if (!checkTime(openHour.getText().toString()) || !checkTime(closeHour.getText().toString()))
                     Toast.makeText(getContext(), "Invalid time!", Toast.LENGTH_SHORT).show();
+                else if (restaurantAddress.length()!=6)
+                    Toast.makeText(getContext(), "Invalid Postal Code!", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(getContext(), "Missing fields!", Toast.LENGTH_SHORT).show();
             }
@@ -182,6 +184,7 @@ public class VendorClaimStoreFragment extends Fragment {
                 !openHour.getText().toString().equals(closeHour.getText().toString()) &&
                 checkTime(closeHour.getText().toString()) &&
                 !restaurantAddress.getText().toString().isEmpty() &&
+                restaurantAddress.getText().toString().length()==6 &&
                 !restaurantPhone.getText().toString().isEmpty();
         //todo add validation for proof image
     }

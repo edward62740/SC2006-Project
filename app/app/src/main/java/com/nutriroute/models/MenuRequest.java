@@ -6,7 +6,6 @@ import com.nutriroute.enums.RequestType;
 public class MenuRequest extends Request<String> {
     private String menuItemId;
     private String restaurantId;
-//    private String vendorId;
     private String changeType;
     private MenuItem newValue;
     private String reason;
@@ -33,14 +32,6 @@ public class MenuRequest extends Request<String> {
         this.restaurantId = restaurantId;
     }
 
-    public String getVendorId() {
-        return super.getVendorId();
-    }
-
-    public void setVendorId(String vendorId) {
-        super.setVendorId(vendorId);
-    }
-
     public String getChangeType() {
         return changeType;
     }
@@ -63,6 +54,17 @@ public class MenuRequest extends Request<String> {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    @Override
+    public void deny() {
+        super.deny();
+        setReason("");
+    }
+
+    public void deny(String reason) {
+        super.deny();
+        setReason(reason);
     }
 
 }

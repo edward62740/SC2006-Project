@@ -6,14 +6,17 @@ import com.nutriroute.enums.RequestType;
 public class RestaurantRequest extends Request<String> {
 
     private String restaurantId;
-//    private String vendorId;
-    private String changeType;
     private Restaurant newValue;
     private String reason;
+    // proof will only be filled if RequestType is Claim. If not Claim, proof will be ""
+    private String proof;
 
-    public RestaurantRequest(String id, String description) {
-        super(id, description, RequestType.RESTAURANT_CHANGE_REQUEST);
-        this.setStatus(RequestStatus.PENDING);
+    public RestaurantRequest(String id, String description, RequestType requestType) {
+        super(id, description, requestType);
+        setStatus(RequestStatus.PENDING);
+        // To prevent nullException
+        if (requestType==RequestType.RESTAURANT_CHANGE_REQUEST)
+            setProof("");
     }
 
     public String getRestaurantId() {
@@ -22,24 +25,6 @@ public class RestaurantRequest extends Request<String> {
 
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
-    }
-
-    public String getVendorId() {
-        //return vendorId;
-        return super.getVendorId();
-    }
-
-    public void setVendorId(String vendorId) {
-        //this.vendorId = vendorId;
-        super.setVendorId(vendorId);
-    }
-
-    public String getChangeType() {
-        return changeType;
-    }
-
-    public void setChangeType(String changeType) {
-        this.changeType = changeType;
     }
 
     public Restaurant getNewValue() {
@@ -58,4 +43,18 @@ public class RestaurantRequest extends Request<String> {
         this.reason = reason;
     }
 
+    public String getProof() { return proof;}
+
+    public void setProof(String proof) {this.proof = proof;}
+
+    @Override
+    public void deny() {
+        super.deny();
+        setReason("");
+    }
+
+    public void deny(String reason) {
+        super.deny();
+        setReason(reason);
+    }
 }
