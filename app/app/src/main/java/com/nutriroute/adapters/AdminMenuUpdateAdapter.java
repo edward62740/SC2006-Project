@@ -41,6 +41,7 @@ public class AdminMenuUpdateAdapter extends RecyclerView.Adapter<AdminMenuUpdate
         holder.textMenuItemId.setText("Menu item ID: " + request.getMenuItemID());
         holder.textRestaurantId.setText("Restaurant ID: " + request.getRestaurantId());
         holder.textVendorId.setText("Vendor ID: " + request.getVendorId());
+        holder.textChangeType.setText("Change Type: " + request.getChangeType());
 
         holder.itemView.setOnClickListener(v -> {
             showDetailDialog(request);
@@ -56,12 +57,14 @@ public class AdminMenuUpdateAdapter extends RecyclerView.Adapter<AdminMenuUpdate
         TextView textMenuItemId;
         TextView textRestaurantId;
         TextView textVendorId;
+        TextView textChangeType;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textMenuItemId = itemView.findViewById(R.id.textMenuItemId);
             textRestaurantId = itemView.findViewById(R.id.textRestaurantId);
             textVendorId = itemView.findViewById(R.id.textVendorId);
+            textChangeType = itemView.findViewById(R.id.textChangeType);
         }
     }
 

@@ -15,8 +15,10 @@ public class RequestFactory {
 
     public static Request<String> createRequest(RequestType requestType) {
         switch (requestType) {
+            case RESTAURANT_CHANGE_REQUEST:
+                return new RestaurantRequest("", "", RequestType.RESTAURANT_CHANGE_REQUEST);
             case CLAIM_REQUEST:
-                return new RestaurantRequest("", "");
+                return new RestaurantRequest("", "", RequestType.CLAIM_REQUEST);
             case MENU_CHANGE_REQUEST:
                 return new MenuRequest("", "");
             default:

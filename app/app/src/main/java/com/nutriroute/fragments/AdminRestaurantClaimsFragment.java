@@ -38,7 +38,7 @@ public class AdminRestaurantClaimsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.adminClaimRestaurantRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        List<Request<String>> requests = AdminController.getRestaurantClaimRequests();
+        List<Request<String>> requests = AdminController.getRestaurantRequests();
         System.out.println(requests);
         // remove if request type is not claim request using lambda
        // requests.removeIf(request -> !request.getType().equals(RequestType.CLAIM_REQUEST));

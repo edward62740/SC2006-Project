@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:text="Your Claims"
+        android:text="Your Requests"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         android:textStyle="bold" />
@@ -37,6 +37,7 @@
         android:background="#252525"
         android:scrollbars="vertical"
         android:padding="12dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginBottom="50dp"/>
 
 </LinearLayout>

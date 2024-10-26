@@ -9,6 +9,7 @@ import com.nutriroute.services.RequestMailboxService;
 import com.nutriroute.interfaces.IDataStore;
 import com.nutriroute.utils.ServiceLocator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminController {
@@ -21,14 +22,21 @@ public class AdminController {
         requestMailboxService.synchronize();
     }
 
-    public static List<Request<String>> getRestaurantClaimRequests() {
+    public static List<Request<String>> getRestaurantRequests() {
         //requestMailboxService.synchronize();
-        return requestMailboxService.receive(RequestType.CLAIM_REQUEST);
+        List<Request<String>> requests = new ArrayList<>();
+        requests.addAll(requestMailboxService.receive(RequestType.CLAIM_REQUEST));
+        requests.addAll(requestMailboxService.receive(RequestType.RESTAURANT_CHANGE_REQUEST));
+        return requests;
     }
 
     public static List<Request<String>> getMenuChangeRequests() {
        // requestMailboxService.synchronize();
         return requestMailboxService.receive(RequestType.MENU_CHANGE_REQUEST);
+    }
+
+    public static List<Request<String>> getRestaurantChangeRequests() {
+        return requestMailboxService.receive(RequestType.RESTAURANT_CHANGE_REQUEST);
     }
 
     //probably need some logic to remove from the mailbox or delete the underlying obj from the db

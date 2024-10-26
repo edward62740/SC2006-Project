@@ -34,6 +34,19 @@ public class VendorController {
         return vendorRestaurantMS.getRestaurantList();
     }
 
+    public static int getNumberOfRequests(){
+        return vendorRequestMS.getNumberOfRequests();
+    }
+
+    public static List<Request<String>> getRequests(){
+        return vendorRequestMS.getRequests();
+    }
+
+    public static void generateNewMenuRequest(Menu menu, MenuItem menuItem){
+        Request<String> req = vendorRequestMS.generateAddMenuItemRequest(menu, menuItem);
+        requestMailboxService.send(req);
+    }
+
     public static void generateNewMenuRequest(Menu menu, int position, MenuItem menuItem){
 
         // modified this to send to requestMailboxService;so the controller doesnt return model class to view
@@ -41,13 +54,15 @@ public class VendorController {
         requestMailboxService.send(req);
     }
 
-    public static void generateNewMenuRequest(Restaurant restaurant){
-        Request<String> req = vendorRequestMS.generateRestaurantClaimRequest(restaurant);
+    public static void generateNewRestaurantRequest(Restaurant restaurant, Restaurant newValue){
+        Request<String> req = vendorRequestMS.generateEditRestaurantRequest(restaurant, newValue);
         requestMailboxService.send(req);
     }
 
-
-    // public static Pair<Time, Time>
+    public static void generateNewRestaurantClaimRequest(Restaurant restaurant, String proof){
+        Request<String> req = vendorRequestMS.generateRestaurantClaimRequest(restaurant, proof);
+        requestMailboxService.send(req);
+    }
 
     public static void logoutAndExit() {
         AuthController.logout();

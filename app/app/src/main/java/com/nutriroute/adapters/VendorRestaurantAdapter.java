@@ -54,7 +54,7 @@ public class VendorRestaurantAdapter extends RecyclerView.Adapter<VendorRestaura
         holder.textPhone.setText("Phone: " + restaurant.getPhone());
         holder.textDescription.setText(restaurant.getDescription());
         holder.openingHour.setText(restaurant.getOpenHour()==null ? "--:--":restaurant.getOpenHour().toString());
-        holder.closingHour.setText(restaurant.getOpenHour()==null ? "--:--":restaurant.getOpenHour().toString());
+        holder.closingHour.setText(restaurant.getCloseHour()==null ? "--:--":restaurant.getCloseHour().toString());
         // Set the click listener for the item view
 
         holder.buttonAddMenuItem.setOnClickListener(v -> showAddDialog(restaurant));

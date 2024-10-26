@@ -20,7 +20,6 @@ public class VendorMoreFragment extends Fragment {
 
         Button logoutButton = view.findViewById(R.id.button_logout);
 
-        //TODO: idk. find out what to do
         logoutButton.setOnClickListener(v -> {
             VendorController.logoutAndExit();
             requireActivity().finish();

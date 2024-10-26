@@ -8,12 +8,19 @@ public abstract class Request <T> {
     private String description;
     private RequestStatus status;
     private RequestType type;
+    private String vendorId;
 
     public Request(T id, String description, RequestType type) {
         this.id = id;
         this.type = type;
         this.description = description;
         this.status = RequestStatus.PENDING;
+    }
+
+    public String getVendorId() {return vendorId;}
+
+    public void setVendorId(String vendorId) {
+        this.vendorId = vendorId;
     }
 
     public T getId() {

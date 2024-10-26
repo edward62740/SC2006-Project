@@ -25,7 +25,8 @@
         android:layout_weight="1"
         android:background="#252525"
         android:scrollbars="vertical"
-        android:padding="12dp"/>
+        android:padding="12dp"
+        android:layout_marginBottom="50dp"/>
 
     <!-- Button to claim a new store -->
 

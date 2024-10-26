@@ -21,7 +21,6 @@ public class AdminSettingsFragment extends Fragment {
 
         Button logoutButton = view.findViewById(R.id.admin_button_logout);
 
-        //TODO: idk. find out what to do
         logoutButton.setOnClickListener(v -> {
             AdminController.logoutAndExit();
             requireActivity().finish();

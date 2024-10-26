@@ -23,6 +23,15 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reason"
+        android:visibility="gone"
+        android:textColor="#AEEEEE"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/textReason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -16,6 +16,7 @@ import com.nutriroute.utils.ServiceLocator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
       //  __TEST__generateRandomDB();
+        //_addNewRestaurantToDB();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
 
@@ -55,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    protected void _addNewRestaurantToDB(){
+        List<MenuItem> menuItemList = new ArrayList<>();
+        menuItemList.add(new MenuItem("TestItem", "TestDescription", 1.23, "TestCategory", "", 1520));
+        Menu menu = new Menu(menuItemList);
+        Restaurant restaurant = new Restaurant(menu, "TestRestaurant", "637553", "65837931", "Test@gmail.com", "www.Test.com", "TestDescription", "", "TestRestaurant", "08:00", "20:30");
+        dataStore.setRestaurant(restaurant);
     }
 
     //dummy data for testing and demonstration

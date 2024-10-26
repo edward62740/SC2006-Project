@@ -22,10 +22,10 @@ public class Restaurant {
     private String image; // path to img (do we want this?)
     private String id;
     private String location; // this should be the GPS coordinates
-    private LocalTime openHour;
-    private LocalTime closeHour;
+    private String openHour;
+    private String closeHour;
 
-    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id, LocalTime openHour, LocalTime closeHour) {
+    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id, String openHour, String closeHour) {
         this.menu = menu;
         this.name = name;
         this.address = address;
@@ -39,8 +39,19 @@ public class Restaurant {
         this.closeHour = closeHour;
     }
 
-    public Restaurant() {
-
+    // Constructor for request generation
+    public Restaurant(String name, String openHour, String closeHour, String address, String phone, String email, String website, String description){
+        this.name = name;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.website = website;
+        this.description = description;
+        this.image = "";
+        this.id = "";
+        this.location = "";
     }
 
     public String getId() {
@@ -123,19 +134,36 @@ public class Restaurant {
         this.location = location;
     }
 
-    public LocalTime getOpenHour() {
+    public String getOpenHour() {
         return openHour;
     }
 
     public void setOpenHour(String openHour){
-        this.openHour = LocalTime.parse(openHour);
+        this.openHour = openHour;
     }
 
-    public LocalTime getCloseHour() {
+    public String getCloseHour() {
         return closeHour;
     }
 
     public void setCloseHour(String closeHour){
-        this.closeHour = LocalTime.parse(closeHour);
+        this.closeHour = closeHour;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o==this) return true;
+        if (!(o instanceof Restaurant)) return false;
+        Restaurant c = (Restaurant) o;
+
+        return (name.equals(c.name) &&
+                address.equals(c.address) &&
+                phone.equals(c.phone) &&
+                email.equals(c.email) &&
+                website.equals(c.website) &&
+                image.equals(c.image) &&
+                openHour.equals(c.openHour) &&
+                closeHour.equals(c.closeHour)
+        );
     }
 }
