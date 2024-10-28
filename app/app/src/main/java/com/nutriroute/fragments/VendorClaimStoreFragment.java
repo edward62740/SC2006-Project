@@ -18,12 +18,16 @@ import androidx.fragment.app.Fragment;
 import com.nutriroute.R;
 import com.nutriroute.controllers.VendorController;
 import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.models.Menu;
+import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.Vendor;
 import com.nutriroute.stores.AuthStore;
 import com.nutriroute.utils.ServiceLocator;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VendorClaimStoreFragment extends Fragment {
     private ImageButton backButton;
@@ -122,6 +126,10 @@ public class VendorClaimStoreFragment extends Fragment {
                 String website = restaurantWebsite.getText().toString();
                 String description = restaurantDescription.getText().toString();
                 Restaurant restaurant = new Restaurant(name, open, close, address, phone, email, website, description);
+                MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
+                List<MenuItem> items = new ArrayList<>();
+                items.add(item);
+                restaurant.setMenu(new Menu(items));
                 VendorController.generateNewRestaurantClaimRequest(restaurant, "proof1"); //todo add proof
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new VendorStoresFragment()).commit();
                 Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();

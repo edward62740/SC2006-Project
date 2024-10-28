@@ -113,6 +113,12 @@ public class FirebaseDataStore<T extends Comparable<T>> implements IDataStore<T>
         return requestCache.get(keyToString != null ? keyToString.apply(id) : id.toString());
     }
 
+    public void deleteRequest(T id) {
+        Request<T> request = requestCache.get(keyToString != null ? keyToString.apply(id) : id.toString());
+        this._deleteObjectFromDB(request, keyToString != null ? keyToString.apply(id) : id.toString());
+        requestCache.remove(keyToString != null ? keyToString.apply(id) : id.toString());
+    }
+
     public boolean setRestaurant(Restaurant restaurant) {
         this._updateObjectToDB(restaurant, restaurant.getId());
         restaurantCache.put(restaurant.getId(), restaurant);

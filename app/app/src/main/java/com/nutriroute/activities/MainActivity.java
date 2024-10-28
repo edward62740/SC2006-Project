@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-      //  __TEST__generateRandomDB();
+       // __TEST__generateRandomDB();
         //_addNewRestaurantToDB();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
@@ -71,9 +71,17 @@ public class MainActivity extends AppCompatActivity {
     protected void __TEST__generateRandomDB()
     {String[] validPostalCode = {"637553", "637034", "639798", "637335", "636922", "639798", "639798", "638075", "636922", "321789"};
 
-        String[] validImageUrl = {};
+        // bunch of random images
+        String[] validImageUrl = {"https://github.com/hpatches/hpatches-dataset/blob/master/img/detections.png?raw=true",
+        "https://www.researchgate.net/publication/366230142/figure/fig2/AS:11431281115030222@1674751733108/SuperPoint-network-model.png",
+        "https://ar5iv.labs.arxiv.org/html/1712.07629/assets/x1.png",
+        "https://www.researchgate.net/profile/Ciaran-Eising/publication/358598875/figure/fig2/AS:1126639740170247@1645623254951/Self-supervised-fisheye-Keypoint-Detection-and-Description-training-framework-adapted_Q320.jpg",
+        "https://d3i71xaburhd42.cloudfront.net/a62bdda9ae6f86fc06d7edf5d3b429eda3a6640e/6-Figure7-1.png",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNqNI0JDuleRuP1DZnxVh6ERXvmEc72faS-s7CAHcxi2Otko1CUMqg1cEW1zLIJ52mk6E&usqp=CAU",
+        "https://production-media.paperswithcode.com/methods/Screen_Shot_2021-01-26_at_9.43.31_PM_uI4jjMq.png",
+        "https://xuranpan.plus/publication/dat/featured_hu2a5919fcf9b44331e6d70800bb6ac312_1031328_720x2500_fit_q75_h2_lanczos_3.webp"};
 
-
+        /*
         for (int i = 1; i <= 25; i++) {
             String userName = "User" + i;
             String email = i + "@gmail.com";
@@ -138,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             // Output to show user creation
             System.out.println("Created admin: " + userName + " with ID: " + id);
         }
-        /*
+        */
 
 
         for (int x = 1; x <= 16; x++) { //restaurant
@@ -152,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 price = Math.round(price * 100.0) / 100.0;
                 MenuItem menuItem = new MenuItem(itemname, "description of item" + j,
                         price, "category" + (int) (Math.random() * 36), "", (int) (Math.random() * 2200));
+                menuItem.setImage(validImageUrl[(int) (Math.random() * validImageUrl.length)]);
                 items.add(menuItem);
             }
             String menuname = "MenuForRestaurant" + x;
@@ -166,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
             String description = "Description of restaurant" + x;
 
             // Create a new restaurant
-            Restaurant restaurant = new Restaurant(null, name, address, phone, " ", " ", description, " ", someId);
+            Restaurant restaurant = new Restaurant(menu, name, address, phone, " ", " ", description, " ", someId, "08:00", "20:30");
             restaurant.setMenu(menu);
-
+            restaurant.setImage(validImageUrl[(int) (Math.random() * validImageUrl.length)]);
             // Set the restaurant in the data store
             dataStore.setRestaurant(restaurant);
 
@@ -177,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-*/
+
 
 
 

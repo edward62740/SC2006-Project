@@ -28,7 +28,7 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
         for (Request<String> request : dataStore.getRequests()){
             if (request.getType()==RequestType.MENU_CHANGE_REQUEST){
                 MenuRequest menuRequest = (MenuRequest) request;
-                if (menuRequest.getRestaurantId().equals(menu.getId())){
+                if (menu != null && menuRequest.getRestaurantId().equals(menu.getId())){
                     count++;
                 }
             }

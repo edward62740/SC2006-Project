@@ -125,6 +125,15 @@ public class CreateGenericUserActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill in all fields and select a user type", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (name.length() >= 128 || email.length() >= 128 || password.length() >= 128) {
+            Toast.makeText(this, "Please ensure that the length of the fields is less than 128 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //check for only printable ascii
+        if (!name.matches("\\A\\p{ASCII}*\\z") || !email.matches("\\A\\p{ASCII}*\\z") || !password.matches("\\A\\p{ASCII}*\\z")) {
+            Toast.makeText(this, "Please ensure that the fields contain only printable ASCII characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         GenericUser<String> newUser = GenericUserFactory.createUser(selectedUserType);
         newUser.setName(name);
