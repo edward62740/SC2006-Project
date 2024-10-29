@@ -11,12 +11,16 @@ import com.nutriroute.fragments.VendorClaimStoreFragment;
 import com.nutriroute.fragments.VendorMoreFragment;
 import com.nutriroute.fragments.VendorStatusFragment;
 import com.nutriroute.fragments.VendorStoresFragment;
+import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.models.Request;
+import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.Vendor;
 import com.nutriroute.stores.AuthStore;
+import com.nutriroute.utils.ServiceLocator;
 
 public class VendorActivity extends AppCompatActivity {
     Vendor currentUser = (Vendor) AuthStore.getCurUser();
-
+    private static final IDataStore<String> dataStore = ServiceLocator.getDB();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,9 @@ public class VendorActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = new VendorStoresFragment();
+
+            dataStore._loadObjFromDB(Restaurant.class, null);
+            dataStore._loadObjFromDB(Request.class, null);
 
             if(item.getItemId() == R.id.nav_vendor_stores) {
                 selectedFragment = new VendorStoresFragment();

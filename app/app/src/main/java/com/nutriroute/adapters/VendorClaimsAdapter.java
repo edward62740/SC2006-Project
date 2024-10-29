@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nutriroute.R;
 import com.nutriroute.controllers.AdminController;
+import com.nutriroute.controllers.VendorController;
+import com.nutriroute.enums.RequestStatus;
 import com.nutriroute.enums.RequestType;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Request;
@@ -60,6 +62,12 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
         Request<String> request = requestList.get(position);
 
         holder.textName.setText(request.getId());
+        if(request.getStatus() == RequestStatus.APPROVED)
+            holder.textName.setTextColor(context.getResources().getColor(R.color.green));
+        else if (request.getStatus() == RequestStatus.DENIED)
+            holder.textName.setTextColor(context.getResources().getColor(R.color.red));
+        else if (request.getStatus() == RequestStatus.PENDING)
+            holder.textName.setTextColor(context.getResources().getColor(R.color.teal_700));
         holder.textDescription.setText(request.getDescription());
 
         holder.itemView.setOnClickListener(v -> {
@@ -72,6 +80,15 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
             } else {
                 MenuRequest menuRequest = (MenuRequest) requestList.get(position);
                 showDetailDialog(menuRequest);
+            }
+            if (request.getStatus() == RequestStatus.APPROVED || request.getStatus() == RequestStatus.DENIED){
+                VendorController.deleteRequest(request.getId());
+                // reload adapter
+                requestList.remove(position);
+                notifyItemRemoved(position);
+                requestList.remove(request);
+                notifyItemRangeChanged(position, requestList.size());
+
             }
         });
     }

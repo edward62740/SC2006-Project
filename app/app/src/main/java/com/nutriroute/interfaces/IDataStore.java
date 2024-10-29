@@ -84,4 +84,6 @@ public interface IDataStore<T extends Comparable<T>> {
     Collection<Restaurant> getRestaurants();
 
     Collection<Request<T>> getRequests();
+
+    void deleteRequest(T id);
 }

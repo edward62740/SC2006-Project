@@ -58,9 +58,32 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 selectMealAndAlloc(menuItem);
             }
         });
-        Glide.with(context).load("https://lh3.googleusercontent.com/p/AF1QipNMwMB3ZR2p2Nz61uCrCgzv2-dw3in2kIM5SfAd=s680-w680-h510").into(imageView);
+        if (menuItem.getImage() != null)
+        {
+            Glide.with(context).load(menuItem.getImage()).into(imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showImageDialog(menuItem.getImage());
+                }
+            });
+        }
+        else // load the empty image/no image available
+        {
+            Glide.with(context).load(R.drawable.no_image_available).into(imageView);
+        }
     }
+    private void showImageDialog(String imageUrl) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_image, null);
+        ImageView enlargedImageView = dialogView.findViewById(R.id.enlarged_image);
 
+        Glide.with(context).load(imageUrl).into(enlargedImageView);
+
+        builder.setView(dialogView);
+        builder.setCancelable(true);
+        builder.show();
+    }
     @Override
     public int getItemCount() {
         return menuItems.size();

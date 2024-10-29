@@ -64,6 +64,10 @@ public class VendorController {
         requestMailboxService.send(req);
     }
 
+    public static void deleteRequest(String id){
+        dataStore.deleteRequest(id);
+    }
+
     public static void logoutAndExit() {
         AuthController.logout();
     }

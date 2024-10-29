@@ -2,6 +2,8 @@ package com.nutriroute.models;
 
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents a restaurant.
@@ -37,6 +39,13 @@ public class Restaurant {
         this.id = id;
         this.openHour = openHour;
         this.closeHour = closeHour;
+        // instantiate menu and populate it to avoid some issues with vendor
+        MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
+        List<MenuItem> items = new ArrayList<>();
+        items.add(item);
+        this.menu = new Menu(items);
+
+
     }
 
     // Constructor for request generation
