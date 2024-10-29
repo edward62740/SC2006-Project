@@ -104,7 +104,7 @@ public class UserStoresFragment extends Fragment {
 
                //Toast.makeText(getContext(), "Setting static location for testing", Toast.LENGTH_SHORT).show();
 
-                UserController.setUserCurrentLocation("1.3544,103.9866");
+                UserController.setUserCurrentLocation("1.35310,103.68909");
                 userLatLong = UserController.getUserCurrentLocation();
 
                 queryAndSetupAdapter();

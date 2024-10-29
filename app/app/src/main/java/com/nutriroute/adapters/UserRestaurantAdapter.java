@@ -70,7 +70,11 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         holder.textName.setText(restaurant.getName());
         holder.textPhone.setText("Phone: " + restaurant.getPhone());
         holder.textDescription.setText(restaurant.getDescription());
-        holder.textDistance.setText("Distance: " + distanceList.get(position) + " km");
+        if (distanceList.get(position) < 1)
+            holder.textDistance.setText("Distance: " + String.format("%.3g", distanceList.get(position) * 1000) + " m");
+        else
+            holder.textDistance.setText("Distance: " + String.format("%.3g", distanceList.get(position)) + " km");
+
         if (restaurant.getImage() != null)
         {
             Glide.with(context).load(restaurant.getImage()).into(imageView);

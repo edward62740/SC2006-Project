@@ -105,7 +105,7 @@ public class VendorAddItemDialogFragment extends DialogFragment {
                 menuItem.setDescription(itemDescription.getText().toString());
                 if (imageURL != null)
                     menuItem.setImage(imageURL);
-                VendorController.generateNewMenuRequest(menu, menuItem);
+                VendorController.generateNewMenuRequest(restaurant, menu, menuItem);
                 System.out.println("Add Item Request generated");
                 Toast.makeText(getContext(), "Request Submitted", Toast.LENGTH_SHORT).show();
                 dismiss();

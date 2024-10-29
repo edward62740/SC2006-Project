@@ -87,7 +87,7 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
                 if (!editItemList.get(i).noChange() && !editItemList.get(i).changeIsValid())
                     valid=false;
                 if (editItemList.get(i).changeIsValid() && !menu.get(i).equals(editItemList.get(i))){
-                    VendorController.generateNewMenuRequest(menu, i, editItemList.get(i));
+                    VendorController.generateNewMenuRequest(restaurant, menu, i, editItemList.get(i));
                     change=true;
                 }
             }

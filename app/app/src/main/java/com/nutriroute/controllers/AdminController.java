@@ -79,6 +79,7 @@ public class AdminController {
             RestaurantRequest restaurantRequest = (RestaurantRequest) request;
                 Restaurant restaurant = restaurantRequest.getNewValue();
                 restaurant.setId(restaurant.getName()); // this is not great, but we have to otherwise sync id generation
+                restaurant.getMenu().setId(restaurant.getName());
                 if (restaurant.getId() != null && dataStore.getRestaurant(restaurant.getId()) == null) { // set iff does not exist
                     dataStore.setRestaurant(restaurant);
                     vendor.addRestaurant(restaurant.getId());

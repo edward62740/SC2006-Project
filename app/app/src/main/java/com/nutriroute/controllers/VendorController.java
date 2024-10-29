@@ -11,6 +11,7 @@ import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.MenuRequest;
 import com.nutriroute.models.Request;
 import com.nutriroute.models.Restaurant;
+import com.nutriroute.models.RestaurantRequest;
 import com.nutriroute.services.RequestMailboxService;
 import com.nutriroute.services.VendorRequestManagementService;
 import com.nutriroute.services.VendorRestaurantManagementService;
@@ -42,15 +43,15 @@ public class VendorController {
         return vendorRequestMS.getRequests();
     }
 
-    public static void generateNewMenuRequest(Menu menu, MenuItem menuItem){
-        Request<String> req = vendorRequestMS.generateAddMenuItemRequest(menu, menuItem);
+    public static void generateNewMenuRequest(Restaurant restaurant, Menu menu, MenuItem menuItem){
+        Request<String> req = vendorRequestMS.generateAddMenuItemRequest(restaurant, menu, menuItem);
         requestMailboxService.send(req);
     }
 
-    public static void generateNewMenuRequest(Menu menu, int position, MenuItem menuItem){
+    public static void generateNewMenuRequest(Restaurant restaurant, Menu menu, int position, MenuItem menuItem){
 
         // modified this to send to requestMailboxService;so the controller doesnt return model class to view
-        Request<String> req = vendorRequestMS.generateEditMenuItemRequest(menu, position, menuItem);
+        Request<String> req = vendorRequestMS.generateEditMenuItemRequest(restaurant, menu, position, menuItem);
         requestMailboxService.send(req);
     }
 
