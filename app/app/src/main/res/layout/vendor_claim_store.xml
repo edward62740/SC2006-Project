@@ -22,12 +22,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/back_button"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button">
+        app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="50dp">
 
             <!-- Title -->
             <TextView
@@ -157,6 +158,39 @@
                 android:layout_marginTop="16dp"
                 android:padding="12dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restaurant Image (URL)"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="16dp" />
+
+            <!-- File Upload Button -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/image_restaurant"
+                    android:layout_width="256dp"
+                    android:layout_height="256dp" />
+
+                <Button
+                    android:id="@+id/button_image_restaurant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#008F00"
+                    android:text="Input URL"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
             <!-- Proof of Business Registration -->
             <TextView
                 android:layout_width="wrap_content"
@@ -191,18 +225,18 @@
 
             </LinearLayout>
 
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#00A000"
+                android:text="Submit"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </LinearLayout>
     </ScrollView>
-
-    <!-- Submit Button -->
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#00A000"
-        android:text="Submit"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

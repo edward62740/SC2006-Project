@@ -37,9 +37,9 @@ public class VendorClaimStoreFragment extends Fragment {
     private TextView textTitle;
     private EditText restaurantName, openHour, closeHour, restaurantAddress, restaurantPhone,
             restaurantEmail, restaurantWebsite, restaurantDescription;
-    private ImageView proofImage;
-    private Button browseButton, submitButton;
-    private String imageURL;
+    private ImageView proofImage, imageRestaurant;
+    private Button browseButton, submitButton, buttonRestaurantImage;
+    private String proofURL, restaurantImageURL;
 
 
     @Override
@@ -64,6 +64,8 @@ public class VendorClaimStoreFragment extends Fragment {
         restaurantWebsite = view.findViewById(R.id.restaurant_website);
         restaurantDescription = view.findViewById(R.id.restaurant_description);
         proofImage = view.findViewById(R.id.upload_image);
+        imageRestaurant = view.findViewById(R.id.image_restaurant);
+        buttonRestaurantImage = view.findViewById(R.id.button_image_restaurant);
 
         if (!currentUser.isNewAccount())
             textTitle.setText("Claim a new store!");
@@ -115,8 +117,12 @@ public class VendorClaimStoreFragment extends Fragment {
             }
         });
 
+        buttonRestaurantImage.setOnClickListener(v -> {
+            showInputImageURLDialog(imageRestaurant);
+        });
+
         browseButton.setOnClickListener(v -> {
-            showInputImageURLDialog();
+            showInputImageURLDialog(proofImage);
         });
 
         submitButton.setOnClickListener(v -> {
@@ -134,7 +140,9 @@ public class VendorClaimStoreFragment extends Fragment {
                 List<MenuItem> items = new ArrayList<>();
                 items.add(item);
                 restaurant.setMenu(new Menu(items, restaurant.getId()));
-                VendorController.generateNewRestaurantClaimRequest(restaurant, imageURL);
+                if (imageRestaurant.getDrawable()!=null)
+                    restaurant.setImage(restaurantImageURL);
+                VendorController.generateNewRestaurantClaimRequest(restaurant, proofURL);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new VendorStoresFragment()).commit();
                 Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
                 currentUser.setNewAccount(false);
@@ -203,14 +211,17 @@ public class VendorClaimStoreFragment extends Fragment {
                 proofImage.getDrawable()!=null;
     }
 
-    private void showInputImageURLDialog(){
+    private void showInputImageURLDialog(ImageView imageview){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final EditText input = new EditText(getContext());
         builder.setTitle("Enter ImageURL")
                 .setPositiveButton("Submit", (dialog, which) -> {
                     if (!input.getText().toString().isEmpty()) {
-                        imageURL = input.getText().toString();
-                        Glide.with(getContext()).load(imageURL).into(proofImage);
+                        if (imageview == proofImage)
+                            proofURL = input.getText().toString();
+                        else if (imageview == imageRestaurant)
+                            restaurantImageURL = input.getText().toString();
+                        Glide.with(getContext()).load(input.getText().toString()).into(imageview);
                     }
                     else
                         Toast.makeText(getContext(), "URL Empty", Toast.LENGTH_SHORT).show();
