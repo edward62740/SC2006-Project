@@ -105,6 +105,12 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         return restaurantList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {return position;}
+
+    @Override
+    public long getItemId(int position) {return Integer.toUnsignedLong(position);}
+
     @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
     private void showRestaurantDialog(Restaurant restaurant) {
         com.nutriroute.adapters.RestaurantDialogFragment dialogFragment = new com.nutriroute.adapters.RestaurantDialogFragment(restaurant);

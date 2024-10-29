@@ -33,9 +33,15 @@ public class AdminController {
     public static List<Request<String>> getRestaurantRequests() {
         //requestMailboxService.synchronize();
         List<Request<String>> requests = new ArrayList<>();
-        requests.addAll(requestMailboxService.receive(RequestType.CLAIM_REQUEST));
-        requests.addAll(requestMailboxService.receive(RequestType.RESTAURANT_CHANGE_REQUEST));
+        List<Request<String>> claimRequests = requestMailboxService.receive(RequestType.CLAIM_REQUEST);
+        List<Request<String>> changeRequests = requestMailboxService.receive(RequestType.RESTAURANT_CHANGE_REQUEST);
+        if (claimRequests!=null)
+            requests.addAll(requestMailboxService.receive(RequestType.CLAIM_REQUEST));
+        if (changeRequests!=null)
+            requests.addAll(requestMailboxService.receive(RequestType.RESTAURANT_CHANGE_REQUEST));
         // filter by status
+        if (requests.isEmpty())
+            return null;
         requests.removeIf(request -> request.getStatus() != RequestStatus.PENDING);
         return requests;
     }
@@ -43,6 +49,8 @@ public class AdminController {
     public static List<Request<String>> getMenuChangeRequests() {
        // requestMailboxService.synchronize();
         List<Request<String>> requests = requestMailboxService.receive(RequestType.MENU_CHANGE_REQUEST);
+        if (requests==null)
+            return null;
         requests.removeIf(request -> request.getStatus() != RequestStatus.PENDING);
         return requests;
     }
@@ -103,10 +111,18 @@ public class AdminController {
         //requestMailboxService.synchronize();
     }
 
-    public static void rejectRequest(Request<String> request) {
+    public static void rejectRequest(Request<String> request, String reason) {
         request.setStatus(RequestStatus.DENIED);
+        if (reason.isEmpty())
+            request.setReason("null");
+        else
+            request.setReason(reason);
         dataStore.setRequest(request, request.getId());
         //requestMailboxService.synchronize();
+    }
+
+    public static void deleteRequest(String id){
+        dataStore.deleteRequest(id);
     }
 
     public static void logoutAndExit() {

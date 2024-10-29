@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     protected void _addNewRestaurantToDB(){
         List<MenuItem> menuItemList = new ArrayList<>();
         menuItemList.add(new MenuItem("TestItem", "TestDescription", 1.23, "TestCategory", "", 1520));
-        Menu menu = new Menu(menuItemList);
+        Menu menu = new Menu(menuItemList, "TestRestaurant");
         Restaurant restaurant = new Restaurant(menu, "TestRestaurant", "637553", "65837931", "Test@gmail.com", "www.Test.com", "TestDescription", "", "TestRestaurant", "08:00", "20:30");
         dataStore.setRestaurant(restaurant);
     }
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int x = 1; x <= 16; x++) { //restaurant
             String name = "Restaurant" + x;
-            Menu menu = new Menu(new ArrayList<>());
+            Menu menu = new Menu(new ArrayList<>(), "");
 
             List<MenuItem> items = new ArrayList<>();
             for(int j = 1; j <= 16; j++) {

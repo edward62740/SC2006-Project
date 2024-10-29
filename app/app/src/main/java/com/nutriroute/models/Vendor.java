@@ -21,6 +21,9 @@ public class Vendor extends GenericUser<String>{
     }
 
     public void addRestaurant(String restaurant) {
+        if (this.restaurants==null)
+            this.restaurants = new ArrayList<>();
+
         this.restaurants.add(restaurant);
     }
 

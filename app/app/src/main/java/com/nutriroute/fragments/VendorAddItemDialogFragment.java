@@ -1,8 +1,10 @@
 package com.nutriroute.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,24 +13,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.nutriroute.R;
-import com.nutriroute.adapters.VendorMenuAdapter;
+import com.nutriroute.controllers.AdminController;
 import com.nutriroute.controllers.VendorController;
+import com.nutriroute.enums.RequestType;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.MenuItem;
 import com.nutriroute.models.Restaurant;
 
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.Locale;
 
 public class VendorAddItemDialogFragment extends DialogFragment {
@@ -36,9 +38,10 @@ public class VendorAddItemDialogFragment extends DialogFragment {
     private Restaurant restaurant;
     private Menu menu;
     private RecyclerView menuRecyclerView;
-    ImageButton restaurantImage, backButton;
+    ImageButton itemImage, backButton;
     EditText itemName, itemPrice, itemCalories, itemDescription;
     Button submitButton;
+    String imageURL;
 
     public VendorAddItemDialogFragment(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -51,7 +54,7 @@ public class VendorAddItemDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_add_item, container, false);
 
-        restaurantImage = view.findViewById(R.id.button_image);
+        itemImage = view.findViewById(R.id.button_image);
         itemName = view.findViewById(R.id.text_name);
         itemPrice = view.findViewById(R.id.text_price);
         itemCalories = view.findViewById(R.id.text_calories);
@@ -87,8 +90,8 @@ public class VendorAddItemDialogFragment extends DialogFragment {
             }
         });
 
-        restaurantImage.setOnClickListener(v -> {
-            //TODO: Implement logic to upload image
+        itemImage.setOnClickListener(v -> {
+            showInputImageURLDialog();
         });
 
         submitButton.setOnClickListener(v -> {
@@ -100,6 +103,8 @@ public class VendorAddItemDialogFragment extends DialogFragment {
                 menuItem.setPrice(price);
                 menuItem.setCalories(Integer.parseInt(itemCalories.getText().toString()));
                 menuItem.setDescription(itemDescription.getText().toString());
+                if (imageURL != null)
+                    menuItem.setImage(imageURL);
                 VendorController.generateNewMenuRequest(menu, menuItem);
                 System.out.println("Add Item Request generated");
                 Toast.makeText(getContext(), "Request Submitted", Toast.LENGTH_SHORT).show();
@@ -131,5 +136,26 @@ public class VendorAddItemDialogFragment extends DialogFragment {
                 !itemCalories.getText().toString().isEmpty() &&
                 !itemDescription.getText().toString().isEmpty();
         //todo add validation for proof image
+    }
+
+    private void showInputImageURLDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final EditText input = new EditText(getContext());
+        builder.setTitle("Enter ImageURL")
+                .setPositiveButton("Submit", (dialog, which) -> {
+                    if (!input.getText().toString().isEmpty()) {
+                        imageURL = input.getText().toString();
+                        Glide.with(getContext()).load(imageURL).into(itemImage);
+                    }
+                    else
+                        Toast.makeText(getContext(), "URL Empty", Toast.LENGTH_SHORT).show();
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setCancelable(false);
+        builder.show();
     }
 }

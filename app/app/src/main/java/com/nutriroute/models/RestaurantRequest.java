@@ -7,7 +7,6 @@ public class RestaurantRequest extends Request<String> {
 
     private String restaurantId;
     private Restaurant newValue;
-    private String reason;
     // proof will only be filled if RequestType is Claim. If not Claim, proof will be ""
     private String proof;
 
@@ -33,14 +32,6 @@ public class RestaurantRequest extends Request<String> {
 
     public void setNewValue(Restaurant newValue) {
         this.newValue = newValue;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
     }
 
     public String getProof() { return proof;}

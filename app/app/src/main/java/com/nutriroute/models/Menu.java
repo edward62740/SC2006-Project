@@ -6,8 +6,9 @@ public class Menu {
     private List<MenuItem> items;
     private String id;
 
-    public Menu(List<MenuItem> items) {
+    public Menu(List<MenuItem> items, String id) {
         this.items = items;
+        this.id = id;
     }
 
     public String getId() {

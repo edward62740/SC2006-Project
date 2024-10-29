@@ -33,6 +33,9 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(menu.getId() + "_MenuItemRequest_" + count) != null)
+            count++;
+
         MenuRequest menuRequest = new MenuRequest(menu.getId() + "_MenuItemRequest_" + count, "Add Menu Item Request");
         menuRequest.setMenuItemId("0");
         menuRequest.setRestaurantId(menu.getId());
@@ -55,6 +58,9 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(menu.getId() + "_MenuItemRequest_" + count) != null)
+            count++;
+
         MenuRequest menuRequest = new MenuRequest(menu.getId() + "_MenuItemRequest_" + count, "Edit Menu Item Request");
         menuRequest.setMenuItemId(String.valueOf(position));
         menuRequest.setRestaurantId(menu.getId());
@@ -77,6 +83,8 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(vendor.getId() + "_ClaimRequest_" + count) != null)
+            count++;
 
         RestaurantRequest claimRequest = new RestaurantRequest(vendor.getId() + "_ClaimRequest_" + count, "Claim restaurant Request", RequestType.CLAIM_REQUEST);
         claimRequest.setVendorId(vendor.getId());
@@ -99,6 +107,9 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(restaurant.getId() + "_RestaurantRequest_" + count) != null)
+            count++;
+
         RestaurantRequest restaurantRequest = new RestaurantRequest(restaurant.getId() + "_RestaurantRequest_" + count, "Edit Restaurant Request", RequestType.RESTAURANT_CHANGE_REQUEST);
         restaurantRequest.setRestaurantId(restaurant.getId());
         restaurantRequest.setVendorId(vendor.getId());

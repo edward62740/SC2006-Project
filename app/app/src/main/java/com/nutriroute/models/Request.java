@@ -9,6 +9,7 @@ public abstract class Request <T> {
     private RequestStatus status;
     private RequestType type;
     private String vendorId;
+    private String reason;
 
     public Request(T id, String description, RequestType type) {
         this.id = id;
@@ -62,4 +63,8 @@ public abstract class Request <T> {
     public void deny() {
         this.status = RequestStatus.DENIED;
     }
+
+    public void setReason(String reason) {this.reason = reason;}
+
+    public String getReason() {return reason;}
 }

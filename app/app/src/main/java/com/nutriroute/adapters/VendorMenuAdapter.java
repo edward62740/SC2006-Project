@@ -1,7 +1,9 @@
 package com.nutriroute.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.nutriroute.R;
 import com.nutriroute.models.Menu;
 import com.nutriroute.models.MenuItem;
@@ -48,6 +52,13 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
         MenuItem item = this.menu.get(position);
         MenuItem editItem = editItemList.get(position);
         if (item == null) {return;}
+
+        if (item.getImage()!=null) {
+            editItem.setImage(item.getImage());
+            Glide.with(context).load(item.getImage()).into(holder.itemImage);
+        }
+        else
+            Glide.with(context).load(R.drawable.no_image_available).into(holder.itemImage);
 
         holder.itemName.setText(item.getName());
         holder.itemDescription.setText(item.getDescription());
@@ -117,7 +128,7 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
         });
 
         holder.itemImage.setOnClickListener(v -> {
-            //TODO: Implement logic to upload image
+            showInputImageURLDialog(holder, editItem);
         });
 
     }
@@ -147,5 +158,24 @@ public class VendorMenuAdapter extends RecyclerView.Adapter<VendorMenuAdapter.Me
             itemCalories = itemView.findViewById(R.id.text_calories);
 
         }
+    }
+
+    private void showInputImageURLDialog(MenuViewHolder holder, MenuItem editItem){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final EditText input = new EditText(context);
+        builder.setTitle("Enter ImageURL")
+                .setPositiveButton("Submit", (dialog, which) -> {
+                    if (!input.getText().toString().isEmpty()) {
+                        editItem.setImage(input.getText().toString());
+                        Glide.with(context).load(input.getText().toString()).into(holder.itemImage);
+                    }
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setCancelable(false);
+        builder.show();
     }
 }

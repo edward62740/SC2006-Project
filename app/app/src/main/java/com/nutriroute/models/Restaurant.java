@@ -43,7 +43,7 @@ public class Restaurant {
         MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
         List<MenuItem> items = new ArrayList<>();
         items.add(item);
-        this.menu = new Menu(items);
+        this.menu = new Menu(items, id);
 
 
     }
@@ -172,7 +172,8 @@ public class Restaurant {
                 website.equals(c.website) &&
                 image.equals(c.image) &&
                 openHour.equals(c.openHour) &&
-                closeHour.equals(c.closeHour)
+                closeHour.equals(c.closeHour) &&
+                description.equals(c.description)
         );
     }
 }

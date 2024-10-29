@@ -161,7 +161,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please submit your proof of business registration (pdf, jpg, png)"
+                android:text="Please submit a URL to an image of your proof of business registration"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:gravity="center"
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:backgroundTint="#008F00"
-                    android:text="Browse"
+                    android:text="Input URL"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
