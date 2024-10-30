@@ -1,7 +1,9 @@
 package com.nutriroute.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.nutriroute.R;
 import com.nutriroute.controllers.VendorController;
 import com.nutriroute.interfaces.IDataStore;
@@ -34,9 +37,9 @@ public class VendorClaimStoreFragment extends Fragment {
     private TextView textTitle;
     private EditText restaurantName, openHour, closeHour, restaurantAddress, restaurantPhone,
             restaurantEmail, restaurantWebsite, restaurantDescription;
-    private ImageView proofImage;
-    private Button browseButton, submitButton;
-
+    private ImageView proofImage, imageRestaurant;
+    private Button browseButton, submitButton, buttonRestaurantImage;
+    private String proofURL, restaurantImageURL;
 
 
     @Override
@@ -60,6 +63,9 @@ public class VendorClaimStoreFragment extends Fragment {
         restaurantEmail = view.findViewById(R.id.restaurant_email);
         restaurantWebsite = view.findViewById(R.id.restaurant_website);
         restaurantDescription = view.findViewById(R.id.restaurant_description);
+        proofImage = view.findViewById(R.id.upload_image);
+        imageRestaurant = view.findViewById(R.id.image_restaurant);
+        buttonRestaurantImage = view.findViewById(R.id.button_image_restaurant);
 
         if (!currentUser.isNewAccount())
             textTitle.setText("Claim a new store!");
@@ -111,8 +117,12 @@ public class VendorClaimStoreFragment extends Fragment {
             }
         });
 
+        buttonRestaurantImage.setOnClickListener(v -> {
+            showInputImageURLDialog(imageRestaurant);
+        });
+
         browseButton.setOnClickListener(v -> {
-            //TODO: Implement logic to upload image
+            showInputImageURLDialog(proofImage);
         });
 
         submitButton.setOnClickListener(v -> {
@@ -126,11 +136,13 @@ public class VendorClaimStoreFragment extends Fragment {
                 String website = restaurantWebsite.getText().toString();
                 String description = restaurantDescription.getText().toString();
                 Restaurant restaurant = new Restaurant(name, open, close, address, phone, email, website, description);
-                MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
+                MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", 0);
                 List<MenuItem> items = new ArrayList<>();
                 items.add(item);
-                restaurant.setMenu(new Menu(items));
-                VendorController.generateNewRestaurantClaimRequest(restaurant, "proof1"); //todo add proof
+                restaurant.setMenu(new Menu(items, restaurant.getId()));
+                if (imageRestaurant.getDrawable()!=null)
+                    restaurant.setImage(restaurantImageURL);
+                VendorController.generateNewRestaurantClaimRequest(restaurant, proofURL);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new VendorStoresFragment()).commit();
                 Toast.makeText(getContext(), "Claim Request Submitted", Toast.LENGTH_SHORT).show();
                 currentUser.setNewAccount(false);
@@ -141,6 +153,8 @@ public class VendorClaimStoreFragment extends Fragment {
                     Toast.makeText(getContext(), "Invalid time!", Toast.LENGTH_SHORT).show();
                 else if (restaurantAddress.length()!=6)
                     Toast.makeText(getContext(), "Invalid Postal Code!", Toast.LENGTH_SHORT).show();
+                else if (proofImage.getDrawable()==null)
+                    Toast.makeText(getContext(), "Invalid Image", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(getContext(), "Missing fields!", Toast.LENGTH_SHORT).show();
             }
@@ -193,7 +207,31 @@ public class VendorClaimStoreFragment extends Fragment {
                 checkTime(closeHour.getText().toString()) &&
                 !restaurantAddress.getText().toString().isEmpty() &&
                 restaurantAddress.getText().toString().length()==6 &&
-                !restaurantPhone.getText().toString().isEmpty();
-        //todo add validation for proof image
+                !restaurantPhone.getText().toString().isEmpty() &&
+                proofImage.getDrawable()!=null;
+    }
+
+    private void showInputImageURLDialog(ImageView imageview){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final EditText input = new EditText(getContext());
+        builder.setTitle("Enter ImageURL")
+                .setPositiveButton("Submit", (dialog, which) -> {
+                    if (!input.getText().toString().isEmpty()) {
+                        if (imageview == proofImage)
+                            proofURL = input.getText().toString();
+                        else if (imageview == imageRestaurant)
+                            restaurantImageURL = input.getText().toString();
+                        Glide.with(getContext()).load(input.getText().toString()).into(imageview);
+                    }
+                    else
+                        Toast.makeText(getContext(), "URL Empty", Toast.LENGTH_SHORT).show();
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setCancelable(false);
+        builder.show();
     }
 }

@@ -20,6 +20,15 @@ public class MenuItem {
         this.calories = calories;
     }
 
+    //constructor for request generation
+    public MenuItem(String name, String description, double price, String category, int calories){
+        this.name = name;
+        this.description=description;
+        this.price = price;
+        this.category = category;
+        this.calories = calories;
+    }
+
     public int getCalories() {
         return calories;
     }
@@ -68,6 +77,7 @@ public class MenuItem {
         this.image = image;
     }
 
+    //for request use
     @Override
     public boolean equals(Object o){
         if (o==this) return true;

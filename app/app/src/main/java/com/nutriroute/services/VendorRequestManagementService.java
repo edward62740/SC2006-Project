@@ -22,8 +22,10 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
     static IDataStore<String> dataStore = ServiceLocator.getDB();
 
     @Override
-    public MenuRequest generateAddMenuItemRequest(Menu menu, MenuItem menuItem) {
+    public MenuRequest generateAddMenuItemRequest(Restaurant restaurant, Menu menu, MenuItem menuItem) {
         Vendor vendor = (Vendor) AuthStore.getCurUser();
+        if (menu.getId()==null || menu.getId().equals(""))
+            menu.setId(restaurant.getId());
         int count=1;
         for (Request<String> request : dataStore.getRequests()){
             if (request.getType()==RequestType.MENU_CHANGE_REQUEST){
@@ -33,9 +35,12 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(menu.getId() + "_MenuItemRequest_" + count) != null)
+            count++;
+
         MenuRequest menuRequest = new MenuRequest(menu.getId() + "_MenuItemRequest_" + count, "Add Menu Item Request");
         menuRequest.setMenuItemId("0");
-        menuRequest.setRestaurantId(menu.getId());
+        menuRequest.setRestaurantId(restaurant.getId());
         menuRequest.setVendorId(vendor.getId());
         menuRequest.setChangeType("add");
         menuRequest.setNewValue(menuItem);
@@ -44,8 +49,10 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
     }
 
     @Override
-    public MenuRequest generateEditMenuItemRequest(Menu menu, int position, MenuItem menuItem) {
+    public MenuRequest generateEditMenuItemRequest(Restaurant restaurant, Menu menu, int position, MenuItem menuItem) {
         Vendor vendor = (Vendor) AuthStore.getCurUser();
+        if (menu.getId()==null || menu.getId().equals(""))
+            menu.setId(restaurant.getId());
         int count=1;
         for (Request<String> request : dataStore.getRequests()){
             if (request.getType()==RequestType.MENU_CHANGE_REQUEST){
@@ -55,14 +62,18 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(menu.getId() + "_MenuItemRequest_" + count) != null)
+            count++;
+
         MenuRequest menuRequest = new MenuRequest(menu.getId() + "_MenuItemRequest_" + count, "Edit Menu Item Request");
         menuRequest.setMenuItemId(String.valueOf(position));
-        menuRequest.setRestaurantId(menu.getId());
+        menuRequest.setRestaurantId(restaurant.getId());
         menuRequest.setVendorId(vendor.getId());
         menuRequest.setChangeType("update");
         fillMenuItemOldValues(menu.get(position), menuItem);
         menuRequest.setNewValue(menuItem);
         System.out.println("Menu Request generated: " + menuRequest);
+        System.out.print(restaurant.getId());
         return menuRequest;
     }
 
@@ -77,6 +88,8 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(vendor.getId() + "_ClaimRequest_" + count) != null)
+            count++;
 
         RestaurantRequest claimRequest = new RestaurantRequest(vendor.getId() + "_ClaimRequest_" + count, "Claim restaurant Request", RequestType.CLAIM_REQUEST);
         claimRequest.setVendorId(vendor.getId());
@@ -99,6 +112,9 @@ public class VendorRequestManagementService implements IVendorRequestManagementS
                 }
             }
         }
+        while (dataStore.getRequest(restaurant.getId() + "_RestaurantRequest_" + count) != null)
+            count++;
+
         RestaurantRequest restaurantRequest = new RestaurantRequest(restaurant.getId() + "_RestaurantRequest_" + count, "Edit Restaurant Request", RequestType.RESTAURANT_CHANGE_REQUEST);
         restaurantRequest.setRestaurantId(restaurant.getId());
         restaurantRequest.setVendorId(vendor.getId());

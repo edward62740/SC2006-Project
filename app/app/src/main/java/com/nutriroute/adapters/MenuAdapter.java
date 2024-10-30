@@ -89,6 +89,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return menuItems.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {return position;}
+
+    @Override
+    public long getItemId(int position) {return Integer.toUnsignedLong(position);}
+
     // Show a dialog to prompt the user for the meal type
     private void selectMealAndAlloc(MenuItem menuItem) {
         String[] mealOptions = {"Breakfast", "Lunch", "Dinner", "Misc"};

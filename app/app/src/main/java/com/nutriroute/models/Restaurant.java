@@ -39,11 +39,13 @@ public class Restaurant {
         this.id = id;
         this.openHour = openHour;
         this.closeHour = closeHour;
-        // instantiate menu and populate it to avoid some issues with vendor
-        MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
-        List<MenuItem> items = new ArrayList<>();
-        items.add(item);
-        this.menu = new Menu(items);
+        if (menu.isEmpty()) {
+            // instantiate menu and populate it to avoid some issues with vendor
+            MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
+            List<MenuItem> items = new ArrayList<>();
+            items.add(item);
+            this.menu = new Menu(items, id);
+        }
 
 
     }
@@ -172,7 +174,8 @@ public class Restaurant {
                 website.equals(c.website) &&
                 image.equals(c.image) &&
                 openHour.equals(c.openHour) &&
-                closeHour.equals(c.closeHour)
+                closeHour.equals(c.closeHour) &&
+                description.equals(c.description)
         );
     }
 }

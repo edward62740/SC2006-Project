@@ -10,8 +10,8 @@ import com.nutriroute.models.RestaurantRequest;
 import java.util.List;
 
 public interface IVendorRequestManagementService {
-    public MenuRequest generateAddMenuItemRequest(Menu menu, MenuItem menuItem);
-    public MenuRequest generateEditMenuItemRequest(Menu menu, int position, MenuItem menuItem);
+    public MenuRequest generateAddMenuItemRequest(Restaurant restaurant, Menu menu, MenuItem menuItem);
+    public MenuRequest generateEditMenuItemRequest(Restaurant restaurant, Menu menu, int position, MenuItem menuItem);
     public RestaurantRequest generateEditRestaurantRequest(Restaurant restaurant, Restaurant newValue);
     public RestaurantRequest generateRestaurantClaimRequest(Restaurant restaurant, String proof);
     public int getNumberOfRequests();

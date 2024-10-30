@@ -1,8 +1,11 @@
 package com.nutriroute.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.nutriroute.R;
 import com.nutriroute.adapters.VendorMenuAdapter;
 import com.nutriroute.controllers.VendorController;
@@ -41,6 +45,7 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
     restaurantAddress, restaurantPhone, restaurantEmail, restaurantWebsite;
     Button saveChanges;
     ImageButton backButton;
+    String imageURL;
 
     public VendorEditRestaurantDialogFragment(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -64,6 +69,15 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
         restaurantEmail = view.findViewById(R.id.restaurant_email);
         restaurantWebsite = view.findViewById(R.id.restaurant_website);
 
+        Glide.with(getContext()).load(restaurant.getImage()).into(restaurantImage);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (restaurantImage.getDrawable()==null)
+                    Glide.with(getContext()).load(R.drawable.no_image_available).into(restaurantImage);
+            }
+        }, 500);
         restaurantName.setText(restaurant.getName());
         restaurantDescription.setText(restaurant.getDescription());
         openHour.setText(restaurant.getOpenHour()==null ? "--:--":restaurant.getOpenHour().toString());
@@ -120,8 +134,7 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
         });
 
         restaurantImage.setOnClickListener(v -> {
-            //TODO: Implement logic to upload image
-
+            showInputImageURLDialog();
         });
 
         saveChanges.setOnClickListener(v -> {
@@ -136,6 +149,8 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
                 String description = restaurantDescription.getText().toString();
                 Restaurant editRestaurant = new Restaurant(name, open, close, address, phone, email, website, description);
                 editRestaurant.setId(restaurant.getId());
+                if (restaurant.getImage()!=null)
+                    editRestaurant.setImage(restaurant.getImage());
                 if (editRestaurant.equals(restaurant))
                     Toast.makeText(getContext(), "No Changes Detected!", Toast.LENGTH_SHORT).show();
                 else {
@@ -204,5 +219,26 @@ public class VendorEditRestaurantDialogFragment extends DialogFragment {
                 checkTime(closeHour.getText().toString()) &&
                 !restaurantAddress.getText().toString().isEmpty() &&
                 !restaurantPhone.getText().toString().isEmpty();
+    }
+
+    private void showInputImageURLDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final EditText input = new EditText(getContext());
+        builder.setTitle("Enter ImageURL")
+                .setPositiveButton("Submit", (dialog, which) -> {
+                    if (!input.getText().toString().isEmpty()) {
+                        imageURL = input.getText().toString();
+                        Glide.with(getContext()).load(imageURL).into(restaurantImage);
+                    }
+                    else
+                        Toast.makeText(getContext(), "URL Empty", Toast.LENGTH_SHORT).show();
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setCancelable(false);
+        builder.show();
     }
 }

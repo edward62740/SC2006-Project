@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        // __TEST__generateRandomDB();
         //_addNewRestaurantToDB();
+        //__TEST__generateDemoRestaurants();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
 
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void _addNewRestaurantToDB(){
         List<MenuItem> menuItemList = new ArrayList<>();
         menuItemList.add(new MenuItem("TestItem", "TestDescription", 1.23, "TestCategory", "", 1520));
-        Menu menu = new Menu(menuItemList);
+        Menu menu = new Menu(menuItemList, "TestRestaurant");
         Restaurant restaurant = new Restaurant(menu, "TestRestaurant", "637553", "65837931", "Test@gmail.com", "www.Test.com", "TestDescription", "", "TestRestaurant", "08:00", "20:30");
         dataStore.setRestaurant(restaurant);
     }
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int x = 1; x <= 16; x++) { //restaurant
             String name = "Restaurant" + x;
-            Menu menu = new Menu(new ArrayList<>());
+            Menu menu = new Menu(new ArrayList<>(), "");
 
             List<MenuItem> items = new ArrayList<>();
             for(int j = 1; j <= 16; j++) {
@@ -189,6 +190,82 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    protected void __TEST__generateDemoRestaurants(){
+        Restaurant mcdonalds, subway, starbucks, pastaExpress, hotHideout;
+        Menu mcdonaldsMenu, subwayMenu, starbucksMenu, pastaExpressMenu, hotHideoutMenu;
+        List<MenuItem> mcdonaldsMenuItems, subwayMenuItems, starbucksMenuItems, pastaExpressMenuItems, hotHideoutMenuItems;
+
+        mcdonaldsMenuItems = new ArrayList<>();
+        mcdonaldsMenuItems.add(new MenuItem("Big Mac", "Big Mac", 7.60, "Burger", "https://www.mcdonalds.com.sg/sites/default/files/2023-02/1200x1200_MOP_BBPilot_BigMac.png", 558));
+        mcdonaldsMenuItems.add(new MenuItem("McSpicy", "McSpicy", 7.30, "Burger", "https://www.mcdonalds.com.sg/sites/default/files/2023-02/1200x1200_MOP_BBPilot_McSpicy.png", 541));
+        mcdonaldsMenuItems.add(new MenuItem("Filet-O-Fish", "Filet-O-Fish", 6.25, "Burger", "https://www.mcdonalds.com.sg/sites/default/files/2023-02/1200x1200_MOP_BBPilot_FOF.png", 332));
+        mcdonaldsMenuItems.add(new MenuItem("McChicken", "McChicken", 5.30, "Burger", "https://www.mcdonalds.com.sg/sites/default/files/2023-02/1200x1200_MOP_BBPilot_McChicken.png", 391));
+        mcdonaldsMenu = new Menu(mcdonaldsMenuItems, "McDonald's");
+
+        subwayMenuItems = new ArrayList<>();
+        subwayMenuItems.add(new MenuItem("Avo Caesar Chicken", "Avo Caesar Chicken", 9.70, "6-inch", "https://www.subdelivery.com.sg/orders/axmenu/images/category/113/20241017060104-sub-chick-avo.jpg", 558));
+        subwayMenuItems.add(new MenuItem("Californian Avocado Club", "Californian Avocado Club", 10.80, "6-inch", "https://www.subdelivery.com.sg/orders/axmenu/images/category/105/20240815074544-20231114052713-californian-avocado-club%20copy.jpg", 541));
+        subwayMenuItems.add(new MenuItem("Italian Supreme", "Italian Supreme", 10.20, "6-inch", "https://www.subdelivery.com.sg/orders/axmenu/images/category/102/20231114052728-italian-supreme.jpg", 332));
+        subwayMenuItems.add(new MenuItem("Chunky Beef Steak", "Chunky Beef Steak", 9.80, "6-inch", "https://www.subdelivery.com.sg/orders/axmenu/images/category/86/20200406103945-Chunky%20Beef%20Steak%20&%20Cheese.png", 391));
+        subwayMenu = new Menu(subwayMenuItems, "Subway");
+
+        starbucksMenuItems = new ArrayList<>();
+        starbucksMenuItems.add(new MenuItem("Caffe Latte", "Caffe Latte", 7.30, "Espresso", "https://food-cms.grab.com/compressed_webp/items/SGITE20230821101652015638/detail/15d84b7b_540lattec0.webp", 150));
+        starbucksMenuItems.add(new MenuItem("Flat White", "Flat White", 8.10, "Espresso", "https://food-cms.grab.com/compressed_webp/items/SGITE20230821101655011726/detail/19f324d4_latwhitec0.webp", 145));
+        starbucksMenuItems.add(new MenuItem("Vanilla Latte", "Vanilla Latte", 8.00, "Espresso", "https://food-cms.grab.com/compressed_webp/items/SGITE20230821101656013940/detail/23192703_llalattec5.webp", 180));
+        starbucksMenuItems.add(new MenuItem("Caffe Mocha", "Caffe Mocha", 8.00, "Espresso", "https://food-cms.grab.com/compressed_webp/items/SGITE20230821101700013951/detail/0d1fcd83_080mochac5.webp", 231));
+        starbucksMenu = new Menu(starbucksMenuItems, "Starbucks");
+
+        pastaExpressMenuItems = new ArrayList<>();
+        pastaExpressMenuItems.add(new MenuItem("Carbonara", "Carbonara", 9.00, "Pasta", "https://images.deliveryhero.io/image/fd-sg/Products/5359497.jpg?width=%s", 364));
+        pastaExpressMenuItems.add(new MenuItem("Smoked Duck Aglio Oglio", "Smoked Duck Aglio Oglio", 9.00, "Pasta", "https://images.deliveryhero.io/image/fd-sg/Products/5376529.jpg?width=%s", 578));
+        pastaExpressMenuItems.add(new MenuItem("Bolognese", "Bolognese", 9.00, "Pasta", "https://images.deliveryhero.io/image/fd-sg/Products/5376527.jpg?width=%s", 830));
+        pastaExpressMenuItems.add(new MenuItem("Meat Lovers", "Meat Lovers", 10.20, "Pasta", "https://images.deliveryhero.io/image/fd-sg/Products/46063921.jpg?width=%s", 250));
+        pastaExpressMenu = new Menu(pastaExpressMenuItems, "Pasta Express");
+
+        hotHideoutMenuItems = new ArrayList<>();
+        hotHideoutMenuItems.add(new MenuItem("Mala Collagen Soup", "Mala Collagen Soup", 3.00, "Soup", "https://order.ahothideout.com/assets/images/atlas-core-active-storage/c7p00wvnmt4whyeo809hhdtrpt9o", 553));
+        hotHideoutMenuItems.add(new MenuItem("Mala Stir Fry", "Mala Stir Fry", 2.00, "Soup", "https://order.ahothideout.com/assets/images/atlas-core-active-storage/9axgu9zqsyd6uti693bbmrm2jxry", 541));
+        hotHideoutMenuItems.add(new MenuItem("Fried Lotus", "Fried Lotus", 5.80, "Ingredients", "https://order.ahothideout.com/assets/images/atlas-core-active-storage/osrhqfcakh6vrnovxwgxkvlavvn4", 158));
+        hotHideoutMenuItems.add(new MenuItem("Pork Belly Slice", "Pork belly Slice", 3.60, "Ingredients", "https://order.ahothideout.com/assets/images/atlas-core-active-storage/rzd1d1mmj181tocw6fodjxtggw18", 518));
+        hotHideoutMenu = new Menu(hotHideoutMenuItems, "Hot Hideout");
+
+        mcdonalds = new Restaurant(mcdonaldsMenu, "McDonald's", "637331", "67773777", "", "https://www.mcdonalds.com.sg", "McDonald's @ NTU", "https://images.deliveryhero.io/image/fd-sg/sg-logos/cl8ox-logo.jpg", "McDonald's", "07:00", "22:00");
+        dataStore.setRestaurant(mcdonalds);
+        subway = new Restaurant(subwayMenu, "Subway", "637331", "64625238", "", "https://www.subway.com/en-SG/", "Subway @ NTU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpQeQDsNkoCdhhaAUJ4qXLiygT3dwaY2ZZYQ&s", "Subway", "07:00", "22:00");
+        dataStore.setRestaurant(subway);
+        starbucks = new Restaurant(starbucksMenu, "Starbucks", "637331", "69101245", "", "https://www.starbucks.com.sg/", "Starbucks @ NTU", "https://www.paragon.com.sg/media/media/images/stores/Starbucks/starbucks_logo.jpg", "Starbucks", "07:00", "22:00");
+        dataStore.setRestaurant(starbucks);
+        pastaExpress = new Restaurant(pastaExpressMenu, "Pasta Express", "639798", "90258148", "", "", "Pasta Express @ NTU", "https://images.deliveryhero.io/image/fd-sg/Products/5376536.jpg?width=%s", "Pasta Express", "10:00", "19:30");
+        dataStore.setRestaurant(pastaExpress);
+        hotHideout = new Restaurant(hotHideoutMenu, "Hot Hideout", "636957", "", "", "https://www.ahothideout.com/", "A Hot Hideout @ NTU", "https://lh3.googleusercontent.com/p/AF1QipPfZmBB0imyAvxZRRnlh0QyLRzi4ZS9T8KXCIf8=s1360-w1360-h1020", "Hot Hideout", "11:00", "21:30");
+        dataStore.setRestaurant(hotHideout);
+
+        List<String> addList = new ArrayList<>();
+        addList.add(mcdonalds.getId());
+        addList.add(subway.getId());
+        addList.add(starbucks.getId());
+        addList.add(pastaExpress.getId());
+        addList.add(hotHideout.getId());
+
+        if (dataStore.getUser("NTU") == null) {
+            Vendor ntu = new Vendor("NTU", "NTU@gmail.com", "NTU", "NTU");
+            ntu.setNewAccount(false);
+            ntu.addRestaurant(addList.get(0));
+            ntu.addRestaurant(addList.get(1));
+            ntu.addRestaurant(addList.get(2));
+            ntu.addRestaurant(addList.get(3));
+            ntu.addRestaurant(addList.get(4));
+
+            dataStore.setUser(ntu, ntu.getId());
+        }
+        else {
+            Vendor ntu = (Vendor) dataStore.getUser("NTU");
+            ntu.setRestaurants(addList);
+        }
 
     }
 

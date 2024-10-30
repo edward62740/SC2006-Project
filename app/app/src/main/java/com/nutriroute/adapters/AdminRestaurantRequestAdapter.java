@@ -2,9 +2,11 @@ package com.nutriroute.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +49,7 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
             holder.textReason.setText("Request Type: Update Restaurant Details");
 
         holder.itemView.setOnClickListener(v -> {
-            showDetailDialog(request);
+            showDetailDialog(request, position);
         });
     }
 
@@ -70,7 +72,7 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
     }
 
 
-    private void showDetailDialog(RestaurantRequest request) {
+    private void showDetailDialog(RestaurantRequest request, int position) {
 
         String requestType = (request.getType()==RequestType.CLAIM_REQUEST ? "Restaurant Claim" : "Update Restaurant Details");
         String message =
@@ -81,19 +83,33 @@ public class AdminRestaurantRequestAdapter extends RecyclerView.Adapter<AdminRes
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
+        final EditText input = new EditText(context);
         builder.setTitle(requestType)
                 .setMessage(message)
+                .setView(input)
                 .setPositiveButton("Accept", (dialog, which) -> {
                     AdminController.acceptRequest(request);
+                    //AdminController.deleteRequest(request.getId());
+                    // reload adapter
+                    restaurantRequestList.remove(position);
+                    notifyItemRemoved(position);
+                    restaurantRequestList.remove(request);
+                    notifyItemRangeChanged(position, restaurantRequestList.size());
                 })
                 .setNegativeButton("Reject", (dialog, which) -> {
-                    AdminController.rejectRequest(request);
+                    AdminController.rejectRequest(request, input.getText().toString());
+                    //AdminController.deleteRequest(request.getId());
+                    // reload adapter
+                    restaurantRequestList.remove(position);
+                    notifyItemRemoved(position);
+                    restaurantRequestList.remove(request);
+                    notifyItemRangeChanged(position, restaurantRequestList.size());
                 })
                 .setNeutralButton("Exit", (dialog, which) -> {
                     dialog.dismiss();
                 });
-
+        input.setHint("Reason");
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         AlertDialog dialog = builder.create();
         dialog.show();
     }

@@ -1,7 +1,9 @@
 package com.nutriroute.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.nutriroute.R;
 import com.nutriroute.adapters.VendorMenuAdapter;
 import com.nutriroute.controllers.VendorController;
@@ -52,6 +55,16 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
         Button saveChanges = view.findViewById(R.id.saveChangesButton);
         ImageButton backButton = view.findViewById(R.id.backButton);
 
+        Glide.with(getContext()).load(restaurant.getImage()).into(restaurantImage);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (restaurantImage.getDrawable()==null)
+                    Glide.with(getContext()).load(R.drawable.no_image_available).into(restaurantImage);
+            }
+        }, 500);
+
         menuRecyclerView = view.findViewById(R.id.menuRecyclerView);
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         menuRecyclerView.setNestedScrollingEnabled(false);
@@ -74,7 +87,7 @@ public class VendorEditMenuDialogFragment extends DialogFragment {
                 if (!editItemList.get(i).noChange() && !editItemList.get(i).changeIsValid())
                     valid=false;
                 if (editItemList.get(i).changeIsValid() && !menu.get(i).equals(editItemList.get(i))){
-                    VendorController.generateNewMenuRequest(menu, i, editItemList.get(i));
+                    VendorController.generateNewMenuRequest(restaurant, menu, i, editItemList.get(i));
                     change=true;
                 }
             }

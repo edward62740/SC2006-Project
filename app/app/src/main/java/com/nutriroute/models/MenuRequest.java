@@ -8,7 +8,6 @@ public class MenuRequest extends Request<String> {
     private String restaurantId;
     private String changeType;
     private MenuItem newValue;
-    private String reason;
 
     public MenuRequest(String id, String description) {
         super(id, description, RequestType.MENU_CHANGE_REQUEST);
@@ -46,14 +45,6 @@ public class MenuRequest extends Request<String> {
 
     public void setNewValue(MenuItem newValue) {
         this.newValue = newValue;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
     }
 
     @Override
