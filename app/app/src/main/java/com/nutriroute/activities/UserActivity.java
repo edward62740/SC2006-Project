@@ -10,8 +10,12 @@ import com.nutriroute.R;
 import com.nutriroute.fragments.UserSettingsFragment;
 import com.nutriroute.fragments.UserStoresFragment;
 import com.nutriroute.fragments.UserDiaryFragment;
+import com.nutriroute.interfaces.IDataStore;
+import com.nutriroute.models.Request;
+import com.nutriroute.models.Restaurant;
 import com.nutriroute.models.User;
 import com.nutriroute.stores.AuthStore;
+import com.nutriroute.utils.ServiceLocator;
 
 /**
  * This is the entry point for Users.
@@ -21,7 +25,7 @@ import com.nutriroute.stores.AuthStore;
 public class UserActivity extends AppCompatActivity {
 
     User currentUser = (User) AuthStore.getCurUser();
-
+    private static final IDataStore<String> dataStore = ServiceLocator.getDB();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,9 @@ public class UserActivity extends AppCompatActivity {
         // Transition higher-level logic flow to the fragment
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = new UserDashboardFragment();
+
+            dataStore._loadObjFromDB(Restaurant.class, null);
+
 
             if(item.getItemId() == R.id.nav_user_dashboard) {
                 selectedFragment = new UserDashboardFragment();

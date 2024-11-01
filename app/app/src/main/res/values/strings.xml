@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NutriRoute</string>
+    <string name="client_id">119440866473-qn23gcsb50q7kv556jsa2al3eurse3bg.apps.googleusercontent.com</string>
+    <string name="create_an_account"><u>Create an account.</u></string>
 </resources>

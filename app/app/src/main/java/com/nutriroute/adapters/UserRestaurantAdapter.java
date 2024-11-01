@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.nutriroute.R;
 import com.nutriroute.fragments.UserStoresFragment;
 import com.nutriroute.models.Restaurant;
@@ -28,6 +30,7 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
     private List<Restaurant> restaurantList;
     private List<Float> distanceList;
     private Context context;
+    static ImageView imageView;
     PostalCodeHelper postalCodeHelper = new PostalCodeHelper();
 
     public UserRestaurantAdapter(Context context, Pair<List<Restaurant>, List<Float>> restaurantList) {
@@ -67,16 +70,50 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
         holder.textName.setText(restaurant.getName());
         holder.textPhone.setText("Phone: " + restaurant.getPhone());
         holder.textDescription.setText(restaurant.getDescription());
-        holder.textDistance.setText("Distance: " + distanceList.get(position) + " km");
+        if (distanceList.get(position) < 1)
+            holder.textDistance.setText("Distance: " + String.format("%.3g", distanceList.get(position) * 1000) + " m");
+        else
+            holder.textDistance.setText("Distance: " + String.format("%.3g", distanceList.get(position)) + " km");
+
+        if (restaurant.getImage() != null)
+        {
+            Glide.with(context).load(restaurant.getImage()).into(imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showImageDialog(restaurant.getImage());
+                }
+            });
+        }
+        else // load the empty image/no image available
+        {
+            Glide.with(context).load(R.drawable.no_image_available).into(imageView);
+        }
 
         // Set the click listener for the item view
         holder.itemView.setOnClickListener(v -> showRestaurantDialog(restaurant));
     }
+    private void showImageDialog(String imageUrl) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_image, null);
+        ImageView enlargedImageView = dialogView.findViewById(R.id.enlarged_image);
 
+        Glide.with(context).load(imageUrl).into(enlargedImageView);
+
+        builder.setView(dialogView);
+        builder.setCancelable(true);
+        builder.show();
+    }
     @Override
     public int getItemCount() {
         return restaurantList.size();
     }
+
+    @Override
+    public int getItemViewType(int position) {return position;}
+
+    @Override
+    public long getItemId(int position) {return Integer.toUnsignedLong(position);}
 
     @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
     private void showRestaurantDialog(Restaurant restaurant) {
@@ -95,6 +132,7 @@ public class UserRestaurantAdapter extends RecyclerView.Adapter<UserRestaurantAd
             textPhone = itemView.findViewById(R.id.text_phone);
             textDescription = itemView.findViewById(R.id.text_description);
             textDistance = itemView.findViewById(R.id.text_dist);
+            imageView = itemView.findViewById(R.id.image_restaurant);
         }
     }
 }

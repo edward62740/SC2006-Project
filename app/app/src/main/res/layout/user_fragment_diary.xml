@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#001f0e"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     app:layout_anchorGravity="center_vertical">
 
@@ -19,33 +19,39 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Title -->
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="40dp"
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
                 android:text="Track Your Calories"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+                 />
 
-            <!-- Today's Diary (Calories Progress Section) -->
             <TextView
                 android:id="@+id/tvCaloriesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:text="Today's Diary"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="4dp"
+                android:textSize="20dp"
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="30dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -57,7 +63,7 @@
                     android:layout_weight="1"
                     android:max="100"
                     android:progress="75"
-                    android:progressTint="#00C853" />
+                    android:progressTint="@color/light_green"/>
 
                 <TextView
                     android:id="@+id/tvCalories"
@@ -65,16 +71,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:text="1,200 Remaining"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/alice_regular"/>
             </LinearLayout>
 
-            <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#00C853"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="30dp"/>
 
             <!-- Meal Section Template -->
             <TextView
@@ -82,23 +89,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
+                android:layout_marginHorizontal="30dp"
                 android:text="Breakfast"
-                android:textColor="#00E676"
+                android:textColor="@color/light_green"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/alice_regular"/>
 
             <LinearLayout
                 android:id="@+id/breakfastMealContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginHorizontal="30dp">
+
+            </LinearLayout>
 
             <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#00C853"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="30dp"/>
 
             <TextView
                 android:id="@+id/tvLunch"
@@ -107,22 +120,29 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="4dp"
                 android:text="Lunch"
-                android:textColor="#00E676"
+                android:textColor="@color/light_green"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/alice_regular"
+                />
 
             <LinearLayout
                 android:id="@+id/lunchMealContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginHorizontal="30dp">
+
+            </LinearLayout>
 
             <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#00C853"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="30dp"/>
 
             <TextView
                 android:id="@+id/tvDinner"
@@ -131,22 +151,28 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="4dp"
                 android:text="Dinner"
-                android:textColor="#00E676"
+                android:textColor="@color/light_green"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/alice_regular"
+                android:layout_marginHorizontal="30dp"/>
 
             <LinearLayout
                 android:id="@+id/dinnerMealContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginHorizontal="30dp">
+
+            </LinearLayout>
 
             <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#00C853"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="30dp"/>
 
             <TextView
                 android:id="@+id/tvMisc"
@@ -155,9 +181,11 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="4dp"
                 android:text="Unspecified"
-                android:textColor="#00E676"
+                android:textColor="@color/light_green"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/alice_regular"/>
 
             <LinearLayout
                 android:id="@+id/miscMealContainer"
@@ -165,24 +193,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginHorizontal="30dp">
+
+            </LinearLayout>
 
             <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#00C853"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="30dp"/>
 
             <Button
                 android:id="@+id/btnAddCalories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="#00C853"
+                android:backgroundTint="@color/button_bg_green"
                 android:text="Add Calories"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="30dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

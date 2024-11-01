@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="40dp"
+    android:background="@color/main_bg">
+
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:padding="8dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/button_back"
+        app:layout_constraintBottom_toTopOf="@+id/button_save_changes"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_restaurant"
+                android:contentDescription="Restaurant Image"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="16dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_launcher_foreground"/>
+
+            <EditText
+                android:id="@+id/text_name"
+                android:text="Restaurant Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alice_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Operating Hours"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/alice_regular"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/text_open_hour"
+                    android:text="--:--"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="00:00"
+                    android:textAlignment="center"
+                    android:inputType="time"
+                    android:background="@drawable/rounded_textfield_bg"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/pastel_green"
+                    android:textSize="30sp"/>
+
+                <!-- Text Between Opening and Closing Times -->
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="until"
+                    android:textColor="@color/pastel_green"
+                    android:textSize="18sp"
+                    android:layout_marginHorizontal="8dp"
+                    android:textAlignment="center"
+                    android:textStyle="bold|italic"
+                    android:fontFamily="@font/alice_regular"/>
+
+                <!-- Closing Time Picker -->
+                <EditText
+                    android:id="@+id/text_close_hour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="--:--"
+                    android:textAlignment="center"
+                    android:inputType="time"
+                    android:background="@drawable/rounded_textfield_bg"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/pastel_green"
+                    android:textSize="30sp"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Postal Code"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/restaurant_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Postal Code of Restaurant"
+                android:inputType="text"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/restaurant_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone number of Restaurant"
+                android:inputType="text"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/restaurant_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email of Restaurant (If applicable)"
+                android:inputType="text"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/restaurant_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Website of Restaurant (If applicable)"
+                android:inputType="text"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/restaurant_description"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Write the description of your restaurant here..."
+                android:inputType="textMultiLine"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:padding="15dp"
+                android:textSize="15sp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/rounded_textfield_bg_reversed"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_save_changes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:backgroundTint="#00C853"
+        android:text="Submit Request"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

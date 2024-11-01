@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class UserFoodService implements IUserFoodService {
     static IDataStore<String> dataStore = ServiceLocator.getDB();
@@ -86,6 +87,9 @@ public class UserFoodService implements IUserFoodService {
 
     private double calculateDistance(double userLat, double userLong, Restaurant restaurant) {
         if (restaurant.getLocation() == null || restaurant.getLocation().equals("null")) {
+            return Double.MAX_VALUE; // inf distance
+        }
+        if (Objects.equals(restaurant.getLocation(), "") || restaurant.getLocation().isEmpty()) {
             return Double.MAX_VALUE; // inf distance
         }
 

@@ -201,6 +201,7 @@ public class UserDiaryFragment extends Fragment {
             setupCaloriesProgress(currentUser.getCaloriesToday().getTotalCalories(),
                     currentUser.getTargetCalories());
             dialog.dismiss();
+
         });
     }
 

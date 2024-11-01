@@ -27,7 +27,6 @@ public interface IDataStore<T extends Comparable<T>> {
      */
     GenericUser<T> getUser(T id);
     Restaurant getRestaurant(String id);
-    Menu getMenu(String id);
     Request<T> getRequest(T id);
 
     /**
@@ -48,7 +47,6 @@ public interface IDataStore<T extends Comparable<T>> {
      */
     boolean setUser(GenericUser<T> user, T id);
     boolean setRestaurant(Restaurant restaurant);
-    boolean setMenu(Menu menu);
     boolean setRequest(Request<T> request, T id);
 
     // TODO: DELETE METHODS
@@ -84,4 +82,8 @@ public interface IDataStore<T extends Comparable<T>> {
     int isPendingUpdate();
 
     Collection<Restaurant> getRestaurants();
+
+    Collection<Request<T>> getRequests();
+
+    void deleteRequest(T id);
 }

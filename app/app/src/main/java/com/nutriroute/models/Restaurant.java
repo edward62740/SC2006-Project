@@ -1,6 +1,10 @@
 package com.nutriroute.models;
 
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class represents a restaurant.
  *
@@ -20,8 +24,10 @@ public class Restaurant {
     private String image; // path to img (do we want this?)
     private String id;
     private String location; // this should be the GPS coordinates
+    private String openHour;
+    private String closeHour;
 
-    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id) {
+    public Restaurant(Menu menu, String name, String address, String phone, String email, String website, String description, String image, String id, String openHour, String closeHour) {
         this.menu = menu;
         this.name = name;
         this.address = address;
@@ -31,10 +37,30 @@ public class Restaurant {
         this.description = description;
         this.image = image;
         this.id = id;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        // instantiate menu and populate it to avoid some issues with vendor
+        MenuItem item = new MenuItem("My First Item", "description1", 10.0, "category1", "", 0);
+        List<MenuItem> items = new ArrayList<>();
+        items.add(item);
+        this.menu = new Menu(items, id);
+
+
     }
 
-    public Restaurant() {
-
+    // Constructor for request generation
+    public Restaurant(String name, String openHour, String closeHour, String address, String phone, String email, String website, String description){
+        this.name = name;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.website = website;
+        this.description = description;
+        this.image = "";
+        this.id = "";
+        this.location = "";
     }
 
     public String getId() {
@@ -115,5 +141,39 @@ public class Restaurant {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getOpenHour() {
+        return openHour;
+    }
+
+    public void setOpenHour(String openHour){
+        this.openHour = openHour;
+    }
+
+    public String getCloseHour() {
+        return closeHour;
+    }
+
+    public void setCloseHour(String closeHour){
+        this.closeHour = closeHour;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o==this) return true;
+        if (!(o instanceof Restaurant)) return false;
+        Restaurant c = (Restaurant) o;
+
+        return (name.equals(c.name) &&
+                address.equals(c.address) &&
+                phone.equals(c.phone) &&
+                email.equals(c.email) &&
+                website.equals(c.website) &&
+                image.equals(c.image) &&
+                openHour.equals(c.openHour) &&
+                closeHour.equals(c.closeHour) &&
+                description.equals(c.description)
+        );
     }
 }
