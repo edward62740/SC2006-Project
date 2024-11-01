@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#042D14">
+    android:background="@color/main_bg">
 
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="end"
-        android:padding="8dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
         android:background="@drawable/baseline_close_24"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,18 +32,16 @@
             android:layout_height="0dp"
             android:orientation="vertical">
 
-            <!-- Profile Image at the top -->
             <ImageView
                 android:id="@+id/restaurantImage"
-                android:layout_width="256dp"
-                android:layout_height="256dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="Restaurant Image"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_foreground" /> <!-- Replace with actual image -->
+                android:src="@drawable/ic_launcher_foreground" />
 
-            <!-- Restaurant Title -->
             <TextView
                 android:id="@+id/restaurantName"
                 android:layout_width="wrap_content"
@@ -50,9 +49,11 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:text="Restaurant Name"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alice_regular"/>
 
             <!-- ScrollView wrapping the RecyclerView to allow scrolling -->
             <ScrollView

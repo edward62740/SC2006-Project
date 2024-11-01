@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_green"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -11,63 +11,110 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="50dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/alice_regular"
         android:text="Create New Account"
-        android:textColor="@color/light_green"
+        android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="4dp" />
 
     <EditText
         android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_dropdown_dark_frame"
-        android:hint="Name"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_textfield_bg"
+        android:hint="Enter Name"
+        android:padding="15dp"
+        android:layout_marginHorizontal="40dp"
         android:textColor="@color/white"
-    android:textColorHint="@color/dark_green"
-    android:padding="12dp" />
+        android:textColorHint="@color/text_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login ID"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="4dp" />
 
     <EditText
         android:id="@+id/idEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_dropdown_dark_frame"
-        android:hint="Login ID"
+        android:background="@drawable/rounded_textfield_bg"
+        android:hint="Enter Login ID"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="40dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/dark_green"
-        android:padding="12dp" />
+        android:textColorHint="@color/text_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="4dp" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_dropdown_dark_frame"
-        android:hint="Email"
+        android:background="@drawable/rounded_textfield_bg"
+        android:hint="Example@email.com"
         android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="15dp"
+        android:padding="15dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/dark_green"
-        android:padding="12dp" />
+        android:textColorHint="@color/text_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginHorizontal="40dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_dropdown_dark_frame"
-        android:hint="Password"
+        android:background="@drawable/rounded_textfield_bg"
+        android:hint="Enter Password"
         android:inputType="textPassword"
-        android:padding="12dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="40dp"
+        android:padding="15dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/dark_green" />
+        android:textColorHint="@color/text_gray" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/createUserButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@color/teal_700"
-        android:backgroundTint="@color/light_green"
-        android:padding="12dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/rounded_button_bg"
         android:text="Create User"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/white"
+        android:padding="12dp" />
 
 </LinearLayout>

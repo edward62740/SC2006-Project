@@ -41,6 +41,8 @@ public class UserCalorieManagementService implements IUserCalorieManagementServi
             user.addCaloriesHistory(user.getCaloriesToday());
             user.setCaloriesToday(new CalorieDay(LocalDate.now()));
         }
+        // remove duplicate days
+        user.getCaloriesHistory().removeIf(calorieDay -> calorieDay.getDate().equals(LocalDate.now()));
 
         // ensure existence of sub-attributes because gson deserialization returns null for empty lists
         if (user.getCaloriesToday().getCaloriesConsumed() == null) {

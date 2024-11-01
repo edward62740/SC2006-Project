@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"> <!-- Add space for the navbar -->
+        android:layout_marginBottom="80dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,159 +17,225 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <EditText
+            <TextView
                 android:id="@+id/settingsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#003300"
-                android:ellipsize="end"
-                android:ems="10"
-                android:inputType="text"
-                android:maxLines="10"
-                android:padding="12dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="40dp"
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 android:text="User Information"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/heightValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:text="Height"
-                android:textColor="#FFFFFF" />
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="4dp"/>
 
             <SeekBar
                 android:id="@+id/heightSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#003300"
+                android:background="@drawable/rounded_seekbar"
                 android:max="250"
-                android:padding="12dp"
-                android:progressTint="#00C853" />
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="20dp"
+                android:padding="15dp"
+                android:progressTint="#00C853"
+                android:thumbOffset="1dp"/>
 
             <TextView
                 android:id="@+id/weightValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:text="Weight"
-                android:textColor="#FFFFFF" />
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="4dp"/>
 
             <SeekBar
                 android:id="@+id/weightSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#003300"
                 android:max="200"
-                android:padding="12dp"
-                android:progressTint="#00C853" />
+                android:background="@drawable/rounded_seekbar"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="20dp"
+                android:padding="15dp"
+                android:progressTint="#00C853"
+                android:thumbOffset="1dp" />
 
             <TextView
                 android:id="@+id/targetCaloriesValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:text="Target Calories"
-                android:textColor="#FFFFFF" />
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="4dp" />
 
             <SeekBar
                 android:id="@+id/targetCaloriesSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#003300"
                 android:max="5000"
-                android:padding="12dp"
-                android:progressTint="#00C853" />
+                android:background="@drawable/rounded_seekbar"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="20dp"
+                android:padding="15dp"
+                android:progressTint="#00C853"
+                android:thumbOffset="1dp"/>
 
             <TextView
                 android:id="@+id/targetWeightValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:text="Target Weight"
-                android:textColor="#FFFFFF" />
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="4dp"/>
 
             <SeekBar
                 android:id="@+id/targetWeightSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#003300"
                 android:max="200"
-                android:padding="12dp"
-                android:progressTint="#00C853" />
+                android:background="@drawable/rounded_seekbar"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="30dp"
+                android:padding="15dp"
+                android:progressTint="#00C853"
+                android:thumbOffset="1dp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
-
-            <EditText
+            <TextView
                 android:id="@+id/editTextText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#003300"
                 android:ems="10"
-                android:inputType="text"
-                android:padding="12dp"
                 android:text="Should we suggest your meals?"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="4dp" />
 
-            <Switch
-                android:id="@+id/prescribedSwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:thumbTint="#00C853"
-                android:trackTint="#003300"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:scaleX="1.5"
-                android:scaleY="1.5" />
-
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#003300"
-                android:ems="10"
-                android:inputType="text"
-                android:padding="12dp"
-                android:text="Enable notifications?"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="40dp"
+                android:background="@color/dark_button_bg"
+                android:layout_marginBottom="20dp">
 
-            <Switch
-                android:id="@+id/notificationSwitch"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:fontFamily="@font/alice_regular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="20dp"
+                    android:text="Meal Suggestion"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/prescribedSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:thumbTint="@color/light_green"
+                    android:trackTint="@color/dark_green"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:thumbTint="#00C853"
-                android:trackTint="#003300"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:scaleX="1.5"
-                android:scaleY="1.5" />
+                android:ems="10"
+                android:text="Enable notifications?"
+                android:fontFamily="@font/alice_regular"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="4dp" />
 
-            <Button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="40dp"
+                android:background="@color/dark_button_bg"
+                android:layout_marginBottom="30dp">
+
+                <TextView
+                    android:fontFamily="@font/alice_regular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="20dp"
+                    android:text="Notifications"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/notificationSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:thumbTint="@color/light_green"
+                    android:trackTint="@color/dark_green"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5" />
+
+            </LinearLayout>
+
+<!--            <Switch-->
+<!--                android:id="@+id/notificationSwitch"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="12dp"-->
+<!--                android:thumbTint="#00C853"-->
+<!--                android:trackTint="#003300"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:scaleX="1.5"-->
+<!--                android:scaleY="1.5" />-->
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:backgroundTint="#00C853"
                 android:text="Save Changes"
-                android:textColor="#FFFFFF" />
+                android:layout_marginHorizontal="40dp"
+                android:fontFamily="@font/alice_regular"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_button_bg"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/logoutButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:backgroundTint="#00C853"
                 android:text="LOGOUT"
-                android:textColor="#FFFFFF" />
+                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:fontFamily="@font/alice_regular"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_button_reversed"/>
 
         </LinearLayout>
     </ScrollView>

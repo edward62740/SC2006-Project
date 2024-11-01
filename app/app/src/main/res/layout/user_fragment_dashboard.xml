@@ -4,71 +4,78 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#1D1D1D">
+    android:background="@color/dark_button_bg">
 
     <!-- Top Bar with Navigation -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingBottom="16dp">
+        android:orientation="vertical"
+        android:background="@color/main_bg">
 
-        <ImageView
-            android:id="@+id/button_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="Back to previous day"
-            android:padding="8dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:background="?android:selectableItemBackgroundBorderless"
-            app:tint="#00E676" />
-
-        <TextView
-            android:id="@+id/text_calories_day"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:text="Today" />
+            android:layout_marginTop="30dp">
 
-        <ImageView
-            android:id="@+id/button_forward"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="Forward to next day"
-            android:padding="8dp"
-            android:src="@android:drawable/ic_media_next"
-            android:background="?android:selectableItemBackgroundBorderless"
-            app:tint="#00E676" />
+            <ImageView
+                android:id="@+id/button_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Back to previous day"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_media_previous"
+                android:background="?android:selectableItemBackgroundBorderless"
+                app:tint="#00E676" />
+
+            <TextView
+                android:id="@+id/text_calories_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:paddingHorizontal="30dp"
+                android:fontFamily="@font/alice_regular"
+                android:text="Today" />
+
+            <ImageView
+                android:id="@+id/button_forward"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Forward to next day"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_media_next"
+                android:background="?android:selectableItemBackgroundBorderless"
+                app:tint="#00E676" />
+        </LinearLayout>
+
+        <!-- Calories Count Display -->
+        <TextView
+            android:id="@+id/text_calories_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 Calories"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/alice_regular"/>
     </LinearLayout>
 
-    <!-- Calories Count Display -->
-    <TextView
-        android:id="@+id/text_calories_count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="0 Calories"
-        android:textSize="22sp"
-        android:textColor="#B0BEC5"
-        android:gravity="center"
-        android:paddingBottom="16dp" />
-
     <!-- Calorie History (RecyclerView) -->
+
+    <!-- Bottom Navigation Placeholder -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_calorie_history"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#252525"
-        android:scrollbars="vertical"
-        android:padding="8dp" />
+        android:scrollbars="vertical" />
 
-    <!-- Bottom Navigation Placeholder -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

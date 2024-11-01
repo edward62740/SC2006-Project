@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +42,7 @@ public class RestaurantDialogFragment extends DialogFragment {
         TextView dialogDescription = view.findViewById(R.id.dialog_description);
         WebView mapWebView = view.findViewById(R.id.map_webview);
         mapWebView.getSettings().setJavaScriptEnabled(true);
-        Button dialogExit = view.findViewById(R.id.exit_button);
+        AppCompatImageButton dialogExit = view.findViewById(R.id.exit_button);
 
         menuRecyclerView = view.findViewById(R.id.restaurant_menu);
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

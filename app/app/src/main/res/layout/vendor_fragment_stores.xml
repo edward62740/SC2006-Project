@@ -3,19 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1D1D1D"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     android:padding="16dp">
+
     <TextView
         android:id="@+id/vendor_restaurants_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
         android:text="Your Restaurants"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="40dp"
+        android:fontFamily="@font/alice_regular"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textAlignment="center" />
 
     <!-- RecyclerView for the list of claimed stores -->
     <androidx.recyclerview.widget.RecyclerView
@@ -23,11 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#252525"
         android:scrollbars="vertical"
         android:padding="12dp"/>
 
-    <!-- Button to claim a new store -->
     <Button
         android:id="@+id/claimNewStoreButton"
         android:layout_width="match_parent"

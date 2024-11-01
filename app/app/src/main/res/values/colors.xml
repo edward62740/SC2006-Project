@@ -9,6 +9,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#FF00C853</color>
     <color name="dark_green">#FF001f0e</color>
+    <color name="main_bg">#FF051F17</color>
     <color name="light_green">#FF00E676</color>
+    <color name="dark_button_bg">#023816</color>
+    <color name="button_bg_green">#08B347</color>
+    <color name="textfield_bg_green">#07883B</color>
+    <color name="text_gray">#FFA6A6A6</color>
+    <color name="lighter_grey">#FFBDC3C7</color>
+    <color name="pastel_green">#D9EADF</color>
+    <color name="textfield_darker_green">#042511</color>
+    <color name="darker_red">#D00505</color>
     <color name="red">#FF002C</color>
 </resources>

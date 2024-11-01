@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
+    android:background="@color/main_bg"
     android:orientation="vertical">
 
     <include
@@ -30,50 +30,107 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="Welcome to NutriRoute"
-            android:textColor="@color/light_green"
-            android:textSize="32sp"
+            android:layout_marginTop="40dp"
+            android:text="Account Login"
+            android:fontFamily="@font/alice_regular"
+            android:textColor="@color/white"
+            android:textSize="45sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/usernameEditText"
+            android:background="@drawable/rounded_textfield_bg"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="40dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="4dp" />
+
         <EditText
             android:id="@+id/passwordEditText"
+            android:background="@drawable/rounded_textfield_bg"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="40dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="40dp"
+            android:background="@drawable/rounded_button_bg"
             android:text="Login" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginVertical="20dp" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/googleLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="40dp"/>
 
-        <Space
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="wrap_content"
+            android:text="Don't have an account yet?"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="40dp" />
 
         <Button
             android:id="@+id/createAccountButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Account"
-            android:textColorLink="#5B00FF" />
+            android:text="@string/create_an_account"
+            android:textAlignment="center"
+            android:textColor="@color/button_bg_green"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:textStyle="normal" />
+
     </LinearLayout>
 
 </LinearLayout>

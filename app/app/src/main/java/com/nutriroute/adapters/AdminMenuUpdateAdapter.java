@@ -88,7 +88,7 @@ public class AdminMenuUpdateAdapter extends RecyclerView.Adapter<AdminMenuUpdate
                 .setView(input)
                 .setPositiveButton("Accept", (dialog, which) -> {
                     AdminController.acceptRequest(request);
-                    AdminController.deleteRequest(request.getId());
+                    //AdminController.deleteRequest(request.getId());
                     // reload adapter
                     menuRequestList.remove(position);
                     notifyItemRemoved(position);
@@ -97,7 +97,7 @@ public class AdminMenuUpdateAdapter extends RecyclerView.Adapter<AdminMenuUpdate
                 })
                 .setNegativeButton("Reject", (dialog, which) -> {
                     AdminController.rejectRequest(request, input.getText().toString());
-                    AdminController.deleteRequest(request.getId());
+                    //AdminController.deleteRequest(request.getId());
                     // reload adapter
                     menuRequestList.remove(position);
                     notifyItemRemoved(position);

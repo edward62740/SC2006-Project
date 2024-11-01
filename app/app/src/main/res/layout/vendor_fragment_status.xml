@@ -3,28 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1D1D1D"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     android:padding="16dp">
+
     <TextView
         android:id="@+id/vendor_claims_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
         android:text="Your Requests"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="40dp"
+        android:fontFamily="@font/alice_regular"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/text_noclaim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your claim history is empty!"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/alice_regular"
+        android:layout_marginHorizontal="40dp"
         android:visibility="gone"
         android:layout_gravity="center"/>
 
