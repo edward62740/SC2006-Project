@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#252525"
+        android:background="@color/main_bg"
         android:scrollbars="vertical"
         android:padding="12dp"
         android:visibility="gone"

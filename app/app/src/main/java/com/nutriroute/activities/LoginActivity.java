@@ -77,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         // Google Login Button
         googleLoginButton = findViewById(R.id.googleLoginButton);
+        googleLoginButton.setSize(SignInButton.SIZE_WIDE);
+        googleLoginButton.setColorScheme(SignInButton.COLOR_LIGHT);
 
 
         createAccountButton = findViewById(R.id.createAccountButton);
