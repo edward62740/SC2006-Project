@@ -49,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextView nutrirouteTextView;
 
     // Authentication
-        private static final int RC_SIGN_IN = 123;
-        private GoogleSignInClient googleSignInClient;
-        private FirebaseAuth firebaseAuth;
+    private static final int RC_SIGN_IN = 123;
+    private GoogleSignInClient googleSignInClient;
+    private FirebaseAuth firebaseAuth;
 
     IDataStore<String> dataStore = ServiceLocator.getDB();
 
