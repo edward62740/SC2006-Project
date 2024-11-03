@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#1D1D1D">
+    android:background="@drawable/bg_stores_list">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,35 +18,96 @@
             android:layout_weight="1"
             android:layout_gravity="start">
 
-            <TextView
-                android:id="@+id/text_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#00E676"
-                android:textSize="18sp"
-                android:layout_weight="1"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Restaurant Name"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/alice_regular"
+                    android:textColor="@color/dark_button_bg"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/opening_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/green"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/sf"
+                        android:layout_gravity="end"
+                        android:text="--:--"/>
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/green"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/sf"
+                        android:textStyle="bold"
+                        android:layout_gravity="end"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/closing_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:fontFamily="@font/sf"
+                        android:text="--:--"
+                        android:textColor="@color/green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/text_address"
+                android:text="Address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="#FFFFFF" />
+                android:fontFamily="@font/sf"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/text_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="#B0BEC5" />
+                android:text="Phone: 0892738449"
+                android:fontFamily="@font/sf"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/text_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="#B0BEC5" />
+                android:text="Description"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/sf"
+                android:textStyle="italic"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -56,75 +117,39 @@
             android:orientation="vertical"
             android:layout_gravity="end">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="end">
-
-                <TextView
-                    android:id="@+id/opening_hour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#00E676"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="end"
-                    android:text="--:--"/>
-                <TextView
-                    android:id="@+id/to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#00E676"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="end"
-                    android:text=" to "/>
-                <TextView
-                    android:id="@+id/closing_hour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#00E676"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="end"
-                    android:text="--:--"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-
-                <ImageButton
-                    android:id="@+id/button_add_menu_item"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/add_menu_item"
-                    android:backgroundTint="#FFFFFF"
-                    android:layout_marginTop="16dp"/>
-
-                <ImageButton
-                    android:id="@+id/button_edit_menu"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/edit_menu"
-                    android:backgroundTint="#FFFFFF"
-                    android:layout_marginTop="16dp"/>
-
-                <ImageButton
-                    android:id="@+id/button_edit_restaurant"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/options"
-                    android:backgroundTint="#FFFFFF"
-                    android:layout_marginTop="16dp"/>
-
-            </LinearLayout>
-
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="end">
+
+        <ImageButton
+            android:id="@+id/button_add_menu_item"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/add_menu_item"
+            android:backgroundTint="@color/dark_button_bg"/>
+
+        <ImageButton
+            android:id="@+id/button_edit_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/edit_menu"
+            android:backgroundTint="@color/dark_button_bg"/>
+
+        <ImageButton
+            android:id="@+id/button_edit_restaurant"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/options"
+            android:backgroundTint="@color/dark_button_bg"/>
 
     </LinearLayout>
 

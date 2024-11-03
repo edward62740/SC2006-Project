@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/pastel_green"
-    android:padding="16dp">
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/bg_request_menu_item"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/textMenuItemId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Menu Item ID"
-        android:textColor="@color/dark_button_bg"
+        android:textColor="@color/pastel_green"
         android:textSize="16sp" />
 
     <TextView
@@ -19,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Restaurant ID"
-        android:textColor="@color/dark_button_bg"
+        android:textColor="@color/pastel_green"
         android:textSize="16sp" />
 
     <TextView
@@ -27,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vendor ID"
-        android:textColor="@color/dark_button_bg"
+        android:textColor="@color/pastel_green"
         android:textSize="16sp" />
 
     <TextView
@@ -35,6 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change Type"
-        android:textColor="@color/dark_button_bg"
+        android:textColor="@color/pastel_green"
         android:textSize="16sp" />
 </LinearLayout>

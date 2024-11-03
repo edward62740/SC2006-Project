@@ -2,58 +2,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#1D1D1D">
+    android:paddingBottom="20dp"
+    android:layout_marginBottom="20dp"
+    android:elevation="5dp"
+    android:background="@drawable/bg_stores_list">
 
-    <ImageView
-        android:id="@+id/image_restaurant"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:contentDescription=""
-        android:scaleType="centerCrop" />
+        android:layout_height="170dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/image_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:contentDescription="Restaurant Image"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#00E676"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/button_bg_green"
+                android:fontFamily="@font/alice_regular"
+                android:text="Restaurant Name"
+                android:justificationMode="inter_word"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/text_dist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="inf"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/text_dist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:fontFamily="@font/sf"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center_vertical"
+                android:text="Distance: 50km"
+                android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/text_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF" />
+            <TextView
+                android:id="@+id/text_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:text="Address"
+                android:fontFamily="@font/sf"
+                android:justificationMode="inter_word"
+                android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/text_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#B0BEC5" />
+            <TextView
+                android:id="@+id/text_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="@font/sf"
+                android:text="Phone Number"
+                android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/text_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#B0BEC5" />
+            <TextView
+                android:id="@+id/text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="@font/sf"
+                android:text="Description of the restaurant."
+                android:justificationMode="inter_word"
+                android:textColor="@color/textfield_darker_green" />
+        </LinearLayout>
+
 </LinearLayout>

@@ -26,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="Meal Name"
-        android:textColor="#B3E5FC"
+        android:textColor="@color/pastel_green"
         android:textSize="16sp"
-        android:fontFamily="@font/alice_regular"/>
+        android:textStyle="bold"
+        android:fontFamily="@font/sf"/>
 
     <!-- Calories -->
     <TextView
@@ -36,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calories"
-        android:textColor="#00E676"
+        android:textStyle="bold"
+        android:textColor="@color/light_green"
         android:textSize="16sp"
         android:fontFamily="@font/alice_regular"/>
 </LinearLayout>

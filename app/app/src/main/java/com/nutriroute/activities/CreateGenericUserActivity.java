@@ -80,11 +80,14 @@ public class CreateGenericUserActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void showUserTypeSelectionDialog() {
 
-        String[] userTypes = new String[UserType.values().length];
+        String[] userTypes = new String[UserType.values().length-1];
 
-        for (int i = 0; i < UserType.values().length; i++) {
-            userTypes[i] = UserType.values()[i].toString();
-        }
+        //for (int i = 0; i < UserType.values().length; i++) {
+        //    userTypes[i] = UserType.values()[i].toString();
+        //}
+        userTypes[0] = UserType.USER.toString();
+        userTypes[1] = UserType.VENDOR.toString();
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select User Type")
@@ -95,11 +98,9 @@ public class CreateGenericUserActivity extends AppCompatActivity {
                             selectedUserType = UserType.USER;
                             break;
                         case 1:
-                            selectedUserType = UserType.ADMIN;
-                            break;
-                        case 2:
                             selectedUserType = UserType.VENDOR;
                             break;
+                        //patch remove ADMIN
                     }
                 })
                 .setPositiveButton("OK", (dialog, id) -> {

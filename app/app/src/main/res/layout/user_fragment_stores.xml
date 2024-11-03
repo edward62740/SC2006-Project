@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingBottom="30dp">
 
     <TextView
         android:id="@+id/stores_search_title"
@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Nearby Restaurants"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="30dp"
         android:fontFamily="@font/alice_regular"
         android:textColor="@color/white"
         android:textSize="40sp"
@@ -23,16 +23,19 @@
         android:textAlignment="center" />
 
     <!-- Skeleton View -->
+
+
     <include
         android:id="@+id/skeleton_view"
         layout="@layout/skeleton_loader"
         android:visibility="visible" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_restaurants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="30dp"
         android:layout_weight="1"/>
 
 </LinearLayout>

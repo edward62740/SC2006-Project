@@ -38,6 +38,9 @@ public class UserCalorieManagementService implements IUserCalorieManagementServi
             user.setCaloriesToday(new CalorieDay(LocalDate.now()));
         }
         else if (!user.getCaloriesToday().getDate().equals(LocalDate.now())) { // state update if not today
+            System.out.print("CaloriesToday is not today");
+            System.out.print(user.getCaloriesToday().getDate());
+            System.out.print(LocalDate.now());
             user.addCaloriesHistory(user.getCaloriesToday());
             user.setCaloriesToday(new CalorieDay(LocalDate.now()));
         }

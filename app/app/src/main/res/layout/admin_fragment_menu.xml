@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Pending Menu Requests"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="40dp"
         android:fontFamily="@font/alice_regular"
@@ -27,10 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginHorizontal="40dp"
         android:background="@color/main_bg"
         android:scrollbars="vertical"
-        android:padding="12dp"
-        android:layout_marginBottom="50dp"/>
+        android:padding="12dp"/>
 
     <!-- Button to claim a new store -->
 

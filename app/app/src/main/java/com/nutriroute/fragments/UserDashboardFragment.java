@@ -67,6 +67,7 @@ public class UserDashboardFragment extends Fragment {
             }
         });
         // Setup RecyclerView for calorie history
+
         calorieHistoryRecyclerView = view.findViewById(R.id.user_calorie_history);
         calorieHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

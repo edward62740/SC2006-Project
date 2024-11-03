@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingVertical="16dp">
 
     <TextView
         android:id="@+id/vendor_restaurants_title"
@@ -29,6 +29,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="vertical"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="20dp"
         android:padding="12dp"/>
 
     <Button
@@ -39,6 +41,7 @@
         android:layout_marginBottom="64dp"
         android:backgroundTint="#00C853"
         android:text="Claim a new store"
+        android:layout_marginHorizontal="40dp"
         android:textColor="#FFFFFF"
         android:padding="12dp"/>
 
