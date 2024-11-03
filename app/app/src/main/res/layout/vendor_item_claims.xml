@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="#1D1D1D">
+    android:padding="20dp"
+    android:layout_marginBottom="20dp"
+    android:elevation="10"
+    android:background="@drawable/bg_stores_list">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -17,8 +19,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_name"
             android:textColor="#00E676"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:text="Restaurant1"
+            android:fontFamily="@font/alice_regular"
             android:layout_gravity="start"
             android:textStyle="bold"/>
 
@@ -27,8 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Description1"
-            android:textColor="#FFFFFF" />
+            android:text="Description."
+            android:justificationMode="inter_word"
+            android:textColor="@color/black"
+            android:fontFamily="@font/sf"/>
 
     </LinearLayout>
 

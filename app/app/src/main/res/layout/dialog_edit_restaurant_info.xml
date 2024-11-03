@@ -12,12 +12,13 @@
         android:id="@+id/button_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="end"
-        android:padding="8dp"
         android:background="@drawable/baseline_arrow_back_24"
-        android:backgroundTint="#FFFFFF"
+        android:layout_gravity="start"
+        android:padding="8dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,6 +38,7 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@drawable/ic_launcher_foreground"/>
@@ -52,6 +54,8 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                android:backgroundTint="@color/white"
+                android:paddingHorizontal="20dp"
                 android:fontFamily="@font/alice_regular"/>
 
             <TextView
@@ -78,10 +82,11 @@
                     android:hint="00:00"
                     android:textAlignment="center"
                     android:inputType="time"
+                    android:paddingVertical="15dp"
                     android:background="@drawable/rounded_textfield_bg"
                     android:textColor="@color/white"
                     android:textColorHint="@color/pastel_green"
-                    android:textSize="30sp"/>
+                    android:textSize="15sp"/>
 
                 <!-- Text Between Opening and Closing Times -->
                 <TextView
@@ -102,12 +107,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="--:--"
+                    android:paddingVertical="15dp"
                     android:textAlignment="center"
                     android:inputType="time"
                     android:background="@drawable/rounded_textfield_bg"
                     android:textColor="@color/white"
                     android:textColorHint="@color/pastel_green"
-                    android:textSize="30sp"/>
+                    android:textSize="15sp"/>
 
 
             </LinearLayout>
@@ -217,7 +223,7 @@
                 android:textColorHint="@color/pastel_green"
                 android:padding="15dp"
                 android:textSize="15sp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/rounded_textfield_bg_reversed"/>
 
         </LinearLayout>
@@ -226,9 +232,10 @@
     <Button
         android:id="@+id/button_save_changes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginVertical="16dp"
-        android:backgroundTint="#00C853"
+        android:backgroundTint="@color/button_bg_green"
+        android:paddingVertical="15dp"
         android:text="Submit Request"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"/>

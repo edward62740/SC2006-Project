@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:background="@drawable/bg_stores_list"
+    android:paddingVertical="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
         android:layout_gravity="center">
 
         <ImageButton
@@ -22,15 +24,18 @@
 
         <EditText
             android:id="@+id/text_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/alice_regular"
             android:hint="Menu Item Name"
-            android:textAlignment="textStart"
-            android:textColor="#AEEEEE"
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -38,8 +43,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:paddingHorizontal="20dp"
+        android:orientation="horizontal">
 
         <!-- Menu Item Name -->
 
@@ -51,8 +56,11 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:hint="Description"
-            android:textColor="#AEEEEE"
-            android:padding="8dp"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="10dp"
+            android:gravity="start"
+            android:fontFamily="@font/sf"
+            android:textColor="@color/dark_button_bg"
             android:textSize="14sp"
             android:layout_weight="4"/>
 
@@ -69,9 +77,11 @@
                 android:inputType="numberDecimal"
                 android:layout_width="100dp"
                 android:layout_height="45dp"
+                android:textAlignment="center"
                 android:hint="$00.00"
+                android:fontFamily="@font/sf"
                 android:padding="8dp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -89,8 +99,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
+                android:fontFamily="@font/sf"
                 android:hint="Calories"
-                android:textColor="#AEEEEE"
+                android:textColor="@color/dark_button_bg"
                 android:textSize="16sp"
                 android:padding="8dp" />
 
