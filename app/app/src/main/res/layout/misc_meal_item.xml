@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingVertical="8dp"
+    android:background="@color/main_bg">
 
     <!-- Restaurant Name -->
     <TextView
@@ -13,9 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="Restaurant Name"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/alice_regular"/>
 
     <!-- Meal Name -->
     <TextView
@@ -24,8 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="Meal Name"
-        android:textColor="#B3E5FC"
-        android:textSize="16sp" />
+        android:textColor="@color/pastel_green"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/sf"/>
 
     <!-- Calories -->
     <TextView
@@ -33,6 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calories"
-        android:textColor="#00E676"
-        android:textSize="16sp" />
+        android:textStyle="bold"
+        android:textColor="@color/light_green"
+        android:textSize="16sp"
+        android:fontFamily="@font/alice_regular"/>
 </LinearLayout>

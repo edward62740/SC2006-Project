@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#001f0e"
-    android:padding="16dp">
+    android:background="@drawable/bg_request_menu_item"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/textRestaurantId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Restaurant ID"
-        android:textColor="#AEEEEE"
+        android:textColor="@color/pastel_green"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 
     <TextView
@@ -19,16 +20,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vendor ID"
-        android:textColor="#AEEEEE"
+        android:textColor="@color/pastel_green"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reason"
+        android:text="Status"
         android:visibility="gone"
-        android:textColor="#AEEEEE"
+        android:textColor="@color/pastel_green"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 
     <TextView
@@ -36,6 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reason"
-        android:textColor="#AEEEEE"
+        android:justificationMode="inter_word"
+        android:textColor="@color/pastel_green"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 </LinearLayout>

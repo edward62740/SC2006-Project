@@ -5,19 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#042D14">
+    android:padding="40dp"
+    android:background="@color/main_bg">
 
     <ImageButton
         android:id="@+id/button_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="end"
-        android:padding="8dp"
         android:background="@drawable/baseline_arrow_back_24"
-        android:backgroundTint="#FFFFFF"
+        android:layout_gravity="start"
+        android:padding="8dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,33 +34,39 @@
 
             <ImageView
                 android:id="@+id/image_restaurant"
-                android:layout_width="256dp"
-                android:layout_height="256dp"
-                android:layout_margin="16dp"
                 android:contentDescription="Restaurant Image"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:src="@drawable/ic_launcher_foreground"/>
 
             <EditText
                 android:id="@+id/text_name"
+                android:text="Restaurant Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:text="Restaurant Name"
-                android:textColor="#FFFFFF"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
                 android:textSize="24sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:backgroundTint="@color/white"
+                android:paddingHorizontal="20dp"
+                android:fontFamily="@font/alice_regular"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:text="Operating Hours"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/alice_regular"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,103 +75,156 @@
 
                 <EditText
                     android:id="@+id/text_open_hour"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:textAlignment="center"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#042511"
                     android:text="--:--"
-                    android:textColor="#FFFFFF"
-                    android:textSize="32sp" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="00:00"
+                    android:textAlignment="center"
+                    android:inputType="time"
+                    android:paddingVertical="15dp"
+                    android:background="@drawable/rounded_textfield_bg"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/pastel_green"
+                    android:textSize="15sp"/>
 
                 <!-- Text Between Opening and Closing Times -->
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="until"
+                    android:textColor="@color/pastel_green"
+                    android:textSize="18sp"
+                    android:layout_marginHorizontal="8dp"
                     android:textAlignment="center"
-                    android:layout_weight="1"
-                    android:text=" to "
-                    android:textColor="#FFFFFF"
-                    android:textSize="32sp"
-                    android:layout_marginTop="8dp"/>
+                    android:textStyle="bold|italic"
+                    android:fontFamily="@font/alice_regular"/>
 
                 <!-- Closing Time Picker -->
                 <EditText
                     android:id="@+id/text_close_hour"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:textAlignment="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="#042511"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="--:--"
-                    android:textColor="#FFFFFF"
-                    android:textSize="32sp"/>
+                    android:paddingVertical="15dp"
+                    android:textAlignment="center"
+                    android:inputType="time"
+                    android:background="@drawable/rounded_textfield_bg"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/pastel_green"
+                    android:textSize="15sp"/>
+
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Postal Code"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/restaurant_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Postal Code of Restaurant"
-                android:backgroundTint="#008F00"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textColor="@color/white"
                 android:layout_marginTop="16dp"
-                android:padding="12dp"/>
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/restaurant_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone number of Restaurant"
-                android:backgroundTint="#008F00"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@color/white"
                 android:layout_marginTop="16dp"
-                android:padding="12dp"/>
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/restaurant_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail of Restaurant (If applicable)"
-                android:backgroundTint="#008F00"
+                android:hint="Email of Restaurant (If applicable)"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:textColor="@color/white"
                 android:layout_marginTop="16dp"
-                android:padding="12dp"/>
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/restaurant_website"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Website of Restaurant (If applicable)"
-                android:backgroundTint="#008F00"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
+                android:background="@drawable/rounded_textfield_bg"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/white"
                 android:layout_marginTop="16dp"
-                android:padding="12dp"/>
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/restaurant_description"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:hint="Description of Restaurant"
-                android:backgroundTint="#008F00"
+                android:hint="Write the description of your restaurant here..."
                 android:inputType="textMultiLine"
                 android:textAlignment="textStart"
                 android:gravity="start"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:layout_marginTop="16dp"
-                android:padding="12dp"/>
+                android:textColor="@color/white"
+                android:textColorHint="@color/pastel_green"
+                android:padding="15dp"
+                android:textSize="15sp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_textfield_bg_reversed"/>
 
         </LinearLayout>
     </ScrollView>
@@ -172,11 +232,12 @@
     <Button
         android:id="@+id/button_save_changes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="#00C853"
+        android:layout_height="60dp"
+        android:layout_marginVertical="16dp"
+        android:backgroundTint="@color/button_bg_green"
+        android:paddingVertical="15dp"
         android:text="Submit Request"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

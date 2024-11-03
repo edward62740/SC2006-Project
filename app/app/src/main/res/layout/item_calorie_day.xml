@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
-    android:background="#001f0e"
+    android:background="@color/dark_button_bg"
     android:orientation="horizontal"
     android:paddingStart="8dp"
     android:paddingLeft="8dp"
@@ -44,9 +44,10 @@
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#AEEEEE"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/alice_regular"/>
 
         <!-- Calorie Entries -->
         <LinearLayout

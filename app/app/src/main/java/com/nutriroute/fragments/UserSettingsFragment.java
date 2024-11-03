@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class UserSettingsFragment extends Fragment {
     private SeekBar weightSeekBar;
     private SeekBar targetCaloriesSeekBar;
     private SeekBar targetWeightSeekBar;
-    private Switch prescribedSwitch, notificationSwitch;
+    private SwitchCompat prescribedSwitch, notificationSwitch;
     private Button saveButton, logoutButton;
 
     private TextView heightValue;

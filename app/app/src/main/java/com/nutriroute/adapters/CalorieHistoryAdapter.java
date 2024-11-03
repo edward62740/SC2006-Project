@@ -61,6 +61,9 @@ public class CalorieHistoryAdapter extends RecyclerView.Adapter<CalorieHistoryAd
             return;
         }
 
+
+        holder.calorieEntriesLayout.removeAllViews();
+
         // Create views for each food entry
         for (int i = 0; i < calorieDay.getFoodConsumed().size(); i++) {
             View calorieEntryView = LayoutInflater.from(holder.itemView.getContext())

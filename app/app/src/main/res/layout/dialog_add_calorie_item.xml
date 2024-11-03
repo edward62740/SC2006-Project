@@ -9,31 +9,37 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="25dp"
         android:background="#001f0e"
         android:ems="10"
         android:hint="You can add other food items here, which are not found in this app"
         android:inputType="textMultiLine"
-        android:padding="12dp"
+        android:layout_marginHorizontal="40dp"
         android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/etRestaurantId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@color/teal_200"
         android:hint="Restaurant Name"
-        android:padding="12dp" />
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_textfield_bg"
+        android:padding="15dp"
+        android:layout_marginHorizontal="40dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/lighter_grey" />
 
     <EditText
         android:id="@+id/etFoodId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Food Name"
-        android:background="@color/teal_200"
-        android:padding="12dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_textfield_bg"
+        android:padding="15dp"
+        android:layout_marginHorizontal="40dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/lighter_grey" />
 
     <EditText
         android:id="@+id/etCalories"
@@ -41,22 +47,30 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="Calories"
-        android:background="@color/teal_200"
-        android:padding="12dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_textfield_bg"
+        android:padding="15dp"
+        android:layout_marginHorizontal="40dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/lighter_grey"/>
 
     <Spinner
         android:id="@+id/spinnerMealType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/white"/>
+        android:layout_marginHorizontal="40dp"
+        android:minHeight="30dp"
+        android:paddingVertical="15dp"
+        android:background="@drawable/rounded_textfield_bg"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:backgroundTint="#00C853"
-        android:textColor="#FFFFFF" />
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/rounded_button_bg"
+        android:textColor="@color/white"
+        android:padding="12dp" />
 </LinearLayout>

@@ -11,6 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -18,20 +20,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingBottom="8dp"
+            android:fontFamily="@font/alice_regular"
             android:text="Dialog Title"
-            android:textColor="#AEEEEE"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Button
+        <ImageButton
             android:id="@+id/exit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:backgroundTint="@color/cardview_dark_background"
-            app:icon="@android:drawable/ic_menu_close_clear_cancel"
-            app:iconGravity="end" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:padding="8dp"
+            android:background="@drawable/baseline_close_24"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--        <Button-->
+<!--            android:id="@+id/exit_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.1"-->
+<!--            android:backgroundTint="@color/cardview_dark_background"-->
+<!--            app:icon="@android:drawable/ic_menu_close_clear_cancel"-->
+<!--            app:iconGravity="end" />-->
     </LinearLayout>
 
 
@@ -39,17 +53,21 @@
         android:id="@+id/map_webview"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="12dp"
-        android:elevation="4dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:elevation="4dp"
+        android:layout_marginHorizontal="30dp"/>
 
 
     <TextView
         android:id="@+id/dialog_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="3dp"
         android:text="Address: 123 Main St, City"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 
     <TextView
@@ -57,7 +75,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phone: (123) 456-7890"
-        android:textColor="#FFFFFF"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="3dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 
 
@@ -65,26 +86,32 @@
         android:id="@+id/dialog_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description of the restaurant or details."
-        android:textColor="#AEEEEE"
+        android:text="Description of the restaurant in details."
+        android:layout_marginHorizontal="30dp"
+        android:justificationMode="inter_word"
+        android:textColor="@color/pastel_green"
+        android:fontFamily="@font/sf"
         android:textSize="16sp" />
 
     <!-- RecyclerView for Restaurant Menu -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:text="Menu"
-        android:textColor="#AEEEEE"
-        android:textSize="16sp"
+        android:fontFamily="@font/alice_regular"
+        android:layout_marginHorizontal="30dp"
+        android:textColor="@color/pastel_green"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/restaurant_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#001a0a"
+        android:layout_marginTop="10dp"
+        android:background="@color/main_bg"
+        android:layout_marginHorizontal="30dp"
         android:elevation="2dp" />
 
 </LinearLayout>

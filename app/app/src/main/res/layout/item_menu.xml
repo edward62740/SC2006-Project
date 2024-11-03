@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
-    android:background="#001f0e"
     android:orientation="horizontal"
     android:padding="8dp">
 
@@ -30,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Menu Item Name"
-            android:textColor="#AEEEEE"
+            android:fontFamily="@font/alice_regular"
+            android:textColor="@color/pastel_green"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Menu Item Description"
-            android:textColor="#AEEEEE"
+            android:fontFamily="@font/sf"
+            android:textColor="@color/pastel_green"
             android:textSize="14sp" />
 
         <!-- Price and Calories Horizontal Layout -->
@@ -57,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$12.99"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sf"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -72,7 +74,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="350 cal"
-                android:textColor="#AEEEEE"
+                android:fontFamily="@font/sf"
+                android:gravity="center"
+                android:textColor="@color/pastel_green"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

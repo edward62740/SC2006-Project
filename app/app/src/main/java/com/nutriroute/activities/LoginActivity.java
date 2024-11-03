@@ -102,8 +102,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startColorAnimation() {
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),
-                getResources().getColor(R.color.light_green), // Start color (black)
-                getResources().getColor(R.color.dark_green)); // End color (red)
+                getResources().getColor(R.color.dark_green), // Start color (black)
+                getResources().getColor(R.color.light_green)); // End color (red)
 
         colorAnimation.setDuration(1500); // Duration of the animation
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         skeletonLoader.setVisibility(View.GONE);
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        Toast.makeText(this, "Backend is loading ...", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Backend is loading ...", Toast.LENGTH_SHORT).show();
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
