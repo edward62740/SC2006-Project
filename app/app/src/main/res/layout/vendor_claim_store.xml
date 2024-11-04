@@ -237,6 +237,15 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/rounded_textfield_bg_reversed"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please submit a URL to an image of your restaurant"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="16dp" />
+
             <!-- File Upload Button -->
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -251,7 +260,7 @@
                     android:layout_height="256dp" />
 
                 <Button
-                    android:id="@+id/browse_button"
+                    android:id="@+id/button_image_restaurant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -285,7 +294,7 @@
                     android:layout_height="256dp" />
 
                 <Button
-                    android:id="@+id/button_image_restaurant"
+                    android:id="@+id/browse_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
