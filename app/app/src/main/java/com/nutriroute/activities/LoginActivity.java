@@ -174,11 +174,16 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign-In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
+                if (account != null) {
+                    firebaseAuthWithGoogle(account);
+                } else {
+                    Log.w("LoginActivity", "Google sign-in account is null");
+                }
             } catch (ApiException e) {
-                Log.w("TAG", "Google sign in failed", e);
+                // Log the error code to diagnose the issue
+                Log.w("LoginActivity", "Google sign-in failed, error code: " + e.getStatusCode(), e);
+                Toast.makeText(this, "Google sign-in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
