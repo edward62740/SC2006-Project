@@ -112,7 +112,7 @@ public class VendorClaimsAdapter extends RecyclerView.Adapter<VendorClaimsAdapte
         String message =
                 "Vendor ID: " + request.getVendorId() +
                         "\nRestaurant ID: " + request.getRestaurantId() +
-                        "\nMenu Item ID: " + request.getMenuItemID() +
+                        "\nMenu Item Name: " + request.getNewValue().getName() +
                         "\nChange Type: " + request.getChangeType() +
                         "\nStatus: " + request.getStatus() +
                         "\nReason: " + request.getReason();

@@ -42,7 +42,7 @@ public class AdminMenuUpdateAdapter extends RecyclerView.Adapter<AdminMenuUpdate
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MenuRequest request = (MenuRequest)  menuRequestList.get(position);
-        holder.textMenuItemId.setText("Menu item ID: " + request.getMenuItemID());
+        holder.textMenuItemId.setText("Menu item ID: " + request.getNewValue().getName());
         holder.textRestaurantId.setText("Restaurant ID: " + request.getRestaurantId());
         holder.textVendorId.setText("Vendor ID: " + request.getVendorId());
         holder.textChangeType.setText("Change Type: " + request.getChangeType());
@@ -74,7 +74,7 @@ public class AdminMenuUpdateAdapter extends RecyclerView.Adapter<AdminMenuUpdate
 
     private void showDetailDialog(MenuRequest request, int position) {
 
-        String message = "Menu Item ID: " + request.getMenuItemID() +
+        String message = "Menu Item Name: " + request.getNewValue().getName() +
                 "\nRestaurant ID: " + request.getRestaurantId() +
                 "\nVendor ID: " + request.getVendorId() +
                 "\nChange Type: " + request.getChangeType() +

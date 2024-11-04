@@ -11,7 +11,7 @@
         android:id="@+id/textMenuItemId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menu Item ID"
+        android:text="Menu Item Name"
         android:textColor="@color/pastel_green"
         android:textSize="16sp" />
 
